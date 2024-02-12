@@ -17,3 +17,4 @@ async def check_us(us_id):
         return row
     except:
         pass  # logging в файлы
+
