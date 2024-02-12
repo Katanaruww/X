@@ -1,4 +1,4 @@
 token = ["6243740464:AAHX8FI35_g7JXjfkvvAHm3loYAprvN_qXo"]
 admins = [6630175448, 6541308610]
 name_db = ["db.db"]
-name_code = ["батюк данил николаевич 2006 года рождения"]
+name_code = ["патек"]
