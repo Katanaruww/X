@@ -13,8 +13,12 @@ async def start_db(user_id, f_name, l_name):
 
 async def check_us(us_id):
     try:
-        row = curs.execute("SELECT * FROM users WHERE id_us = ?", (us_id,)).fetchone()
-        return row
+        return curs.execute("SELECT * FROM users WHERE id_us = ?", (us_id,)).fetchone()
     except:
         pass  # logging в файлы
 
+async def check_tech():
+    try:
+        return curs.execute("SELECT * FROM technical").fetchone()
+    except:
+        pass

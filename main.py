@@ -7,11 +7,13 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 import config
 from hand import router
+from middlewares.middle import TechMidddle
 
 
 async def main():
     bot = Bot(token=config.token[0], parse_mode=ParseMode.HTML)
     dp = Dispatcher(memory=MemoryStorage())
+    # dp.message.middleware.register(TechMidddle())
     dp.include_router(router)
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
 

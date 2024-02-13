@@ -1,6 +1,10 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-
+def admin_but():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="Рассылка", callback_data="send")
+    adm.adjust(1)
+    return adm
 def rules():
     rul = InlineKeyboardBuilder()
     rul.button(text="Согласен🟢", callback_data="agree_rules")

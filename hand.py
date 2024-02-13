@@ -39,6 +39,20 @@ async def start_handler(msg: Message):
     except Exception as e:
         logging.exception(e)
 
+@router.message(Command("rate"))
+async def rate(msg: Message):
+    pass
+@router.message(Command("admin"))
+async def admin(msg: Message):
+    try:
+        if msg.chat.id in config.admins:
+            await msg.answer("<b><i>Админ-панель</i></b>", reply_markup=admin_but().as_markup())
+        else:
+            await msg.answer("<b>Ты не админ!</b>")
+    except Exception as err:
+        logging.exception(err)
+
+
 
 @router.callback_query(lambda call: True)
 async def cal(call):
