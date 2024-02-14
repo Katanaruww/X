@@ -14,13 +14,16 @@ import config
 from inline_but import *
 from routers import start_db, check_us
 
+import lxml
 
 
 import asyncio
 router = Router()
 bot = Bot(config.token[0])
 async def fetch_currency(url, headers):
-    async with aiohttp.ClientSession() as session:
+    # Создаем объект TCPConnector с параметром ssl=False для отключения проверки SSL
+    connector = aiohttp.TCPConnector(ssl=False)
+    async with aiohttp.ClientSession(connector=connector) as session:
         async with session.get(url, headers=headers) as response:  # Отправляем асинхронный GET-запрос
             src = await response.text()  # Получаем текст ответа
             soup = BeautifulSoup(src, "lxml")
@@ -29,12 +32,12 @@ async def fetch_currency(url, headers):
                 global curs
                 curs = i.text  # Выводим результат
 
+
 # URL и заголовки остаются теми же
 url = "https://www.google.com/search?q=1+%D1%80%D1%83%D0%B1%D0%BB%D1%8C+%D0%B2+idr&oq=1+%D1%80%D1%83%D0%B1&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIGCAEQRRg5MgoIAhAAGLEDGIAEMgcIAxAAGIAEMgcIBBAAGIAEMgcIBRAAGIAEMgcIBhAAGIAEMgYIBxBFGD2oAgCwAgA&sourceid=chrome&ie=UTF-8"
 headers = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,"
-              "application/signed-exchange;v=b3;q=0.7",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
 }
 
 # Запускаем асинхронную функцию
