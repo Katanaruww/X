@@ -17,7 +17,6 @@ async def main():
     dp.include_router(router)
     sql_start()
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
-#ghjk
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
