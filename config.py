@@ -3,3 +3,4 @@ admins = [6630175448, 6035428327]
 name_db = ["db.db"]
 
 #coders is gays
+#DIMA
