@@ -14,7 +14,7 @@ import config
 from inline_but import *
 from routers import start_db, check_us
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
-
+from function import get_pars
 from func import get_user_value
 # from func import start_menu, check_admin
 router = Router()
@@ -54,7 +54,7 @@ async def start_handler(msg: Message):
 
 @router.message(Command("rate"))
 async def rate(msg: Message):
-    pass
+    await get_pars(msg)
 @router.message(Command("admin"))
 async def admin(msg: Message):
     try:
