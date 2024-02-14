@@ -21,3 +21,22 @@ def start_but():
     st.button(text="Связь с админом", url="google.com")
     st.adjust(2, 2)
     return st
+def admin_but_send():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="Рассылка с фотографией", callback_data="send1")
+    adm.button(text="Рассылка без фотографии", callback_data="send2")
+    adm.adjust(1)
+    return adm
+
+def admin_bc_fsm():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="Да✅", callback_data="yes")
+    adm.button(text="Нет❌", callback_data="no")
+    adm.adjust(1)
+    return adm
+def admin_bc_fsm2():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="Да✅", callback_data="yes2")
+    adm.button(text="Нет❌", callback_data="no2")
+    adm.adjust(1)
+    return adm
