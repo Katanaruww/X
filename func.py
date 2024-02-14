@@ -52,6 +52,3 @@ async def get_user_value(val_1):
     cur.execute("INSERT OR IGNORE INTO users_id (id) VALUES (?)", (val_1,))
     base.commit()
 
-async def get_send(val_1, val_2):
-    cur.execute("INSERT OR IGNORE INTO users_newsletter (img, description) VALUES (?, ?)", (val_1, val_2, ))
-    base.commit()

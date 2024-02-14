@@ -105,6 +105,10 @@ async def cal(call, state: FSMContext):
         ]
         await send_broadcast(photo_url=photo_file_id, message_text=f"\n".join(formatted_text))
 
+    ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
+    elif call.data == "adm_exc":
+        await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+
 @router.message(Form2.description0)
 async def get_userr(message: types.Message, state: FSMContext):
     try:
