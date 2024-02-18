@@ -1,6 +1,8 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from config import garant
 from translate import _
+from routers import check_lang_smail
+import aiogram
                 ### ТО, ЧТО ВИДЕТ КЛИЕНТ ###
 def start_but(lang):
     st = InlineKeyboardBuilder()
@@ -9,7 +11,8 @@ def start_but(lang):
     st.button(text=f"{_('Наш чат', lang)}", url="google.com")
     st.button(text=f"{_('Наш канал', lang)}", url="google.com")
     st.button(text=f"{_('Связь с админом', lang)}", url="google.com")
-    st.adjust(1, 1, 2)
+    st.button(text=f"{_('Настройки', lang)}⚙", callback_data="setting")
+    st.adjust(1, 1, 2, 1)
     return st
 
 
@@ -27,6 +30,13 @@ def lang_btn():
     lang.adjust(2)
     return lang
 
+def setting_btn(call, lang):
+    sett = InlineKeyboardBuilder()
+    sett.button(text=f"{_('Смена языка', lang)} | {check_lang_smail(call.message.chat.id)[1]}",
+                callback_data=f"change_{check_lang_smail(call.message.chat.id)[0]}")
+    sett.button(text=f"{_('Назад')}🔙", callback_data="back_start")
+    sett.adjust(1)
+    return sett
                 ### АДМИН ПАНЕЛЬ ###
 def admin_but_send():
     adm = InlineKeyboardBuilder()

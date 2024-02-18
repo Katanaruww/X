@@ -1,0 +1,6 @@
+2024-02-19 00:27:35,279 - INFO - start_polling: 527 - Start polling
+2024-02-19 00:27:35,780 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-02-19 00:27:37,058 - INFO - feed_update: 172 - Update id=377105279 is handled. Duration 1094 ms by bot id=6243740464
+2024-02-19 00:27:39,527 - INFO - feed_update: 172 - Update id=377105280 is handled. Duration 1063 ms by bot id=6243740464
+2024-02-19 00:27:58,574 - INFO - feed_update: 172 - Update id=377105281 is handled. Duration 1796 ms by bot id=6243740464
+2024-02-19 00:28:06,813 - INFO - feed_update: 172 - Update id=377105282 is handled. Duration 640 ms by bot id=6243740464

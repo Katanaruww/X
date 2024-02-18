@@ -12,10 +12,10 @@ from aiogram import F
 from func import send_broadcast2, send_broadcast
 import config
 from inline_but import *
-from routers import start_db, check_us, add_lang, check_lang
+from routers import start_db, check_us, add_lang, check_lang, db_rep_lang
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
-from func import get_user_value
+from func import get_user_value, replace_language
 # from func import start_menu, check_admin
 router = Router()
 
@@ -32,7 +32,8 @@ class Form2(StatesGroup):
     description0 = State()
 bot = Bot(config.token[0])
 
-
+logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
+                        format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 @router.message(Command("start"))
 async def start_handler(msg: Message):
     try:
@@ -75,6 +76,14 @@ async def lang(call):
         await call.message.edit_text(f"<b>тут будут правила</b>", reply_markup=rules(lang).as_markup())
     except Exception as e:
         logging.exception(e)
+
+@router.callback_query(lambda call: call.data and call.data.startswith("change_"))
+async def lang(call):
+        await replace_language(call)
+
+
+
+
 @router.callback_query(lambda call: True)
 async def cal(call, state: FSMContext):
     if call.data == "agree_rules":
@@ -112,6 +121,15 @@ async def cal(call, state: FSMContext):
             for key ,value in data.items()
         ]
         await send_broadcast(photo_url=photo_file_id, message_text=f"\n".join(formatted_text))
+    elif call.data == "setting":
+        lang = await check_lang(call.message.chat.id)
+        photo = FSInputFile("media/x.jpg")
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await call.message.answer_photo(
+            caption=f"<b>{_('Настройки', lang[0])}</i></b>",
+            reply_markup=setting_btn(call, lang[0]).as_markup(), photo=photo)
+
+
 
     ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
     elif call.data == "adm_exc":

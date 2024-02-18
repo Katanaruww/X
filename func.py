@@ -6,17 +6,18 @@ from aiogram.filters import Command
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import FSInputFile
 from aiogram.types import Message
-
+from translate import _
 import config
 from inline_but import *
-from routers import start_db, check_us
+from routers import start_db, check_us, check_lang, db_rep_lang
 
 import sqlite3 as sq
 
 import asyncio
 router = Router()
 bot = Bot(config.token[0])
-
+logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
+                        format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 
 def sql_start():
     global base, cur
@@ -51,4 +52,24 @@ async def send_broadcast2(text):
 async def get_user_value(val_1):
     cur.execute("INSERT OR IGNORE INTO users_id (id) VALUES (?)", (val_1,))
     base.commit()
+
+async def replace_language(call):
+    try:
+        print(call.data[7:])
+        lang = call.data[7:]
+        if lang == "RU":
+            lang_db = "EN"
+        else:
+            lang_db = "RU"
+        await db_rep_lang(call.message.chat.id, lang_db)
+
+        try:
+            photo = FSInputFile("media/x.jpg")
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await call.message.answer_photo(caption=f"{_('Настройки', lang)}",
+                                            reply_markup=setting_btn(call, lang_db).as_markup(), photo=photo)
+        except Exception as e:
+            logging.error(f"Ошибка при редактировании сообщения: {e}")
+    except Exception as e:
+        logging.exception(e)
 

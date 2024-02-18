@@ -7,6 +7,8 @@ translates = {
         "Наш канал" : "Channel",
         "Связь с админом" : "Admin",
         "Согласен" : "I agree",
+        "Настройки" : "Setting",
+        "Смена языка" : "Change of language",
     }
 }
 
