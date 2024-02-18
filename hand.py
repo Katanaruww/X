@@ -1,5 +1,5 @@
 import logging
-
+from translate import _
 from aiogram import Router, Bot
 from aiogram.filters import Command
 from aiogram.fsm.state import State, StatesGroup
@@ -12,7 +12,7 @@ from aiogram import F
 from func import send_broadcast2, send_broadcast
 import config
 from inline_but import *
-from routers import start_db, check_us
+from routers import start_db, check_us, add_lang, check_lang
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
 from func import get_user_value
@@ -38,17 +38,19 @@ async def start_handler(msg: Message):
     try:
         await get_user_value(msg.from_user.id)
         check = await check_us(msg.chat.id)
-        print(check)
         if check is not None:
             try:
-                photo = FSInputFile("media/logo.png")
+                photo = FSInputFile("media/x.jpg")
+                lang = await check_lang(msg.chat.id)
                 await msg.answer_photo(
-                    caption=f"<b>Добро пожаловать, <i>{msg.chat.first_name}</i></b>",
-                    reply_markup=start_but().as_markup(), photo=photo)
+                    caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{msg.chat.first_name}</i></b>",
+                    reply_markup=start_but(lang[0]).as_markup(), photo=photo)
             except Exception as err:
                 logging.warning(err)
         else:
-            await msg.answer("<b>тут будут правила</b>", reply_markup=rules().as_markup())
+            await start_db(msg.chat.id, msg.chat.username, msg.chat.first_name)
+            await msg.answer("<b>RU:</b> <i>Выберите язык</i>\n"
+                             "<b>EN:</b> <i>Choose language</i>", reply_markup=lang_btn().as_markup())
     except Exception as e:
         logging.exception(e)
 
@@ -65,17 +67,23 @@ async def admin(msg: Message):
     except Exception as err:
         logging.exception(err)
 
-
-
+@router.callback_query(lambda call: call.data and call.data.startswith("lang_"))
+async def lang(call):
+    try:
+        lang = call.data[5:]
+        await add_lang(lang, call.message.chat.id)
+        await call.message.edit_text(f"<b>тут будут правила</b>", reply_markup=rules(lang).as_markup())
+    except Exception as e:
+        logging.exception(e)
 @router.callback_query(lambda call: True)
 async def cal(call, state: FSMContext):
     if call.data == "agree_rules":
         try:
-            await start_db(call.message.chat.id, call.message.chat.username, call.message.chat.first_name)
-            photo = FSInputFile("media/logo.png")
+            photo = FSInputFile("media/x.jpg")
+            lang = await check_lang(call.message.chat.id)
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await call.message.answer_photo(caption=f"<b>Добро пожаловать, <i>{call.message.chat.first_name}</i></b>",
-                                            reply_markup=start_but().as_markup(), photo=photo)
+            await call.message.answer_photo(caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
+                               reply_markup=start_but(lang[0]).as_markup(), photo=photo)
         except Exception as err:
             logging.exception(err)
     elif call.data == "send":
@@ -104,6 +112,10 @@ async def cal(call, state: FSMContext):
             for key ,value in data.items()
         ]
         await send_broadcast(photo_url=photo_file_id, message_text=f"\n".join(formatted_text))
+
+    ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
+    elif call.data == "adm_exc":
+        await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
 
 @router.message(Form2.description0)
 async def get_userr(message: types.Message, state: FSMContext):
