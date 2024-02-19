@@ -15,13 +15,16 @@ from inline_but import *
 from routers import start_db, check_us, add_lang, check_lang, db_rep_lang
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
-from func import get_user_value, replace_language
-# from func import start_menu, check_admin
+from func import get_user_value, replace_language, start_c, deals_online_start, deals_online_change_type, \
+    deals_online_type_add, deals_online_cancel
+
+
 router = Router()
 
 
 class fsm(StatesGroup):
     adm_id = State()
+
 
 class Form(StatesGroup):
     description1 = State()
@@ -30,10 +33,14 @@ class Form(StatesGroup):
 
 class Form2(StatesGroup):
     description0 = State()
+
+
 bot = Bot(config.token[0])
 
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
-                        format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
+                    format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
+
+
 @router.message(Command("start"))
 async def start_handler(msg: Message):
     try:
@@ -55,9 +62,12 @@ async def start_handler(msg: Message):
     except Exception as e:
         logging.exception(e)
 
+
 @router.message(Command("rate"))
 async def rate(msg: Message):
     await get_pars(msg)
+
+
 @router.message(Command("admin"))
 async def admin(msg: Message):
     try:
@@ -68,6 +78,7 @@ async def admin(msg: Message):
     except Exception as err:
         logging.exception(err)
 
+
 @router.callback_query(lambda call: call.data and call.data.startswith("lang_"))
 async def lang(call):
     try:
@@ -77,22 +88,30 @@ async def lang(call):
     except Exception as e:
         logging.exception(e)
 
+
 @router.callback_query(lambda call: call.data and call.data.startswith("change_"))
 async def lang(call):
-        await replace_language(call)
+    await replace_language(call)
 
+@router.callback_query(lambda call: call.data and call.data.startswith("type_"))
+async def lang(call):
+    try:
+        await deals_online_type_add(call)
+    except Exception as e:
+        logging.exception(e)
 
-
+@router.callback_query(lambda call: call.data and call.data.startswith("cancel-deal_"))
+async def lang(call):
+    try:
+        await deals_online_cancel(call)
+    except Exception as e:
+        logging.exception(e)
 
 @router.callback_query(lambda call: True)
 async def cal(call, state: FSMContext):
     if call.data == "agree_rules":
         try:
-            photo = FSInputFile("media/x.jpg")
-            lang = await check_lang(call.message.chat.id)
-            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await call.message.answer_photo(caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
-                               reply_markup=start_but(lang[0]).as_markup(), photo=photo)
+            await start_c(call)
         except Exception as err:
             logging.exception(err)
     elif call.data == "send":
@@ -118,22 +137,38 @@ async def cal(call, state: FSMContext):
         formatted_text = []
         [
             formatted_text.append(f"{value}")
-            for key ,value in data.items()
+            for key, value in data.items()
         ]
         await send_broadcast(photo_url=photo_file_id, message_text=f"\n".join(formatted_text))
     elif call.data == "setting":
         lang = await check_lang(call.message.chat.id)
         photo = FSInputFile("media/x.jpg")
-        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-        await call.message.answer_photo(
-            caption=f"<b>{_('Настройки', lang[0])}</i></b>",
+        await call.message.edit_caption(
+            caption=f"<b><i>{_('Настройки', lang[0])}</i></b>",
             reply_markup=setting_btn(call, lang[0]).as_markup(), photo=photo)
-
+    elif call.data == "back_start":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
+    ### ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
+    elif call.data == "exch":
+        try:
+            await deals_online_start(call)
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "online_deals":
+        try:
+            await deals_online_change_type(call)
+        except Exception as err:
+            logging.exception(err)
+    ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ###
 
 
     ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
     elif call.data == "adm_exc":
         await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+
 
 @router.message(Form2.description0)
 async def get_userr(message: types.Message, state: FSMContext):
@@ -142,13 +177,15 @@ async def get_userr(message: types.Message, state: FSMContext):
         global user_data
         user_data = await state.get_data()
         await message.answer(
-            text=f"Ваш текст:\n{user_data['name']}.\n\nОтправить сообщение пользователям?",reply_markup=admin_bc_fsm(
+            text=f"Ваш текст:\n{user_data['name']}.\n\nОтправить сообщение пользователям?", reply_markup=admin_bc_fsm(
             ).as_markup())
         # Сброс состояния и сохранённых данных у пользователя
         await state.clear()
     except Exception as err:
         logging.exception(err)
         await message.answer(f'Сначала создайте сообщение')
+
+
 @router.message(Form.description1)
 async def get_adn(message: types.Message, state: FSMContext):
     try:
@@ -157,6 +194,8 @@ async def get_adn(message: types.Message, state: FSMContext):
         await state.set_state(Form.photo_adm)
     except Exception as err:
         logging.exception(err)
+
+
 @router.message(Form.photo_adm, F.photo)
 async def get_photo(message: types.Message, state: FSMContext):
     try:
@@ -174,16 +213,19 @@ async def get_photo(message: types.Message, state: FSMContext):
         ]
         await message.answer_photo(
             photo_file_id,
-            "\n".join(formatted_text),reply_markup=admin_bc_fsm2(
+            "\n".join(formatted_text), reply_markup=admin_bc_fsm2(
             ).as_markup()
 
         )
     except Exception as err:
         logging.exception(err)
 
+
 @router.message(Form.photo_adm, ~F.photo)
 async def get_photo(message: types.Message, state: FSMContext):
     await message.answer(f'Отправь фотографию!')
+
+
 @router.message(Form.description1, ~F.text)
 async def get_trext(message: types.Message, state: FSMContext):
     await message.answer(f'Отправь текст!')

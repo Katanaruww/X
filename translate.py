@@ -9,6 +9,14 @@ translates = {
         "Согласен" : "I agree",
         "Настройки" : "Setting",
         "Смена языка" : "Change of language",
+        "Сделка онлайн": "Deal online",
+        "Доставка налички" : "Cash delivery",
+        "Покупка валюты" : "Purchase of currency",
+        "Продажа валюты" : "Sale of currency",
+        "Выберите действие" : "Select an action",
+        "Что отдаете" : "What are you giving away",
+        "Назад" : "Back",
+        "Отмена" : "Cancel"
     }
 }
 

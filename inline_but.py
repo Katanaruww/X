@@ -34,9 +34,32 @@ def setting_btn(call, lang):
     sett = InlineKeyboardBuilder()
     sett.button(text=f"{_('Смена языка', lang)} | {check_lang_smail(call.message.chat.id)[1]}",
                 callback_data=f"change_{check_lang_smail(call.message.chat.id)[0]}")
-    sett.button(text=f"{_('Назад')}🔙", callback_data="back_start")
+    sett.button(text=f"{_('Назад', lang)}🔙", callback_data="back_start")
     sett.adjust(1)
     return sett
+
+def exc_btn_start(lang):
+    exc = InlineKeyboardBuilder()
+    exc.button(text=f"{_('Сделка онлайн', lang)}", callback_data="online_deals")
+    exc.button(text=f"{_('Доставка налички', lang)}", callback_data="offline_deals") ### для данила
+    exc.button(text=f"{_('Назад', lang)}🔙", callback_data="back_start")
+    exc.adjust(2, 1)
+    return exc
+
+def exc_type_onl_btn(call, lang):
+    exc_t = InlineKeyboardBuilder()
+    exc_t.button(text=f"{_('Покупка валюты', lang)}📈", callback_data=f"type_{call.message.chat.id}_pay")
+    exc_t.button(text=f"{_('Продажа валюты', lang)}📉", callback_data=f"type_{call.message.chat.id}_sale")
+    exc_t.button(text=f"{_('Назад', lang)}🔙", callback_data="back_start")
+    exc_t.adjust(1, 1, 1)
+    return exc_t
+
+def exc_online_cancel(call, lang):
+    exc_o = InlineKeyboardBuilder()
+    exc_o.button(text=f"{_('Отмена', lang)}", callback_data=f"cancel-deal_{call.message.chat.id}")
+    exc_o.adjust(1)
+    return exc_o
+
                 ### АДМИН ПАНЕЛЬ ###
 def admin_but_send():
     adm = InlineKeyboardBuilder()
@@ -52,7 +75,6 @@ def admin_but():
     adm.button(text="Рассылка", callback_data="send")
     adm.adjust(1)
     return adm
-
 
 def admin_bc_fsm():
     adm = InlineKeyboardBuilder()
@@ -77,3 +99,4 @@ def admin_exc():
     adm_exc.button(text="Назад🔙", callback_data="back_admin")
     adm_exc.adjust(1, 1, 1)
     return adm_exc
+

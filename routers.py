@@ -33,7 +33,7 @@ async def add_lang(lang, id_us):
     except Exception as e:
         logging.warning(e)
 
-async def check_lang(id_us):
+async def check_lang(id_us): # проверка языка пользователя
     try:
         return curs.execute("SELECT lang FROM users WHERE id_us = ?", (id_us, )).fetchone()
     except Exception as e:
@@ -52,3 +52,19 @@ async def db_rep_lang(id_us, lang):
         conn.commit()
     except Exception as e:
         logging.warning(e)
+
+async def db_add_start_deals(id_us, type_d):
+    try:
+        curs.execute("INSERT INTO deals_onl (id_user, type) VALUES (?, ?)",(id_us, type_d))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+async def db_delete_deal(id_us):
+    try:
+        curs.execute("DELETE FROM deals_onl WHERE id_user = ?", (id_us, ))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
