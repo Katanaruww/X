@@ -48,7 +48,7 @@ async def start_handler(msg: Message):
         check = await check_us(msg.chat.id)
         if check is not None:
             try:
-                photo = FSInputFile("media/x.jpg")
+                photo = FSInputFile("media/logo.png")
                 lang = await check_lang(msg.chat.id)
                 await msg.answer_photo(
                     caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{msg.chat.first_name}</i></b>",
@@ -147,6 +147,16 @@ async def cal(call, state: FSMContext):
             caption=f"<b><i>{_('Настройки', lang[0])}</i></b>",
             reply_markup=setting_btn(call, lang[0]).as_markup(), photo=photo)
     elif call.data == "back_start":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "no":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "no2":
         try:
             await start_c(call)
         except Exception as err:

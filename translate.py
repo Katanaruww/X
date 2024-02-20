@@ -16,7 +16,8 @@ translates = {
         "Выберите действие" : "Select an action",
         "Что отдаете" : "What are you giving away",
         "Назад" : "Back",
-        "Отмена" : "Cancel"
+        "Отмена" : "Cancel",
+        "Главное меню" : "Main menu"
     }
 }
 

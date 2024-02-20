@@ -60,6 +60,20 @@ def exc_online_cancel(call, lang):
     exc_o.adjust(1)
     return exc_o
 
+"""MYZONE"""
+
+
+def setting_rasilka(lang):
+    sett = InlineKeyboardBuilder()
+    sett.button(text=f"{_('Главное меню', lang[0])}🔙", callback_data="back_start")
+    sett.adjust(1)
+    return sett
+
+
+
+
+"""MYZONE"""
+
                 ### АДМИН ПАНЕЛЬ ###
 def admin_but_send():
     adm = InlineKeyboardBuilder()
