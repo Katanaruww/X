@@ -3,12 +3,12 @@ import sqlite3 as sq
 
 from aiogram import Router, Bot
 from aiogram.types import FSInputFile
-
+from aiogram import types
 import config
 from inline_but import *
 from routers import check_lang, db_rep_lang, db_add_start_deals, db_delete_deal
 from translate import _
-from inline_but import setting_rasilka
+from inline_but import setting_rasilka, crypto_valets
 router = Router()
 bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
@@ -79,7 +79,18 @@ async def start_c(call):
         caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
         reply_markup=start_but(lang[0]).as_markup(), photo=photo)
 
+"""ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
+async def get_crypto(call : types.CallbackQuery):
+    try:
+        lang = await check_lang(call.message.chat.id)
+        await call.message.edit_text(f'❗<i>Выберите интересующие направление для вас</i>❗\n<b>Формат:</b>\n'
+                                  f'<b>Отдаёте-получаете</b>',
+                                  reply_markup=crypto_valets(lang).as_markup())
+    except Exception as err:
+        logging.exception(err)
 
+
+"""КОНЕЦ ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
 ### ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###
 async def deals_online_start(call):
     try:

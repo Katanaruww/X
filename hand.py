@@ -16,7 +16,7 @@ from routers import start_db, check_us, add_lang, check_lang, db_rep_lang
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
 from func import get_user_value, replace_language, start_c, deals_online_start, deals_online_change_type, \
-    deals_online_type_add, deals_online_cancel
+    deals_online_type_add, deals_online_cancel, get_crypto
 
 
 router = Router()
@@ -161,7 +161,21 @@ async def cal(call, state: FSMContext):
             await start_c(call)
         except Exception as err:
             logging.exception(err)
-    ### ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
+    # ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
+    elif call.data == "offline_deals":
+        try:
+            await get_crypto(call)
+        except Exception as err:
+            logging.exception(err)
+
+
+
+
+    # КОНЕЦ ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
+
+
+
+    ## ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
     elif call.data == "exch":
         try:
             await deals_online_start(call)
