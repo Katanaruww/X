@@ -7,10 +7,11 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from func import sql_start
 import config
 from hand import router
-
+from art import tprint
 
 
 async def main():
+    tprint("Coders Company\nFUFIIKK AND PHANTOM\nLucky  EXchange")
     bot = Bot(token=config.token[0], parse_mode=ParseMode.HTML)
     dp = Dispatcher(memory=MemoryStorage())
     # dp.message.middleware.register(TechMidddle())
