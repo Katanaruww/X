@@ -74,8 +74,10 @@ def crypto_valets(lang):
     sett.button(text=f"RUB/IDR", callback_data="RUB/IDR")
     sett.button(text=f"IDR/RUB", callback_data="RUB/IDR")
 
+
     sett.button(text=f"USDT/IDR", callback_data="USDT/IDR")
     sett.button(text=f"IDR/USDT", callback_data="USD/USDT")
+
 
     sett.button(text=f"USD/IDR", callback_data="USD/IDR")
     sett.button(text=f"IDR/USDT", callback_data="USD/USDT")
@@ -83,8 +85,13 @@ def crypto_valets(lang):
 
     sett.button(text=f"USD/USDT", callback_data="USD/USDT")
     sett.button(text=f"USDT/USD", callback_data="USDT/USD")
+
+
+    sett.button(text=f"{_('Как происходит сделка?💸', lang[0])}🔙", callback_data="deal")
     sett.button(text=f"{_('Главное меню', lang[0])}🔙", callback_data="back_start")
-    sett.adjust(2)
+
+
+    sett.adjust(2, 2, 2, 2, 1, 1)
     return sett
 
 

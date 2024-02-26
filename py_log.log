@@ -1,2 +1,8 @@
-2024-02-21 23:21:45,119 - INFO - start_polling: 524 - Start polling
-2024-02-21 23:21:45,704 - INFO - _polling: 340 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-02-26 22:53:42,963 - INFO - start_polling: 524 - Start polling
+2024-02-26 22:53:43,720 - INFO - _polling: 340 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-02-26 22:53:47,302 - INFO - feed_update: 171 - Update id=377105568 is handled. Duration 3328 ms by bot id=6243740464
+2024-02-26 22:53:52,155 - INFO - feed_update: 171 - Update id=377105569 is handled. Duration 2468 ms by bot id=6243740464
+2024-02-26 22:53:57,031 - INFO - feed_update: 171 - Update id=377105570 is handled. Duration 2485 ms by bot id=6243740464
+2024-02-26 22:56:50,546 - INFO - feed_update: 171 - Update id=377105571 is handled. Duration 1389 ms by bot id=6243740464
+2024-02-26 23:00:15,151 - INFO - start_polling: 551 - Polling stopped
+2024-02-26 23:00:15,152 - INFO - _polling: 356 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'

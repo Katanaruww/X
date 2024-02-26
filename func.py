@@ -22,6 +22,17 @@ def sql_start():
     if base:
         print(f"Database connect OK")
     base.execute('CREATE TABLE IF NOT EXISTS users_id(id INTEGER PRIMARY KEY)')
+    base.execute('''
+        CREATE TABLE IF NOT EXISTS offline_exchange(
+            id_num INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY,
+            user_name TEXT,
+            deal TEXT,
+            current TEXT,
+            1)C INTEGER,
+            2)C INTEGER
+        )
+        ''')
     base.commit()
 
 """РАССЫЛКА"""
@@ -88,7 +99,15 @@ async def get_crypto(call : types.CallbackQuery):
                                   reply_markup=crypto_valets(lang).as_markup())
     except Exception as err:
         logging.exception(err)
-
+async def get_messa(call : types.CallbackQuery):
+    try:
+        lang = await check_lang(call.message.chat.id)
+        localized_message = _(f'<b>Доставка курьером производится по этапу:</b>\n1)💸Создаём заявку в боте.\n2)🚛С вами '
+                              f'связывается курьер.\n3)🏎 '
+                              f'Встречаетесь с курьером.\n4)🚀Проверяем и получаем средства', lang=lang[0])
+        await call.message.edit_text(f"{_(text=localized_message)}", reply_markup=setting_rasilka(lang).as_markup())
+    except Exception as err:
+        logging.exception(err)
 
 """КОНЕЦ ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
 ### ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###

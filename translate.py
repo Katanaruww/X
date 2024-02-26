@@ -17,7 +17,8 @@ translates = {
         "Что отдаете" : "What are you giving away",
         "Назад" : "Back",
         "Отмена" : "Cancel",
-        "Главное меню" : "Main menu"
+        "Главное меню" : "Main menu",
+        "Как происходит сделка?": "How does the deal work?"
     }
 }
 
