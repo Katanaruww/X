@@ -15,6 +15,7 @@ translates = {
         "Продажа валюты" : "Sale of currency",
         "Выберите действие" : "Select an action",
         "Что отдаете" : "What are you giving away",
+        "Что хотите получить" : "What you want to get",
         "Назад" : "Back",
         "Отмена" : "Cancel",
         "Главное меню" : "Main menu",
@@ -24,7 +25,9 @@ translates = {
         "Создаём заявку в боте.": "We create a request in the bot.",
         "С вами связывается курьер.": "The courier will contact you.",
         "Встречаетесь с курьером.": "Meet with the courier.",
-        "Проверяем и получаем средства.": "We check and receive funds."
+        "Проверяем и получаем средства.": "We check and receive funds.",
+        "Отлично! Теперь введите сумму в" : "Oh, great! Now enter the amount in",
+        "которую хотите обменять на" : "that you want to trade for"
     }
 }
 

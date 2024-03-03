@@ -2,7 +2,6 @@ import logging
 from translate import _
 from aiogram import Router, Bot
 from aiogram.filters import Command
-from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import FSInputFile
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
@@ -15,8 +14,8 @@ from inline_but import *
 from routers import start_db, check_us, add_lang, check_lang, db_rep_lang
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
-from func import get_user_value, replace_language, start_c, deals_online_start, deals_online_change_type, \
-    deals_online_type_add, deals_online_cancel, get_crypto, get_messa
+from func import get_user_value, replace_language, start_c, deals_online_start, \
+    deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr, deals_add_curr_finish
 
 
 router = Router()
@@ -24,6 +23,7 @@ router = Router()
 
 class fsm(StatesGroup):
     adm_id = State()
+    set_amount = State()
 
 
 class Form(StatesGroup):
@@ -96,7 +96,7 @@ async def lang(call):
 @router.callback_query(lambda call: call.data and call.data.startswith("type_"))
 async def lang(call):
     try:
-        await deals_online_type_add(call)
+        await deals_online_type_add(call, "start")
     except Exception as e:
         logging.exception(e)
 
@@ -104,6 +104,19 @@ async def lang(call):
 async def lang(call):
     try:
         await deals_online_cancel(call)
+    except Exception as e:
+        logging.exception(e)
+@router.callback_query(lambda call: call.data and call.data.startswith("give_"))
+async def lang(call):
+    try:
+        await deals_add_curr(call)
+    except Exception as e:
+        logging.exception(e)
+
+@router.callback_query(lambda call: call.data and call.data.startswith("get_"))
+async def lang(call, state: FSMContext):
+    try:
+        await deals_add_curr_finish(call, state)
     except Exception as e:
         logging.exception(e)
 
@@ -187,7 +200,7 @@ async def cal(call, state: FSMContext):
             logging.exception(err)
     elif call.data == "online_deals":
         try:
-            await deals_online_change_type(call)
+            await deals_online_type_add(call)
         except Exception as err:
             logging.exception(err)
     ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ###
