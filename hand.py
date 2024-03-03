@@ -16,7 +16,7 @@ from routers import start_db, check_us, add_lang, check_lang, db_rep_lang
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
 from func import get_user_value, replace_language, start_c, deals_online_start, deals_online_change_type, \
-    deals_online_type_add, deals_online_cancel
+    deals_online_type_add, deals_online_cancel, get_crypto, get_messa
 
 
 router = Router()
@@ -48,7 +48,7 @@ async def start_handler(msg: Message):
         check = await check_us(msg.chat.id)
         if check is not None:
             try:
-                photo = FSInputFile("media/x.jpg")
+                photo = FSInputFile("media/logo.png")
                 lang = await check_lang(msg.chat.id)
                 await msg.answer_photo(
                     caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{msg.chat.first_name}</i></b>",
@@ -151,7 +151,35 @@ async def cal(call, state: FSMContext):
             await start_c(call)
         except Exception as err:
             logging.exception(err)
-    ### ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
+    elif call.data == "no":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "no2":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
+    # ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
+    elif call.data == "offline_deals":
+        try:
+            await get_crypto(call)
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "deal":
+        try:
+            await get_messa(call)
+        except Exception as err:
+            logging.exception(err)
+
+
+
+    # КОНЕЦ ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
+
+
+
+    ## ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
     elif call.data == "exch":
         try:
             await deals_online_start(call)

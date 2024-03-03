@@ -3,12 +3,12 @@ import sqlite3 as sq
 
 from aiogram import Router, Bot
 from aiogram.types import FSInputFile
-
+from aiogram import types
 import config
 from inline_but import *
 from routers import check_lang, db_rep_lang, db_add_start_deals, db_delete_deal
 from translate import _
-
+from inline_but import setting_rasilka, crypto_valets
 router = Router()
 bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
@@ -22,15 +22,26 @@ def sql_start():
     if base:
         print(f"Database connect OK")
     base.execute('CREATE TABLE IF NOT EXISTS users_id(id INTEGER PRIMARY KEY)')
+    base.execute('''
+        CREATE TABLE IF NOT EXISTS offline_exchange(
+            id_num INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER,
+            user_name TEXT,
+            deal TEXT,
+            current TEXT,
+            polex1 INTEGER,
+            polex2 INTEGER
+        )''')
     base.commit()
 
-
+"""РАССЫЛКА"""
 async def send_broadcast(message_text, photo_url):
     cur.execute('SELECT id FROM users_id')
     users = cur.fetchall()
     for user in users:
         try:
-            await bot.send_photo(user[0], photo=photo_url, caption=message_text)
+            lang = await check_lang(user[0])
+            await bot.send_photo(user[0], photo=photo_url, caption=message_text, reply_markup=setting_rasilka(lang).as_markup())
         except Exception as e:
             print(f"Не удалось отправить сообщение пользователю {user[0]}: {e}")
 
@@ -39,18 +50,19 @@ async def send_broadcast2(text):
     cur.execute('SELECT id FROM users_id')
     users = cur.fetchall()
     for user in users:
-        try:
-            await bot.send_message(user[0], text=text)
+        # try:
+            lang = await check_lang(user[0])
+            await bot.send_message(user[0], text=text, reply_markup=setting_rasilka(lang).as_markup())
 
-        except Exception as e:
-            print(f"Не удалось отправить сообщение пользователю {user[0]}: {e}")
+        # except Exception as e:
+        #     print(f"Не удалось отправить сообщение пользователю {user[0]}: {e}")
 
 
 async def get_user_value(val_1):
     cur.execute("INSERT OR IGNORE INTO users_id (id) VALUES (?)", (val_1,))
     base.commit()
 
-
+"""РАССЫЛКА"""
 async def replace_language(call):
     try:
         lang = call.data[7:]
@@ -71,13 +83,35 @@ async def replace_language(call):
 
 async def start_c(call):
     lang = await check_lang(call.message.chat.id)
-    photo = FSInputFile("media/x.jpg")
+    photo = FSInputFile("media/logo.png")
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     await call.message.answer_photo(
         caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
         reply_markup=start_but(lang[0]).as_markup(), photo=photo)
 
+"""ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
+async def get_crypto(call : types.CallbackQuery):
+    try:
+        lang = await check_lang(call.message.chat.id)
+        await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
+                                  reply_markup=crypto_valets(lang).as_markup())
+    except Exception as err:
+        logging.exception(err)
+async def get_messa(call : types.CallbackQuery):
+    try:
+        lang = await check_lang(call.message.chat.id)
+        localized_message = f'<b>{_("Доставка курьером производится по этапу:", lang[0])}</b>\n' \
+                            f'<b><i>💸{_("Создаём заявку в боте.", lang[0])}</i></b>\n' \
+                            f'<b><i>🚛{_("С вами связывается курьер", lang[0])}</i></b>\n' \
+                            f'<b><i>🏎{_("Встречаетесь с курьером.", lang[0])}</i></b>\n' \
+                            f'<b><i>🚀{_("Проверяем и получаем средства", lang[0])}</i></b>\n' \
 
+
+        await call.message.edit_text(f"{_(text=localized_message)}", reply_markup=setting_rasilka(lang).as_markup())
+    except Exception as err:
+        logging.exception(err)
+
+"""КОНЕЦ ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
 ### ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###
 async def deals_online_start(call):
     try:
