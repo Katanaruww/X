@@ -25,14 +25,13 @@ def sql_start():
     base.execute('''
         CREATE TABLE IF NOT EXISTS offline_exchange(
             id_num INTEGER PRIMARY KEY AUTOINCREMENT,
-            id INTEGER PRIMARY KEY,
+            id INTEGER,
             user_name TEXT,
             deal TEXT,
             current TEXT,
-            1)C INTEGER,
-            2)C INTEGER
-        )
-        ''')
+            polex1 INTEGER,
+            polex2 INTEGER
+        )''')
     base.commit()
 
 """РАССЫЛКА"""
@@ -94,17 +93,20 @@ async def start_c(call):
 async def get_crypto(call : types.CallbackQuery):
     try:
         lang = await check_lang(call.message.chat.id)
-        await call.message.edit_text(f'❗<i>Выберите интересующие направление для вас</i>❗\n<b>Формат:</b>\n'
-                                  f'<b>Отдаёте-получаете</b>',
+        await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
                                   reply_markup=crypto_valets(lang).as_markup())
     except Exception as err:
         logging.exception(err)
 async def get_messa(call : types.CallbackQuery):
     try:
         lang = await check_lang(call.message.chat.id)
-        localized_message = _(f'<b>Доставка курьером производится по этапу:</b>\n1)💸Создаём заявку в боте.\n2)🚛С вами '
-                              f'связывается курьер.\n3)🏎 '
-                              f'Встречаетесь с курьером.\n4)🚀Проверяем и получаем средства', lang=lang[0])
+        localized_message = f'<b>{_("Доставка курьером производится по этапу:", lang[0])}</b>\n' \
+                            f'<b><i>💸{_("Создаём заявку в боте.", lang[0])}</i></b>\n' \
+                            f'<b><i>🚛{_("С вами связывается курьер", lang[0])}</i></b>\n' \
+                            f'<b><i>🏎{_("Встречаетесь с курьером.", lang[0])}</i></b>\n' \
+                            f'<b><i>🚀{_("Проверяем и получаем средства", lang[0])}</i></b>\n' \
+
+
         await call.message.edit_text(f"{_(text=localized_message)}", reply_markup=setting_rasilka(lang).as_markup())
     except Exception as err:
         logging.exception(err)

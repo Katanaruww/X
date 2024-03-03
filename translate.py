@@ -18,7 +18,13 @@ translates = {
         "Назад" : "Back",
         "Отмена" : "Cancel",
         "Главное меню" : "Main menu",
-        "Как происходит сделка?": "How does the deal work?"
+        "Как происходит сделка?": "How does the deal work?",
+        "Выберите интересующие направление для вас:": "Select the direction you are interested in:",
+        "Доставка курьером производится по этапу:": "Delivery by courier is carried out according to the following stages:",
+        "Создаём заявку в боте.": "We create a request in the bot.",
+        "С вами связывается курьер.": "The courier will contact you.",
+        "Встречаетесь с курьером.": "Meet with the courier.",
+        "Проверяем и получаем средства.": "We check and receive funds."
     }
 }
 
