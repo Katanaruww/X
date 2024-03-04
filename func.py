@@ -149,9 +149,9 @@ async def deals_online_type_add(call, type="start"):
         if type == "start":
             id_us = call.message.chat.id
             lang = await check_lang(call.message.chat.id)
-            await db_add_start_deals(id_us)
+            await db_add_start_deals(id_us, call.id)
             await call.message.edit_text(f"<i>{_('Что отдаете', lang[0])}?</i>",
-                                         reply_markup=exc_type_onl_btn(call, lang[0], "give").as_markup())
+                                         reply_markup=exc_type_onl_btn(call.id, lang[0], "give").as_markup())
 
 
     except Exception as e:
@@ -162,11 +162,12 @@ async def deals_add_curr(call):
     try:
         type = "give"
         val = call.data.split("_")[1]
-        await add_pars_deals_onl(call.message.chat.id, type, val)
+        idd = call.data.split("_")[2]
+        await add_pars_deals_onl(idd, type, val)
         lang = await check_lang(call.message.chat.id)
         if type == "give":
             await call.message.edit_text(f"<i>{_('Что хотите получить', lang[0])}?</i>",
-                                         reply_markup=exc_type_onl_btn(call, lang[0], "get").as_markup())
+                                         reply_markup=exc_type_onl_btn(idd, lang[0], "get").as_markup())
     except Exception as e:
         logging.exception(e)
 
@@ -175,14 +176,15 @@ async def deals_add_curr_finish(call, state: FSMContext):
     try:
         type = "get"
         val = call.data.split("_")[1]
-        await add_pars_deals_onl(call.message.chat.id, type, val)
+        idd = call.data.split("_")[2]
+        await add_pars_deals_onl(idd, type, val)
         lang = await check_lang(call.message.chat.id)
-        view_give = await db_view_type_give(call.message.chat.id, "give")
-        view_get = await db_view_type_give(call.message.chat.id, "get")
+        view_give = await db_view_type_give(idd, "give")
+        view_get = await db_view_type_give(idd, "get")
         await call.message.edit_text(f"<b>{_('Отлично! Теперь введите сумму в', lang[0])} <i>{view_give[0]}</i>, "
                                      f"{_('которую хотите обменять на', lang[0])} {view_get[0]}:</b>",
-                                     reply_markup=exc_btn_cancel(call, lang[0]).as_markup())
-        await state.set_state(FSM.set_amount)
+                                     reply_markup=exc_btn_cancel(idd, lang[0]).as_markup())
+        return idd
     except Exception as e:
         logging.exception(e)
 
@@ -199,13 +201,3 @@ async def deals_online_cancel(call):
 
 
 ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###
-### fsm for online ###
-@router.message(FSM.set_amount)
-async def setrt(message: types.Message, state: FSMContext):
-    print("z nen")
-    try:
-        await state.update_data(set_amount=message.text)
-        data = await state.get_data()
-        print(data)
-    except Exception as e:
-        logging.exception(e)
