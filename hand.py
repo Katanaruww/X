@@ -11,7 +11,7 @@ from aiogram import F
 from func import send_broadcast2, send_broadcast
 import config
 from inline_but import *
-from routers import start_db, check_us, add_lang, check_lang, db_rep_lang
+from routers import start_db, check_us, add_lang, check_lang, db_rep_lang, add_amount_deals_onl
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
 from func import get_user_value, replace_language, start_c, deals_online_start, \
@@ -24,6 +24,7 @@ router = Router()
 class fsm(StatesGroup):
     adm_id = State()
     set_amount = State()
+    call_id = State()
 
 
 class Form(StatesGroup):
@@ -116,7 +117,9 @@ async def lang(call):
 @router.callback_query(lambda call: call.data and call.data.startswith("get_"))
 async def lang(call, state: FSMContext):
     try:
-        await deals_add_curr_finish(call, state)
+        call_id = await deals_add_curr_finish(call, state)
+        await state.update_data(call_id=call_id)
+        await state.set_state(fsm.set_amount)
     except Exception as e:
         logging.exception(e)
 
@@ -270,3 +273,16 @@ async def get_photo(message: types.Message, state: FSMContext):
 @router.message(Form.description1, ~F.text)
 async def get_trext(message: types.Message, state: FSMContext):
     await message.answer(f'Отправь текст!')
+
+@router.message(fsm.set_amount)
+async def setrt(message: types.Message, state: FSMContext):
+    try:
+        await state.update_data(set_amount=message.text)
+        data = await state.get_data()
+        amount_get = round(float(data["set_amount"]), 2)
+        call_id = data["call_id"]
+        await add_amount_deals_onl(call_id, amount_get)
+        await message.answer("<b>Успешно!</b>")
+    except Exception as e:
+        logging.exception(e)
+

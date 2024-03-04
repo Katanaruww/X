@@ -47,20 +47,20 @@ def exc_btn_start(lang):
     return exc
 ### ОНЛАЙН СДЕЛКИ ###
 
-def exc_type_onl_btn(call, lang, type):
+def exc_type_onl_btn(call_id, lang, type):
     exc_o = InlineKeyboardBuilder()
-    exc_o.button(text="RUB", callback_data=f"{type}_RUB")
-    exc_o.button(text="USD", callback_data=f"{type}_USD")
-    exc_o.button(text="IDR", callback_data=f"{type}_IDR")
-    exc_o.button(text="USDT", callback_data=f"{type}_USDT")
-    exc_o.button(text="BTC", callback_data=f"{type}_BTC")
-    exc_o.button(text="LTC", callback_data=f"{type}_LTC")
-    exc_o.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call.message.chat.id}")
+    exc_o.button(text="RUB", callback_data=f"{type}_RUB_{call_id}")
+    exc_o.button(text="USD", callback_data=f"{type}_USD_{call_id}")
+    exc_o.button(text="IDR", callback_data=f"{type}_IDR_{call_id}")
+    exc_o.button(text="USDT", callback_data=f"{type}_USDT_{call_id}")
+    exc_o.button(text="BTC", callback_data=f"{type}_BTC_{call_id}")
+    exc_o.button(text="LTC", callback_data=f"{type}_LTC_{call_id}")
+    exc_o.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call_id}")
     exc_o.adjust(3, 3, 1)
     return exc_o
-def exc_btn_cancel(call, lang):
+def exc_btn_cancel(call_id, lang):
     exc = InlineKeyboardBuilder()
-    exc.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call.message.chat.id}")
+    exc.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call_id}")
     exc.adjust(2, 1)
     return exc
 ### ОНЛАЙН СДЕЛКА ###
