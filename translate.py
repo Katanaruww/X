@@ -27,7 +27,8 @@ translates = {
         "Встречаетесь с курьером.": "Meet with the courier.",
         "Проверяем и получаем средства.": "We check and receive funds.",
         "Отлично! Теперь введите сумму в" : "Oh, great! Now enter the amount in",
-        "которую хотите обменять на" : "that you want to trade for"
+        "которую хотите обменять на": "that you want to trade for",
+        "Минимальная сумма": "Minimum amount"
     }
 }
 

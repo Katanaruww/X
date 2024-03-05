@@ -25,6 +25,7 @@ class fsm(StatesGroup):
     adm_id = State()
     set_amount = State()
     call_id = State()
+    min_am = State()
 
 
 class Form(StatesGroup):
@@ -118,7 +119,9 @@ async def lang(call):
 async def lang(call, state: FSMContext):
     try:
         call_id = await deals_add_curr_finish(call, state)
-        await state.update_data(call_id=call_id)
+        print(call_id)
+        await state.update_data(min_am=call_id[1])
+        await state.update_data(call_id=call_id[0])
         await state.set_state(fsm.set_amount)
     except Exception as e:
         logging.exception(e)
@@ -279,10 +282,17 @@ async def setrt(message: types.Message, state: FSMContext):
     try:
         await state.update_data(set_amount=message.text)
         data = await state.get_data()
-        amount_get = round(float(data["set_amount"]), 2)
+        amount_get = round(float(data["set_amount"]))
         call_id = data["call_id"]
-        await add_amount_deals_onl(call_id, amount_get)
-        await message.answer("<b>Успешно!</b>")
+        min_am = data["min_am"]
+        if amount_get >= min_am:
+            await add_amount_deals_onl(call_id, amount_get)
+            await message.answer("<b>Успешно!</b>")
+            await state.clear()
+        else:
+            await state.clear()
+            await message.answer(f"<b>Нахуй пошел! Русским языком сказали же минимум {min_am}</b>")
+            await state.set_state(fsm.set_amount)
     except Exception as e:
         logging.exception(e)
 

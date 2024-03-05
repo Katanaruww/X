@@ -10,7 +10,7 @@ from inline_but import *
 from routers import check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give
 from translate import _
 from inline_but import setting_rasilka, crypto_valets
-
+from limits import limits_currency_pairs
 router = Router()
 bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
@@ -181,10 +181,12 @@ async def deals_add_curr_finish(call, state: FSMContext):
         lang = await check_lang(call.message.chat.id)
         view_give = await db_view_type_give(idd, "give")
         view_get = await db_view_type_give(idd, "get")
-        await call.message.edit_text(f"<b>{_('Отлично! Теперь введите сумму в', lang[0])} <i>{view_give[0]}</i>, "
-                                     f"{_('которую хотите обменять на', lang[0])} {view_get[0]}:</b>",
-                                     reply_markup=exc_btn_cancel(idd, lang[0]).as_markup())
-        return idd
+        min_am = await limits_currency_pairs(view_get[0])
+        await call.message.edit_text(f"<i>{_('Отлично! Теперь введите сумму в', lang[0])} <i>{view_give[0]}</i>, "
+                                     f"{_('которую хотите обменять на', lang[0])} {view_get[0]}</i>\n"
+                                     f"<b><i>{_('Минимальная сумма', lang[0])}:</i></b> <i>{min_am} {view_get[0]}</i>",
+                                     reply_markup=exc_btn_cancel(idd, lang[0], ).as_markup())
+        return idd, min_am
     except Exception as e:
         logging.exception(e)
 
