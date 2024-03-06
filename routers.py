@@ -53,18 +53,76 @@ async def db_rep_lang(id_us, lang):
     except Exception as e:
         logging.warning(e)
 
-async def db_add_start_deals(id_us, type_d):
+async def db_add_start_deals(id_us, call_id):
     try:
-        curs.execute("INSERT INTO deals_onl (id_user, type) VALUES (?, ?)",(id_us, type_d))
+        curs.execute("INSERT INTO deals_onl (id_user, id_call) VALUES (?, ?)", (id_us, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+async def db_view_type_give(id_call, type):
+    try:
+        if type == "give":
+            return curs.execute("SELECT give FROM deals_onl WHERE id_call = ?", (id_call,)).fetchone()
+        elif type == "get":
+            return curs.execute("SELECT get FROM deals_onl WHERE id_call = ?", (id_call,)).fetchone()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def db_delete_deal(call_id):
+    try:
+        curs.execute("DELETE FROM deals_onl WHERE id_call = ?", (call_id, ))
         conn.commit()
     except Exception as e:
         logging.warning(e)
 
-async def db_delete_deal(id_us):
+async def add_pars_deals_onl(call_id, type, val):
     try:
-        curs.execute("DELETE FROM deals_onl WHERE id_user = ?", (id_us, ))
+        if type == "give":
+            curs.execute("UPDATE deals_onl SET give = ? WHERE id_call = ?", (val, call_id))
+            conn.commit()
+        elif type == "get":
+            curs.execute("UPDATE deals_onl SET get = ? WHERE id_call = ?", (val, call_id))
+            conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def add_amount_deals_onl(id_call, amount):
+    try:
+        curs.execute('UPDATE deals_onl SET amount_in = ? WHERE id_call = ?', (amount, id_call))
         conn.commit()
     except Exception as e:
         logging.warning(e)
 
 
+async def add_cards_start(type_v, call_id):
+    try:
+        curs.execute("INSERT INTO cards (curr, id_c) VALUES (?, ?)", (type_v, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def add_cards_rub_type(type_b, call_id):
+    try:
+        curs.execute("UPDATE cards SET type_pay = ? WHERE id_c = ?", (type_b, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def delete_cards(call_id):
+    try:
+        curs.execute("DELETE FROM cards WHERE id_c = ?", (call_id,))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def add_rekv_cards(rekv, call_id):
+    try:
+        curs.execute("UPDATE cards SET rekv = ? WHERE id_c = ?", (rekv, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
