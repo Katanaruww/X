@@ -141,3 +141,33 @@ def admin_exc():
     adm_exc.adjust(1, 1, 1)
     return adm_exc
 
+
+def admin_exc_add_card(call_id, type):
+    adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text="RUB", callback_data=f"{type}-cards_RUB_{call_id}")
+    adm_exc_add.button(text="IDR", callback_data=f"{type}-cards_IDR_{call_id}")
+    adm_exc_add.button(text="USD", callback_data=f"{type}-cards_USD_{call_id}")
+    adm_exc_add.button(text="USDT", callback_data=f"{type}-cards_USDT_{call_id}")
+    adm_exc_add.button(text="BTC", callback_data=f"{type}-cards_BTC_{call_id}")
+    adm_exc_add.button(text="LTC", callback_data=f"{type}-cards_LTC_{call_id}")
+    adm_exc_add.button(text="Назад🔙", callback_data="back_admin")
+    adm_exc_add.adjust(3, 3, 1)
+    return adm_exc_add
+
+
+def admin_exc_rub_add_card(call_id, type_d):
+    adm_e_r_add = InlineKeyboardBuilder()
+    adm_e_r_add.button(text="Сбербанк", callback_data=f"{type_d}-rub-cards_Сбербанк_{call_id}")
+    adm_e_r_add.button(text="Тинькофф", callback_data=f"{type_d}-rub-cards_Тинькофф_{call_id}")
+    adm_e_r_add.button(text="Карта", callback_data=f"{type_d}-rub-cards_Карта_{call_id}")
+    adm_e_r_add.button(text="СБП", callback_data=f"{type_d}-rub-cards_СБП_{call_id}")
+    adm_e_r_add.button(text="Отмена⭕️", callback_data=f"cancel-card_{call_id}")
+    adm_e_r_add.adjust(1, 1, 1, 1, 1)
+    return adm_e_r_add
+
+
+def adm_exc_cancel_card(call_id):
+    adm_e_c = InlineKeyboardBuilder()
+    adm_e_c.button(text="Отмена⭕️", callback_data=f"cancel-card_{call_id}")
+    adm_e_c.adjust(1)
+    return adm_e_c

@@ -96,4 +96,33 @@ async def add_amount_deals_onl(id_call, amount):
         logging.warning(e)
 
 
+async def add_cards_start(type_v, call_id):
+    try:
+        curs.execute("INSERT INTO cards (curr, id_c) VALUES (?, ?)", (type_v, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
 
+
+async def add_cards_rub_type(type_b, call_id):
+    try:
+        curs.execute("UPDATE cards SET type_pay = ? WHERE id_c = ?", (type_b, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def delete_cards(call_id):
+    try:
+        curs.execute("DELETE FROM cards WHERE id_c = ?", (call_id,))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def add_rekv_cards(rekv, call_id):
+    try:
+        curs.execute("UPDATE cards SET rekv = ? WHERE id_c = ?", (rekv, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)

@@ -11,11 +11,13 @@ from aiogram import F
 from func import send_broadcast2, send_broadcast
 import config
 from inline_but import *
-from routers import start_db, check_us, add_lang, check_lang, db_rep_lang, add_amount_deals_onl
+from routers import (start_db, check_us, add_lang, check_lang, db_rep_lang, add_amount_deals_onl, add_cards_start,
+                     add_rekv_cards)
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
 from func import get_user_value, replace_language, start_c, deals_online_start, \
     deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr, deals_add_curr_finish
+from cards import add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin
 
 
 router = Router()
@@ -26,6 +28,8 @@ class fsm(StatesGroup):
     set_amount = State()
     call_id = State()
     min_am = State()
+    call_id_cards = State()
+    rekv = State()
 
 
 class Form(StatesGroup):
@@ -105,7 +109,15 @@ async def lang(call):
 @router.callback_query(lambda call: call.data and call.data.startswith("cancel-deal_"))
 async def lang(call):
     try:
-        await deals_online_cancel(call)
+        await cancel_add_card(call)
+    except Exception as e:
+        logging.exception(e)
+
+
+@router.callback_query(lambda call: call.data and call.data.startswith("cancel-card_"))
+async def lang(call):
+    try:
+        await cancel_add_card(call)
     except Exception as e:
         logging.exception(e)
 @router.callback_query(lambda call: call.data and call.data.startswith("give_"))
@@ -126,6 +138,25 @@ async def lang(call, state: FSMContext):
     except Exception as e:
         logging.exception(e)
 
+
+@router.callback_query(lambda call: call.data and call.data.startswith("add-cards_"))
+async def card(call, state: FSMContext):
+    try:
+        call_id = await add_currency_card(call)
+        await state.update_data(call_id_cards=call_id)
+        await state.set_state(fsm.rekv)
+    except Exception as e:
+        logging.exception(e)
+
+
+@router.callback_query(lambda call: call.data and call.data.startswith("add-rub-cards_"))
+async def card(call, state: FSMContext):
+    try:
+        call_id = await add_type_pay_exc_admin(call)
+        await state.update_data(call_id_cards=call_id)
+        await state.set_state(fsm.rekv)
+    except Exception as e:
+        logging.exception(e)
 @router.callback_query(lambda call: True)
 async def cal(call, state: FSMContext):
     if call.data == "agree_rules":
@@ -191,6 +222,12 @@ async def cal(call, state: FSMContext):
             await get_messa(call)
         except Exception as err:
             logging.exception(err)
+    elif call.data == "add_cards":
+        try:
+            await add_start_card(call)
+        except Exception as err:
+            logging.exception(err)
+
 
 
 
@@ -296,3 +333,18 @@ async def setrt(message: types.Message, state: FSMContext):
     except Exception as e:
         logging.exception(e)
 
+
+@router.message(fsm.rekv)
+async def setrt(message: types.Message, state: FSMContext):
+    try:
+        await state.update_data(rekv=message.text)
+        data = await state.get_data()
+        rekv_get = data["rekv"]
+        call_id = data["call_id_cards"]
+        await add_rekv_cards(rekv_get, call_id)
+        await message.answer(f"<b>Успешно!</b>\n"
+                             f"<i>Добавим еще реквизит?</i>", reply_markup=admin_exc().as_markup())
+        await state.clear()
+        await state.set_state(fsm.set_amount)
+    except Exception as e:
+        logging.exception(e)
