@@ -108,12 +108,15 @@ def admin_but_send():
     adm.button(text="Рассылка без фотографии", callback_data="send2")
     adm.adjust(1)
     return adm
-
+def sub():
+    sub = InlineKeyboardBuilder()
+    sub.button(text="Подпишись!", url="https://t.me/lucky_bali_group")
 
 def admin_but():
     adm = InlineKeyboardBuilder()
     adm.button(text="Админка обменника", callback_data="adm_exc")
     adm.button(text="Рассылка", callback_data="send")
+    adm.button(text="Чёрный список", callback_data="black_list")
     adm.adjust(1)
     return adm
 
@@ -124,7 +127,12 @@ def admin_bc_fsm():
     adm.adjust(1)
     return adm
 
-
+def ban():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="Да✅", callback_data="yes3")
+    adm.button(text="Нет❌", callback_data="no3")
+    adm.adjust(1)
+    return adm
 def admin_bc_fsm2():
     adm = InlineKeyboardBuilder()
     adm.button(text="Да✅", callback_data="yes2")

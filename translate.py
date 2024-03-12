@@ -28,7 +28,8 @@ translates = {
         "Проверяем и получаем средства.": "We check and receive funds.",
         "Отлично! Теперь введите сумму в" : "Oh, great! Now enter the amount in",
         "которую хотите обменять на": "that you want to trade for",
-        "Минимальная сумма": "Minimum amount"
+        "Минимальная сумма": "Minimum amount",
+        "К сожалению вы забанены": "Unfortunately you are banned"
     }
 }
 

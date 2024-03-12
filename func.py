@@ -11,6 +11,7 @@ from routers import check_lang, db_rep_lang, db_add_start_deals, db_delete_deal,
 from translate import _
 from inline_but import setting_rasilka, crypto_valets
 from limits import limits_currency_pairs
+from translate import _
 router = Router()
 bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
@@ -28,6 +29,11 @@ def sql_start():
     if base:
         print(f"Database connect OK")
     base.execute('CREATE TABLE IF NOT EXISTS users_id(id INTEGER PRIMARY KEY)')
+
+    base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY)')
+
+
+
     base.execute('''
         CREATE TABLE IF NOT EXISTS offline_exchange(
             id_num INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,8 +77,30 @@ async def send_broadcast2(text):
 async def get_user_value(val_1):
     cur.execute("INSERT OR IGNORE INTO users_id (id) VALUES (?)", (val_1,))
     base.commit()
+"""ЧЕРНЫЙ СПИСОК2"""
+async def ban_us(val_1):
+    cur.execute("INSERT OR IGNORE INTO ban_users (username) VALUES (?)", (val_1,))
+    base.commit()
 
-
+async def ban_users_us(message: types.Message, val_1):
+    try:
+        cur.execute("SELECT username FROM ban_users")
+        ids = [row[0] for row in cur]
+        for i in ids:
+            if i == val_1:
+                lang = await check_lang(message.chat.id)
+                # await message.answer(f"<b><i>{_('К сожалению вы забанены', lang[0])}</i></b>")
+                await message.answer("К сожалению вы забанены")
+    except Exception as e:
+        logging.warning(e)
+async def check_bans():
+    try:
+        cur.execute("SELECT username FROM ban_users")
+        ids = [row[0] for row in cur]
+        return ids
+    except Exception as e:
+        logging.warning(e)
+"""КОНЕЦ ЧЕРНЫЙ СПИСОК2"""
 """РАССЫЛКА"""
 
 
@@ -99,7 +127,7 @@ async def start_c(call):
     photo = FSInputFile("media/logo.png")
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     await call.message.answer_photo(
-        caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
+        caption=f"<b>{_('Добро пожаловать', lang)}, <i>{call.message.chat.first_name}</i></b>",
         reply_markup=start_but(lang[0]).as_markup(), photo=photo)
 
 
