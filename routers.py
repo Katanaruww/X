@@ -126,3 +126,22 @@ async def add_rekv_cards(rekv, call_id):
         conn.commit()
     except Exception as e:
         logging.warning(e)
+
+
+async def view_list_card(type_v, v="None"):
+    try:
+        if type_v == "RUB":
+            pass
+        else:
+            row = curs.execute("SELECT * FROM cards WHERE curr = ?", (type_v,)).fetchall()
+            return row
+    except Exception as e:
+        logging.exception(e)
+
+
+async def check_status_card_bd(call_id):
+    try:
+        row = curs.execute("SELECT st FROM cards WHERE id_c = ?", (call_id,)).fetchone()
+        return row
+    except Exception as e:
+        logging.warning(e)

@@ -15,9 +15,11 @@ from routers import (start_db, check_us, add_lang, check_lang, db_rep_lang, add_
                      add_rekv_cards)
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2
 from function import get_pars
-from func import get_user_value, replace_language, start_c, deals_online_start, \
-    deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr, deals_add_curr_finish
-from cards import add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin
+from func import (get_user_value, replace_language, start_c, deals_online_start,
+                  deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr,
+                  deals_add_curr_finish)
+from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
+                   get_list_card)
 
 
 router = Router()
@@ -149,6 +151,13 @@ async def card(call, state: FSMContext):
         logging.exception(e)
 
 
+@router.callback_query(lambda call: call.data and call.data.startswith("get-cards_"))
+async def car(call):
+    try:
+        await get_list_card(call)
+    except Exception as e:
+        logging.exception(e)
+
 @router.callback_query(lambda call: call.data and call.data.startswith("add-rub-cards_"))
 async def card(call, state: FSMContext):
     try:
@@ -222,6 +231,11 @@ async def cal(call, state: FSMContext):
             await get_messa(call)
         except Exception as err:
             logging.exception(err)
+    elif call.data == "see_cards":
+        try:
+            await get_start_card(call)
+        except Exception as err:
+            logging.exception(err)
     elif call.data == "add_cards":
         try:
             await add_start_card(call)
@@ -250,7 +264,7 @@ async def cal(call, state: FSMContext):
 
 
     ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
-    elif call.data == "adm_exc":
+    elif call.data == "adm_exc" or call.data == "back_admin":
         await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
 
 

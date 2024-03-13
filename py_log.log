@@ -1,18 +1,9 @@
-2024-03-06 23:34:47,324 - INFO - start_polling: 527 - Start polling
-2024-03-06 23:34:47,985 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-06 23:34:48,209 - INFO - feed_update: 172 - Update id=377106033 is handled. Duration 0 ms by bot id=6243740464
-2024-03-06 23:34:49,564 - INFO - feed_update: 172 - Update id=377106034 is handled. Duration 703 ms by bot id=6243740464
-2024-03-06 23:34:51,299 - INFO - feed_update: 172 - Update id=377106035 is handled. Duration 266 ms by bot id=6243740464
-2024-03-06 23:34:52,816 - INFO - feed_update: 172 - Update id=377106036 is handled. Duration 235 ms by bot id=6243740464
-2024-03-06 23:35:13,442 - INFO - feed_update: 172 - Update id=377106037 is handled. Duration 718 ms by bot id=6243740464
-2024-03-06 23:35:20,902 - INFO - feed_update: 172 - Update id=377106038 is handled. Duration 0 ms by bot id=6243740464
-2024-03-06 23:35:23,762 - INFO - feed_update: 172 - Update id=377106039 is handled. Duration 327 ms by bot id=6243740464
-2024-03-06 23:35:25,806 - INFO - feed_update: 172 - Update id=377106040 is handled. Duration 250 ms by bot id=6243740464
-2024-03-06 23:35:27,709 - INFO - feed_update: 172 - Update id=377106041 is handled. Duration 250 ms by bot id=6243740464
-2024-03-06 23:35:31,214 - INFO - feed_update: 172 - Update id=377106042 is handled. Duration 297 ms by bot id=6243740464
-2024-03-06 23:35:57,910 - INFO - feed_update: 172 - Update id=377106043 is handled. Duration 655 ms by bot id=6243740464
-2024-03-06 23:35:59,413 - INFO - feed_update: 172 - Update id=377106044 is handled. Duration 250 ms by bot id=6243740464
-2024-03-06 23:36:05,215 - INFO - feed_update: 172 - Update id=377106045 is handled. Duration 250 ms by bot id=6243740464
-2024-03-06 23:36:27,032 - INFO - feed_update: 172 - Update id=377106046 is handled. Duration 702 ms by bot id=6243740464
-2024-03-06 23:36:30,198 - INFO - feed_update: 172 - Update id=377106047 is handled. Duration 218 ms by bot id=6243740464
-2024-03-06 23:36:35,519 - INFO - feed_update: 172 - Update id=377106048 is handled. Duration 296 ms by bot id=6243740464
+2024-03-14 02:28:06,424 - INFO - start_polling: 527 - Start polling
+2024-03-14 02:28:06,940 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-14 02:28:08,414 - INFO - feed_update: 172 - Update id=377106252 is handled. Duration 561 ms by bot id=6243740464
+2024-03-14 02:28:09,912 - INFO - feed_update: 172 - Update id=377106253 is handled. Duration 217 ms by bot id=6243740464
+2024-03-14 02:28:12,275 - INFO - feed_update: 172 - Update id=377106254 is handled. Duration 266 ms by bot id=6243740464
+2024-03-14 02:28:13,822 - INFO - feed_update: 172 - Update id=377106255 is handled. Duration 282 ms by bot id=6243740464
+2024-03-14 02:28:15,526 - INFO - feed_update: 172 - Update id=377106256 is handled. Duration 187 ms by bot id=6243740464
+2024-03-14 02:28:35,920 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-14 02:28:35,921 - INFO - start_polling: 554 - Polling stopped
