@@ -41,9 +41,6 @@ class Form(StatesGroup):
 class Form2(StatesGroup):
     description0 = State()
 
-class Black_list(StatesGroup):
-    user_ids = State()
-
 
 bot = Bot(config.token[0])
 
@@ -66,8 +63,7 @@ async def start_handler(msg: Message):
             except Exception as err:
                 logging.warning(err)
         else:
-
-            await start_db(msg.chat.id, msg.from_user.username, msg.from_user.first_name)
+            await start_db(msg.chat.id, msg.chat.username, msg.chat.first_name)
             await msg.answer("<b>RU:</b> <i>Выберите язык</i>\n"
                              "<b>EN:</b> <i>Choose language</i>", reply_markup=lang_btn().as_markup())
     except Exception as e:
@@ -201,8 +197,11 @@ async def cal(call, state: FSMContext):
         await call.message.edit_caption(
             caption=f"<b><i>{_('Настройки', lang[0])}</i></b>",
             reply_markup=setting_btn(call, lang[0]).as_markup(), photo=photo)
-
-
+    elif call.data == "back_start":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
     elif call.data == "no":
         try:
             await start_c(call)
@@ -227,35 +226,15 @@ async def cal(call, state: FSMContext):
     elif call.data == "add_cards":
         try:
             await add_start_card(call)
+        except Exception as err:
+            logging.exception(err)
 
-        except Exception as err:
-            logging.exception(err)
-    elif call.data == "no3":
-        try:
-            await start_c(call)
-        except Exception as err:
-            logging.exception(err)
 
 
 
     # КОНЕЦ ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
 
-    #ЧЕРНЫЙ СПИСОК
-    elif call.data == "black_list":
-        try:
-            await call.message.answer(f'Введите юзернейм пользователя для бана\nПример - @qwerty')
-            await state.set_state(Black_list.user_ids)
-        except Exception as err:
-            logging.exception(err)
-    elif call.data == 'yes3':
-        try:
-            await ban_us(ban_user["name"])
-            await call.message.answer(f'Пользователь - {ban_user["name"]} забанен!')
-        except Exception as err:
-            logging.exception(err)
 
-
-    #КОНЕЦ ЧЕРНОГО СПИСКА
 
     ## ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
     elif call.data == "exch":
@@ -275,22 +254,6 @@ async def cal(call, state: FSMContext):
     elif call.data == "adm_exc":
         await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
 
-@router.message(Black_list.user_ids)
-async def get_ban(message: types.Message, state: FSMContext):
-    try:
-        await state.update_data(name=message.text)
-        global ban_user
-        ban_user = await state.get_data()
-        await message.answer(
-            text=f"Забанить пользователя - {ban_user['name']}?",
-            reply_markup=ban(
-            ).as_markup())
-
-        # Сброс состояния и сохранённых данных у пользователя
-        await state.clear()
-    except Exception as err:
-        logging.exception(err)
-        await message.answer(f'Повторите попытку')
 
 @router.message(Form2.description0)
 async def get_userr(message: types.Message, state: FSMContext):
