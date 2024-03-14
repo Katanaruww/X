@@ -229,7 +229,7 @@ async def cal(call, state: FSMContext):
         except Exception as err:
             logging.exception(err)
 
-
+#sdfghjk
 
 
     # КОНЕЦ ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА

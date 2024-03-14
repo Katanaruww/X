@@ -13,5 +13,5 @@ limits = {
 async def limits_currency_pairs(value):
     return limits[value]
 
-
+#wertyhujik
 asyncio.run(limits_currency_pairs("USD"))

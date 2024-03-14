@@ -19,7 +19,7 @@ async def check_us(us_id):
     except Exception as e:
         logging.warning(e)
 
-
+#werftghyjkl
 async def check_tech():
     try:
         return curs.execute("SELECT * FROM technical").fetchone()

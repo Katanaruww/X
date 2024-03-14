@@ -14,7 +14,7 @@ from translate import _
 from inline_but import setting_rasilka, crypto_valets
 from limits import limits_currency_pairs
 from func import bot
-
+#ertyui
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
                     format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 

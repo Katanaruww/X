@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import aiohttp
 import asyncio
-
+#erfghjk
 
 async def get_pars_rub(amount, val_in, val_out):
     async with aiohttp.ClientSession() as session:

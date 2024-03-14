@@ -3,7 +3,7 @@ from aiogram.types import Message
 from typing import Dict, Any, Callable, Awaitable
 from func import ban_users_us, check_bans
 import logging
-
+#dfghjk
 class BlackListUsers(BaseMiddleware):
 
     async def __call__(

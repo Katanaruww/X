@@ -32,7 +32,7 @@ translates = {
         "К сожалению вы забанены": "Unfortunately you are banned"
     }
 }
-
+#werftghyjuk
 
 def _(text, lang="RU"):
     if lang == "RU":

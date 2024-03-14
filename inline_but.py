@@ -89,7 +89,7 @@ def crypto_valets(lang):
 
     sett.button(text=f"USD/USDT", callback_data="USD/USDT")
     sett.button(text=f"USDT/USD", callback_data="USDT/USD")
-
+#sdfghyjk
 
     sett.button(text=f"{_('Как происходит сделка?', lang[0])}💸", callback_data="deal")
     sett.button(text=f"{_('Главное меню', lang[0])}🔙", callback_data="back_start")
