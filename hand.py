@@ -41,6 +41,10 @@ class Form(StatesGroup):
 class Form2(StatesGroup):
     description0 = State()
 
+class Black_list(StatesGroup):
+    black_user = State()
+
+
 
 bot = Bot(config.token[0])
 
@@ -229,6 +233,12 @@ async def cal(call, state: FSMContext):
         except Exception as err:
             logging.exception(err)
 
+    elif call.data == "black_list":
+        try:
+            await call.message.answer(f'Введите username пользователя для бана\nНапример: qwerty')
+            await state.set_state(Black_list.black_user)
+        except Exception as err:
+            logging.exception(err)
 #sdfghjk
 
 
@@ -254,6 +264,15 @@ async def cal(call, state: FSMContext):
     elif call.data == "adm_exc":
         await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
 
+@router.message(Black_list.black_user)
+async def get_userr(message: types.Message, state: FSMContext):
+    try:
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        await ban_us(ban_user["nameban"])
+        await message.answer(f'Юзер - {ban_user["nameban"]} успешно забанен')
+    except Exception as err:
+        logging.exception(err)
 
 @router.message(Form2.description0)
 async def get_userr(message: types.Message, state: FSMContext):

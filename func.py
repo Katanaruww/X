@@ -128,8 +128,8 @@ async def start_c(call):
     photo = FSInputFile("media/logo.png")
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     await call.message.answer_photo(
-        caption=f"<b>{_('Добро пожаловать', lang)}, <i>{call.message.chat.first_name}</i></b>",
-        reply_markup=start_but(lang[0]).as_markup(), photo=photo)
+        caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
+        reply_markup=start_but(lang).as_markup(), photo=photo)
 
 
 """ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""

@@ -1,14 +1,8 @@
-2024-03-12 22:07:57,079 - INFO - start_polling: 524 - Start polling
-2024-03-12 22:07:57,954 - INFO - _polling: 340 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-12 22:08:07,240 - INFO - feed_update: 171 - Update id=377106196 is handled. Duration 1967 ms by bot id=6243740464
-2024-03-12 22:10:27,445 - INFO - start_polling: 551 - Polling stopped
-2024-03-12 22:10:27,445 - INFO - _polling: 356 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-14 02:28:06,424 - INFO - start_polling: 527 - Start polling
-2024-03-14 02:28:06,940 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-14 02:28:08,414 - INFO - feed_update: 172 - Update id=377106252 is handled. Duration 561 ms by bot id=6243740464
-2024-03-14 02:28:09,912 - INFO - feed_update: 172 - Update id=377106253 is handled. Duration 217 ms by bot id=6243740464
-2024-03-14 02:28:12,275 - INFO - feed_update: 172 - Update id=377106254 is handled. Duration 266 ms by bot id=6243740464
-2024-03-14 02:28:13,822 - INFO - feed_update: 172 - Update id=377106255 is handled. Duration 282 ms by bot id=6243740464
-2024-03-14 02:28:15,526 - INFO - feed_update: 172 - Update id=377106256 is handled. Duration 187 ms by bot id=6243740464
-2024-03-14 02:28:35,920 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-14 02:28:35,921 - INFO - start_polling: 554 - Polling stopped
+2024-03-17 19:16:03,104 - INFO - start_polling: 524 - Start polling
+2024-03-17 19:16:03,652 - INFO - _polling: 340 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-17 19:16:04,850 - INFO - feed_update: 171 - Update id=377106298 is handled. Duration 625 ms by bot id=6243740464
+2024-03-17 19:16:06,088 - INFO - feed_update: 171 - Update id=377106299 is handled. Duration 0 ms by bot id=6243740464
+2024-03-17 19:16:11,344 - INFO - feed_update: 171 - Update id=377106300 is handled. Duration 250 ms by bot id=6243740464
+2024-03-17 19:16:15,806 - INFO - feed_update: 171 - Update id=377106301 is handled. Duration 328 ms by bot id=6243740464
+2024-03-17 19:16:21,671 - INFO - start_polling: 551 - Polling stopped
+2024-03-17 19:16:21,672 - INFO - _polling: 356 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
