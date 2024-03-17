@@ -9,7 +9,7 @@ import config
 from inline_but import *
 from routers import check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give
 from translate import _
-from inline_but import setting_rasilka, crypto_valets
+from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list
 from limits import limits_currency_pairs
 from translate import _
 #ERTYU
@@ -31,7 +31,7 @@ def sql_start():
         print(f"Database connect OK")
     base.execute('CREATE TABLE IF NOT EXISTS users_id(id INTEGER PRIMARY KEY)')
 
-    base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY)')
+    base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY, id INTEGER)')
 
 
 
@@ -83,6 +83,11 @@ async def ban_us(val_1):
     cur.execute("INSERT OR IGNORE INTO ban_users (username) VALUES (?)", (val_1,))
     base.commit()
 
+
+async def ban_us2(val_1):
+    cur.execute("INSERT OR IGNORE INTO ban_users (id) VALUES (?)", (val_1,))
+    base.commit()
+
 async def ban_users_us(message: types.Message, val_1):
     try:
         cur.execute("SELECT username FROM ban_users")
@@ -94,9 +99,27 @@ async def ban_users_us(message: types.Message, val_1):
                 await message.answer("К сожалению вы забанены")
     except Exception as e:
         logging.warning(e)
+async def ban_users_us2(message: types.Message, val_1):
+    try:
+        cur.execute("SELECT id FROM ban_users")
+        ids = [row[0] for row in cur]
+        for i in ids:
+            if i == val_1:
+                lang = await check_lang(message.chat.id)
+                # await message.answer(f"<b><i>{_('К сожалению вы забанены', lang[0])}</i></b>")
+                await message.answer("К сожалению вы забанены")
+    except Exception as e:
+        logging.warning(e)
 async def check_bans():
     try:
         cur.execute("SELECT username FROM ban_users")
+        ids = [row[0] for row in cur]
+        return ids
+    except Exception as e:
+        logging.warning(e)
+async def check_bans2():
+    try:
+        cur.execute("SELECT id FROM ban_users")
         ids = [row[0] for row in cur]
         return ids
     except Exception as e:
@@ -143,7 +166,11 @@ async def get_crypto(call: types.CallbackQuery):
     except Exception as err:
         logging.exception(err)
 
-
+async def get_black_list(call: types.CallbackQuery):
+    try:
+        await call.message.answer(f'Выберите способ бана пользователя:',reply_markup=admin_but_blaack_list().as_markup())
+    except Exception as err:
+        logging.exception(err)
 async def get_messa(call: types.CallbackQuery):
     try:
         lang = await check_lang(call.message.chat.id)

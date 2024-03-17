@@ -8,7 +8,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram import types
 from aiogram import F
-from func import send_broadcast2, send_broadcast, ban_us
+from func import send_broadcast2, send_broadcast, ban_us, ban_us2
 import config
 from inline_but import *
 from routers import (start_db, check_us, add_lang, check_lang, db_rep_lang, add_amount_deals_onl, add_cards_start,
@@ -17,7 +17,7 @@ from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2, ban
 from function import get_pars
 from func import get_user_value, replace_language, start_c, deals_online_start, \
     deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr, deals_add_curr_finish, \
-    ban_users_us, check_bans
+    ban_users_us, check_bans, get_black_list
 from cards import add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin
 
 
@@ -44,7 +44,8 @@ class Form2(StatesGroup):
 class Black_list(StatesGroup):
     black_user = State()
 
-
+class Black_list2(StatesGroup):
+    black_id = State()
 
 bot = Bot(config.token[0])
 
@@ -233,12 +234,24 @@ async def cal(call, state: FSMContext):
         except Exception as err:
             logging.exception(err)
 
-    elif call.data == "black_list":
+    elif call.data == "adm_usr":
         try:
             await call.message.answer(f'Введите username пользователя для бана\nНапример: qwerty')
             await state.set_state(Black_list.black_user)
         except Exception as err:
             logging.exception(err)
+    elif call.data == "black_list":
+        try:
+            await get_black_list(call)
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "adm_id":
+        try:
+            await call.message.answer(f'Введите id пользователя для бана\nНапример: 123456')
+            await state.set_state(Black_list2.black_id)
+        except Exception as err:
+            logging.exception(err)
+
 #sdfghjk
 
 
@@ -263,6 +276,18 @@ async def cal(call, state: FSMContext):
     ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
     elif call.data == "adm_exc":
         await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+
+
+@router.message(Black_list2.black_id)
+async def get_userr(message: types.Message, state: FSMContext):
+    try:
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        await ban_us2(ban_user["nameban"])
+        await message.answer(f'Юзер - {ban_user["nameban"]} успешно забанен')
+    except Exception as err:
+        logging.exception(err)
+
 
 @router.message(Black_list.black_user)
 async def get_userr(message: types.Message, state: FSMContext):

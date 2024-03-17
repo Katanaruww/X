@@ -119,7 +119,11 @@ def admin_but():
     adm.button(text="Чёрный список", callback_data="black_list")
     adm.adjust(1)
     return adm
-
+def admin_but_blaack_list():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="Бан по username", callback_data="adm_usr")
+    adm.button(text="Бан по id", callback_data="adm_id")
+    return adm
 def admin_bc_fsm():
     adm = InlineKeyboardBuilder()
     adm.button(text="Да✅", callback_data="yes")

@@ -1,8 +1,5 @@
-2024-03-17 19:16:03,104 - INFO - start_polling: 524 - Start polling
-2024-03-17 19:16:03,652 - INFO - _polling: 340 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-17 19:16:04,850 - INFO - feed_update: 171 - Update id=377106298 is handled. Duration 625 ms by bot id=6243740464
-2024-03-17 19:16:06,088 - INFO - feed_update: 171 - Update id=377106299 is handled. Duration 0 ms by bot id=6243740464
-2024-03-17 19:16:11,344 - INFO - feed_update: 171 - Update id=377106300 is handled. Duration 250 ms by bot id=6243740464
-2024-03-17 19:16:15,806 - INFO - feed_update: 171 - Update id=377106301 is handled. Duration 328 ms by bot id=6243740464
-2024-03-17 19:16:21,671 - INFO - start_polling: 551 - Polling stopped
-2024-03-17 19:16:21,672 - INFO - _polling: 356 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-17 21:29:58,556 - INFO - start_polling: 524 - Start polling
+2024-03-17 21:29:59,167 - INFO - _polling: 340 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-17 21:30:06,776 - INFO - feed_update: 171 - Update id=377106321 is handled. Duration 640 ms by bot id=6243740464
+2024-03-17 21:30:20,283 - INFO - start_polling: 551 - Polling stopped
+2024-03-17 21:30:20,284 - INFO - _polling: 356 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
