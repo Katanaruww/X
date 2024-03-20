@@ -88,13 +88,31 @@ async def add_pars_deals_onl(call_id, type, val):
         logging.warning(e)
 
 
-async def add_amount_deals_onl(id_call, amount):
+async def add_amount_deals_onl(id_call, amount, rekv_us):
     try:
-        curs.execute('UPDATE deals_onl SET amount_in = ? WHERE id_call = ?', (amount, id_call))
+        curs.execute('UPDATE deals_onl SET amount_in = ?, rekv_user = ? WHERE id_call = ?', (amount, rekv_us, id_call))
         conn.commit()
     except Exception as e:
         logging.warning(e)
 
+
+async def print_deals(call_id):
+    try:
+        return curs.execute("SELECT * FROM deals_onl WHERE id_call = ?", (call_id,)).fetchone()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def add_amount_out(amount_out, curr, oper, call_id):
+    try:
+        curs.execute("UPDATE deals_onl SET amount_out = ?, currency = ?, id_oper= ? WHERE id_call = ?",
+                     (amount_out, curr, oper, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+### НИЖЕ НЕ ЛЕЗТЬ ###
 
 async def add_cards_start(type_v, call_id):
     try:
@@ -131,7 +149,8 @@ async def add_rekv_cards(rekv, call_id):
 async def view_list_card(type_v, v="None"):
     try:
         if type_v == "RUB":
-            pass
+            row = curs.execute("SELECT * FROM cards WHERE curr = ? AND type_pay = ?", (type_v, v)).fetchall()
+            return row
         else:
             row = curs.execute("SELECT * FROM cards WHERE curr = ?", (type_v,)).fetchall()
             return row
@@ -141,7 +160,16 @@ async def view_list_card(type_v, v="None"):
 
 async def check_status_card_bd(call_id):
     try:
+        print(call_id)
         row = curs.execute("SELECT st FROM cards WHERE id_c = ?", (call_id,)).fetchone()
+        return row
+    except Exception as e:
+        logging.warning(e)
+
+
+async def see_cards_db(call_id):
+    try:
+        row = curs.execute("SELECT * FROM cards WHERE id_c = ?", (call_id,)).fetchone()
         return row
     except Exception as e:
         logging.warning(e)

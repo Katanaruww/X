@@ -7,12 +7,15 @@ from aiogram.types import FSInputFile
 from aiogram import types
 import config
 from inline_but import *
-from routers import check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give
+from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
+                     print_deals, add_amount_out)
 from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list
 from limits import limits_currency_pairs
 from translate import _
-#ERTYU
+from currency import get_pars_rub
+
+# ERTYU
 router = Router()
 bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
@@ -25,15 +28,13 @@ class FSM(StatesGroup):
 
 def sql_start():
     global base, cur
-    base = sq.connect('users_bd.bd')
+    base = sq.connect('users_bd.db')
     cur = base.cursor()
     if base:
         print(f"Database connect OK")
     base.execute('CREATE TABLE IF NOT EXISTS users_id(id INTEGER PRIMARY KEY)')
 
     base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY, id INTEGER)')
-
-
 
     base.execute('''
         CREATE TABLE IF NOT EXISTS offline_exchange(
@@ -78,7 +79,11 @@ async def send_broadcast2(text):
 async def get_user_value(val_1):
     cur.execute("INSERT OR IGNORE INTO users_id (id) VALUES (?)", (val_1,))
     base.commit()
+
+
 """ЧЕРНЫЙ СПИСОК2"""
+
+
 async def ban_us(val_1):
     cur.execute("INSERT OR IGNORE INTO ban_users (username) VALUES (?)", (val_1,))
     base.commit()
@@ -87,6 +92,7 @@ async def ban_us(val_1):
 async def ban_us2(val_1):
     cur.execute("INSERT OR IGNORE INTO ban_users (id) VALUES (?)", (val_1,))
     base.commit()
+
 
 async def ban_users_us(message: types.Message, val_1):
     try:
@@ -99,6 +105,8 @@ async def ban_users_us(message: types.Message, val_1):
                 await message.answer("К сожалению вы забанены")
     except Exception as e:
         logging.warning(e)
+
+
 async def ban_users_us2(message: types.Message, val_1):
     try:
         cur.execute("SELECT id FROM ban_users")
@@ -110,6 +118,8 @@ async def ban_users_us2(message: types.Message, val_1):
                 await message.answer("К сожалению вы забанены")
     except Exception as e:
         logging.warning(e)
+
+
 async def check_bans():
     try:
         cur.execute("SELECT username FROM ban_users")
@@ -117,6 +127,8 @@ async def check_bans():
         return ids
     except Exception as e:
         logging.warning(e)
+
+
 async def check_bans2():
     try:
         cur.execute("SELECT id FROM ban_users")
@@ -124,6 +136,8 @@ async def check_bans2():
         return ids
     except Exception as e:
         logging.warning(e)
+
+
 """КОНЕЦ ЧЕРНЫЙ СПИСОК2"""
 """РАССЫЛКА"""
 
@@ -152,7 +166,7 @@ async def start_c(call):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     await call.message.answer_photo(
         caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{call.message.chat.first_name}</i></b>",
-        reply_markup=start_but(lang).as_markup(), photo=photo)
+        reply_markup=start_but(lang[0]).as_markup(), photo=photo)
 
 
 """ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
@@ -166,11 +180,15 @@ async def get_crypto(call: types.CallbackQuery):
     except Exception as err:
         logging.exception(err)
 
+
 async def get_black_list(call: types.CallbackQuery):
     try:
-        await call.message.answer(f'Выберите способ бана пользователя:',reply_markup=admin_but_blaack_list().as_markup())
+        await call.message.edit_text(f'Выберите способ бана пользователя:',
+                                     reply_markup=admin_but_blaack_list().as_markup())
     except Exception as err:
         logging.exception(err)
+
+
 async def get_messa(call: types.CallbackQuery):
     try:
         lang = await check_lang(call.message.chat.id)
@@ -181,7 +199,7 @@ async def get_messa(call: types.CallbackQuery):
                             f'<b><i>🚀{_("Проверяем и получаем средства", lang[0])}</i></b>\n'
 
         await call.message.edit_text(f"{_(text=localized_message)}",
-                                             reply_markup=setting_rasilka(lang).as_markup())
+                                     reply_markup=setting_rasilka(lang).as_markup())
     except Exception as err:
         logging.exception(err)
 
@@ -208,8 +226,6 @@ async def deals_online_type_add(call, type="start"):
             await db_add_start_deals(id_us, call.id)
             await call.message.edit_text(f"<i>{_('Что отдаете', lang[0])}?</i>",
                                          reply_markup=exc_type_onl_btn(call.id, lang[0], "give").as_markup())
-
-
     except Exception as e:
         logging.exception(e)
 
@@ -237,10 +253,10 @@ async def deals_add_curr_finish(call, state: FSMContext):
         lang = await check_lang(call.message.chat.id)
         view_give = await db_view_type_give(idd, "give")
         view_get = await db_view_type_give(idd, "get")
-        min_am = await limits_currency_pairs(view_get[0])
+        min_am = await limits_currency_pairs(view_give[0])
         await call.message.edit_text(f"<i>{_('Отлично! Теперь введите сумму в', lang[0])} <i>{view_give[0]}</i>, "
                                      f"{_('которую хотите обменять на', lang[0])} {view_get[0]}</i>\n"
-                                     f"<b><i>{_('Минимальная сумма', lang[0])}:</i></b> <i>{min_am} {view_get[0]}</i>",
+                                     f"<b><i>{_('Минимальная сумма', lang[0])}:</i></b> <i>{min_am} {view_give[0]}</i>",
                                      reply_markup=exc_btn_cancel(idd, lang[0], ).as_markup())
         return idd, min_am
     except Exception as e:
@@ -257,5 +273,35 @@ async def deals_online_cancel(call):
     except Exception as e:
         logging.exception(e)
 
+
+async def transaction_con(message, call_id):
+    try:
+        row = await print_deals(call_id)
+        curr = round(float(await get_pars_rub("1", row[2], row[3])), 6)
+        amount_out = round(float(curr * row[5] * config.percent), 6)
+        print(amount_out)
+        oper = config.operators[0][0]
+        await add_amount_out(amount_out, curr, oper, call_id)
+        deal = await print_deals(call_id)
+        lang = await check_lang(message.chat.id)
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{curr}</code></b> <i>{deal[3]}</i>\n\n"
+                f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{amount_out}</code> <i>{deal[3]}</i>\n\n")
+        if deal[2] == "RUB":
+            mess += f"<i>{_('Для продолжения выберите способ оплаты', lang[0])}:</i>"
+            await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id).as_markup())
+        else:
+            await message.answer(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
+
+
+    except Exception as e:
+        logging.exception(e)
+
+
+async def continue_in_deals(call):
+    try:
+        pass  ## дописать сбор общей сделки и подтвердение для клиента
+    except Exception as e:
+        logging.exception(e)
 
 ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###

@@ -17,9 +17,8 @@ async def get_pars_rub(amount, val_in, val_out):
                 soup = BeautifulSoup(content, "lxml")
                 new = soup.find_all(class_="a61j6")
                 if new:
-                    print(new[0].get("value"))
-                    print(new)
-
-
-if __name__ == "__main__":
-    asyncio.run(get_pars_rub("500", "LTC", "RUB"))
+                    return new[0].get("value")
+                else:
+                    return None
+            else:
+                return None

@@ -3,6 +3,7 @@ from config import garant
 from translate import _
 from routers import check_lang_smail
 import aiogram
+import asyncio
                 ### ТО, ЧТО ВИДЕТ КЛИЕНТ ###
 def start_but(lang):
     st = InlineKeyboardBuilder()
@@ -63,6 +64,14 @@ def exc_btn_cancel(call_id, lang):
     exc.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call_id}")
     exc.adjust(2, 1)
     return exc
+
+
+def continue_add_deal(call_id, lang):
+    con_ad_d = InlineKeyboardBuilder()
+    con_ad_d.button(text=f"{_('Продолжить', lang)}🟢", callback_data=f"continue-deals_{call_id}")
+    con_ad_d.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call_id}")
+    con_ad_d.adjust(1, 1)
+    return con_ad_d
 ### ОНЛАЙН СДЕЛКА ###
 """MYZONE"""
 
@@ -167,13 +176,13 @@ def admin_exc_add_card(call_id, type):
     return adm_exc_add
 
 
-def admin_exc_rub_add_card(call_id, type_d):
+def admin_exc_rub_add_card(type_d, t="card", call_id=None):
     adm_e_r_add = InlineKeyboardBuilder()
-    adm_e_r_add.button(text="Сбербанк", callback_data=f"{type_d}-rub-cards_Сбербанк_{call_id}")
-    adm_e_r_add.button(text="Тинькофф", callback_data=f"{type_d}-rub-cards_Тинькофф_{call_id}")
-    adm_e_r_add.button(text="Карта", callback_data=f"{type_d}-rub-cards_Карта_{call_id}")
-    adm_e_r_add.button(text="СБП", callback_data=f"{type_d}-rub-cards_СБП_{call_id}")
-    adm_e_r_add.button(text="Отмена⭕️", callback_data=f"cancel-card_{call_id}")
+    adm_e_r_add.button(text="Сбербанк", callback_data=f"{type_d}-RUB-cards_Сбербанк_{call_id}")
+    adm_e_r_add.button(text="Тинькофф", callback_data=f"{type_d}-RUB-cards_Тинькофф_{call_id}")
+    adm_e_r_add.button(text="Карта", callback_data=f"{type_d}-RUB-cards_Карта_{call_id}")
+    adm_e_r_add.button(text="СБП", callback_data=f"{type_d}-RUB-cards_СБП_{call_id}")
+    adm_e_r_add.button(text="Отмена⭕️", callback_data=f"cancel-{t}_{call_id}")
     adm_e_r_add.adjust(1, 1, 1, 1, 1)
     return adm_e_r_add
 
@@ -183,3 +192,11 @@ def adm_exc_cancel_card(call_id):
     adm_e_c.button(text="Отмена⭕️", callback_data=f"cancel-card_{call_id}")
     adm_e_c.adjust(1)
     return adm_e_c
+
+
+def delete_card_button(call_id):
+    del_c_b = InlineKeyboardBuilder()
+    del_c_b.button(text="Удалить🗑", callback_data=f"cancel-card_{call_id}")
+    del_c_b.button(text="Назад🔙", callback_data=f"back_admin")
+    del_c_b.adjust(1, 1)
+    return del_c_b
