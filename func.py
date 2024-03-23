@@ -8,7 +8,7 @@ from aiogram import types
 import config
 from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
-                     print_deals, add_amount_out)
+                     print_deals, add_amount_out, add_t_p)
 from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list
 from limits import limits_currency_pairs
@@ -294,6 +294,22 @@ async def transaction_con(message, call_id):
             await message.answer(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
 
 
+    except Exception as e:
+        logging.exception(e)
+
+
+async def choose_pay_method(call):
+    try:
+        lang = await check_lang(call.message.chat.id)
+        call_id = call.data.split("_")[2]
+        deal = await print_deals(call_id)
+        t_p = call.data.split("_")[1]
+        await add_t_p(call_id)
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{deal[4]}</code></b> <i>{deal[3]}</i>\n\n"
+                f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{deal[6]}</code> <i>{deal[3]}</i>\n\n"
+                f"<b>{_('Тип оплаты', lang[0])}:</b> <code>{t_p}</code>")
+        await call.message.edit_text(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
     except Exception as e:
         logging.exception(e)
 

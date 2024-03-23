@@ -1,16 +1,2 @@
-2024-03-21 01:13:10,854 - INFO - start_polling: 527 - Start polling
-2024-03-21 01:13:11,332 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-21 01:13:17,165 - INFO - feed_update: 172 - Update id=377106799 is handled. Duration 1093 ms by bot id=6243740464
-2024-03-21 01:13:18,974 - INFO - feed_update: 172 - Update id=377106800 is handled. Duration 1422 ms by bot id=6243740464
-2024-03-21 01:13:20,971 - INFO - feed_update: 172 - Update id=377106801 is handled. Duration 702 ms by bot id=6243740464
-2024-03-21 01:13:22,430 - INFO - feed_update: 172 - Update id=377106802 is handled. Duration 202 ms by bot id=6243740464
-2024-03-21 01:13:24,183 - INFO - feed_update: 172 - Update id=377106803 is handled. Duration 233 ms by bot id=6243740464
-2024-03-21 01:13:25,807 - INFO - feed_update: 172 - Update id=377106804 is handled. Duration 295 ms by bot id=6243740464
-2024-03-21 01:13:30,518 - INFO - feed_update: 172 - Update id=377106805 is handled. Duration 282 ms by bot id=6243740464
-2024-03-21 01:13:35,339 - INFO - feed_update: 172 - Update id=377106806 is handled. Duration 1812 ms by bot id=6243740464
-2024-03-21 01:14:04,232 - INFO - feed_update: 172 - Update id=377106807 is handled. Duration 592 ms by bot id=6243740464
-2024-03-21 01:14:06,446 - INFO - feed_update: 172 - Update id=377106808 is handled. Duration 266 ms by bot id=6243740464
-2024-03-21 01:14:09,767 - INFO - feed_update: 172 - Update id=377106809 is handled. Duration 172 ms by bot id=6243740464
-2024-03-21 01:14:11,198 - INFO - feed_update: 172 - Update id=377106810 is handled. Duration 234 ms by bot id=6243740464
-2024-03-21 01:14:14,685 - INFO - feed_update: 172 - Update id=377106811 is handled. Duration 186 ms by bot id=6243740464
-2024-03-21 01:14:18,868 - INFO - feed_update: 172 - Update id=377106812 is handled. Duration 1797 ms by bot id=6243740464
+2024-03-24 00:52:43,172 - INFO - start_polling: 527 - Start polling
+2024-03-24 00:52:43,806 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'

@@ -112,6 +112,14 @@ async def add_amount_out(amount_out, curr, oper, call_id):
         logging.warning(e)
 
 
+async def add_t_p(call_id):
+    try:
+        curs.execute("UPDATE deals_onl SET type_pay = ? WHERE id_call = ?", (call_id,))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
 ### НИЖЕ НЕ ЛЕЗТЬ ###
 
 async def add_cards_start(type_v, call_id):

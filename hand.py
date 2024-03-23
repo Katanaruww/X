@@ -15,9 +15,10 @@ from routers import (start_db, check_us, add_lang, check_lang, db_rep_lang, add_
                      add_rekv_cards)
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2, ban
 from function import get_pars
-from func import get_user_value, replace_language, start_c, deals_online_start, \
-    deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr, deals_add_curr_finish, \
-    ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals
+from func import (get_user_value, replace_language, start_c, deals_online_start,
+                  deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr,
+                  deals_add_curr_finish,
+                  ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
 
