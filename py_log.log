@@ -1,2 +1,3 @@
-2024-03-24 00:52:43,172 - INFO - start_polling: 527 - Start polling
-2024-03-24 00:52:43,806 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-28 23:13:24,869 - INFO - start_polling: 527 - Start polling
+2024-03-28 23:13:25,474 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-28 23:13:27,292 - INFO - feed_update: 172 - Update id=377106981 is handled. Duration 1 ms by bot id=6243740464

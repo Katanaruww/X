@@ -84,20 +84,20 @@ def setting_rasilka(lang):
 
 def crypto_valets(lang):
     sett = InlineKeyboardBuilder()
-    sett.button(text=f"RUB/IDR", callback_data="RUB/IDR")
-    sett.button(text=f"IDR/RUB", callback_data="RUB/IDR")
+    sett.button(text=f"RUB|IDR", callback_data="RUB|IDR")
+    sett.button(text=f"IDR|RUB", callback_data="RUB|IDR")
 
 
-    sett.button(text=f"USDT/IDR", callback_data="USDT/IDR")
-    sett.button(text=f"IDR/USDT", callback_data="USD/USDT")
+    sett.button(text=f"USDT|IDR", callback_data="USDT|IDR")
+    sett.button(text=f"IDR|USDT", callback_data="USD|USDT")
 
 
-    sett.button(text=f"USD/IDR", callback_data="USD/IDR")
-    sett.button(text=f"IDR/USDT", callback_data="USD/USDT")
+    sett.button(text=f"USD|DR", callback_data="USD|IDR")
+    sett.button(text=f"IDR|USDT", callback_data="USD|USDT")
 
 
-    sett.button(text=f"USD/USDT", callback_data="USD/USDT")
-    sett.button(text=f"USDT/USD", callback_data="USDT/USD")
+    sett.button(text=f"USD|USDT", callback_data="USD|USDT")
+    sett.button(text=f"USDT|USD", callback_data="USDT|USD")
 #sdfghyjk
 
     sett.button(text=f"{_('Как происходит сделка?', lang[0])}💸", callback_data="deal")

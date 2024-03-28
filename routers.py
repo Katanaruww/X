@@ -11,7 +11,9 @@ curs = conn.cursor()
 async def start_db(user_id, f_name, l_name):
     curs.execute("INSERT INTO users (id_us, tag, name) VALUES (?, ?, ?)", (user_id, f_name, l_name))
     conn.commit()
-
+async def getegtegeteg():
+    curs.execute("INSERT INTO deals_off (id_us) VALUES (?)", (123131232,))
+    conn.commit()
 
 async def check_us(us_id):
     try:

@@ -21,7 +21,7 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
-
+from routers import getegtegeteg
 
 router = Router()
 
@@ -56,6 +56,7 @@ logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
                     format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 
 
+
 @router.message(Command("start"))
 async def start_handler(msg: Message):
     try:
@@ -76,7 +77,6 @@ async def start_handler(msg: Message):
                              "<b>EN:</b> <i>Choose language</i>", reply_markup=lang_btn().as_markup())
     except Exception as e:
         logging.exception(e)
-
 
 @router.message(Command("rate"))
 async def rate(msg: Message):

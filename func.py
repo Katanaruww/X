@@ -36,16 +36,6 @@ def sql_start():
 
     base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY, id INTEGER)')
 
-    base.execute('''
-        CREATE TABLE IF NOT EXISTS offline_exchange(
-            id_num INTEGER PRIMARY KEY AUTOINCREMENT,
-            id INTEGER,
-            user_name TEXT,
-            deal TEXT,
-            current TEXT,
-            polex1 INTEGER,
-            polex2 INTEGER
-        )''')
     base.commit()
 
 
@@ -194,9 +184,9 @@ async def get_messa(call: types.CallbackQuery):
         lang = await check_lang(call.message.chat.id)
         localized_message = f'<b>{_("Доставка курьером производится по этапу:", lang[0])}</b>\n' \
                             f'<b><i>💸{_("Создаём заявку в боте.", lang[0])}</i></b>\n' \
-                            f'<b><i>🚛{_("С вами связывается курьер", lang[0])}</i></b>\n' \
+                            f'<b><i>🚛{_("С вами связывается курьер.", lang[0])}</i></b>\n' \
                             f'<b><i>🏎{_("Встречаетесь с курьером.", lang[0])}</i></b>\n' \
-                            f'<b><i>🚀{_("Проверяем и получаем средства", lang[0])}</i></b>\n'
+                            f'<b><i>🚀{_("Проверяем и получаем средства.", lang[0])}</i></b>\n'
 
         await call.message.edit_text(f"{_(text=localized_message)}",
                                      reply_markup=setting_rasilka(lang).as_markup())
