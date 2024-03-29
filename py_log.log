@@ -1,3 +1,6 @@
-2024-03-28 23:13:24,869 - INFO - start_polling: 527 - Start polling
-2024-03-28 23:13:25,474 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-03-28 23:13:27,292 - INFO - feed_update: 172 - Update id=377106981 is handled. Duration 1 ms by bot id=6243740464
+2024-03-29 23:19:38,778 - INFO - start_polling: 527 - Start polling
+2024-03-29 23:19:39,700 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-29 23:19:40,653 - INFO - feed_update: 172 - Update id=377106993 is handled. Duration 745 ms by bot id=6243740464
+2024-03-29 23:20:01,742 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-03-29 23:20:01,743 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-03-29 23:20:01,743 - INFO - start_polling: 554 - Polling stopped

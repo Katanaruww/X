@@ -92,7 +92,7 @@ def crypto_valets(lang):
     sett.button(text=f"IDR|USDT", callback_data="USD|USDT")
 
 
-    sett.button(text=f"USD|DR", callback_data="USD|IDR")
+    sett.button(text=f"USD|IDR", callback_data="USD|IDR")
     sett.button(text=f"IDR|USDT", callback_data="USD|USDT")
 
 
