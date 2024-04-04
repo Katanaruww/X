@@ -8,7 +8,7 @@ from aiogram import types
 import config
 from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
-                     print_deals, add_amount_out, add_t_p)
+                     print_deals, add_amount_out, add_t_p, add_type_our, get_card_db)
 from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list
 from limits import limits_currency_pairs
@@ -295,6 +295,8 @@ async def choose_pay_method(call):
         deal = await print_deals(call_id)
         t_p = call.data.split("_")[1]
         await add_t_p(call_id)
+        rekv = await get_card_db(t_p)
+        await add_type_our(t_p, rekv, call_id)
         mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{deal[4]}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
                 f"<b>{_('Вы получите', lang[0])}:</b> <code>{deal[6]}</code> <i>{deal[3]}</i>\n\n"
