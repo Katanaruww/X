@@ -3,7 +3,6 @@ import logging
 
 import config
 
-
 conn = sqlite3.connect(config.name_db[0], check_same_thread=False)
 curs = conn.cursor()
 
@@ -13,18 +12,25 @@ async def start_db(user_id, f_name, l_name):
     conn.commit()
 
 
+async def getegtegeteg():
+    curs.execute("INSERT INTO deals_off (id_us) VALUES (?)", (123131232,))
+    conn.commit()
+
+
 async def check_us(us_id):
     try:
         return curs.execute("SELECT * FROM users WHERE id_us = ?", (us_id,)).fetchone()
     except Exception as e:
         logging.warning(e)
 
-#werftghyjkl
+
+# werftghyjkl
 async def check_tech():
     try:
         return curs.execute("SELECT * FROM technical").fetchone()
     except Exception as e:
         logging.warning(e)
+
 
 async def add_lang(lang, id_us):
     try:
@@ -33,11 +39,13 @@ async def add_lang(lang, id_us):
     except Exception as e:
         logging.warning(e)
 
-async def check_lang(id_us): # проверка языка пользователя
+
+async def check_lang(id_us):  # проверка языка пользователя
     try:
-        return curs.execute("SELECT lang FROM users WHERE id_us = ?", (id_us, )).fetchone()
+        return curs.execute("SELECT lang FROM users WHERE id_us = ?", (id_us,)).fetchone()
     except Exception as e:
         logging.warning(e)
+
 
 def check_lang_smail(id_us):
     lang = curs.execute("SELECT * FROM users WHERE id_us = ?", (id_us,)).fetchone()
@@ -46,6 +54,7 @@ def check_lang_smail(id_us):
     else:
         return lang[4], "🇬🇧"
 
+
 async def db_rep_lang(id_us, lang):
     try:
         curs.execute("UPDATE users SET lang = ? WHERE id_us = ?", (lang, id_us))
@@ -53,12 +62,15 @@ async def db_rep_lang(id_us, lang):
     except Exception as e:
         logging.warning(e)
 
+
 async def db_add_start_deals(id_us, call_id):
     try:
         curs.execute("INSERT INTO deals_onl (id_user, id_call) VALUES (?, ?)", (id_us, call_id))
         conn.commit()
     except Exception as e:
         logging.warning(e)
+
+
 async def db_view_type_give(id_call, type):
     try:
         if type == "give":
@@ -71,10 +83,11 @@ async def db_view_type_give(id_call, type):
 
 async def db_delete_deal(call_id):
     try:
-        curs.execute("DELETE FROM deals_onl WHERE id_call = ?", (call_id, ))
+        curs.execute("DELETE FROM deals_onl WHERE id_call = ?", (call_id,))
         conn.commit()
     except Exception as e:
         logging.warning(e)
+
 
 async def add_pars_deals_onl(call_id, type, val):
     try:
@@ -116,6 +129,33 @@ async def add_t_p(call_id):
     try:
         curs.execute("UPDATE deals_onl SET type_pay = ? WHERE id_call = ?", (call_id,))
         conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def add_type_our(t_p, rekv_our, call_id):
+    try:
+        curs.execute("UPDATE deals_onl SET type_pay = ?, rekv_our = ? WHERE id_call = ?", (t_p, rekv_our, call_id))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def get_data_deals(st):
+    try:
+        return curs.execute("SELECT * FROM deals_onl WHERE status = ?", (st,)).fetchall()
+    except Exception as e:
+        logging.warning(e)
+
+
+async def get_card_db(name_bank):
+    try:
+        row = conn.execute("SELECT rekv FROM cards WHERE type_pay = ? AND st = '1' AND status ='1'",
+                           (name_bank,)).fetchone()
+        rekv = row[0]
+        return rekv
+    except TypeError as e:
+        return None
     except Exception as e:
         logging.warning(e)
 

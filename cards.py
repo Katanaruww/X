@@ -10,7 +10,7 @@ from aiogram import types
 from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
                      add_cards_start, delete_cards, add_cards_rub_type, view_list_card, check_status_card_bd,
-                     see_cards_db)
+                     see_cards_db, get_card_db)
 from routers import conn, curs
 from translate import _
 from inline_but import setting_rasilka, crypto_valets
@@ -192,5 +192,12 @@ async def activate_card(call):
             await call.message.edit_reply_markup(reply_markup=await print_list_card(call, data[1], data[2]))
         except Exception as e:
             logging.warning(f"Не удалось изменить разметку ответа сообщения: {e}")
+    except Exception as e:
+        logging.warning(e)
+
+
+async def get_card_check(name_bank):
+    try:
+        return await get_card_db(name_bank)
     except Exception as e:
         logging.warning(e)
