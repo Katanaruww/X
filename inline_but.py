@@ -107,7 +107,17 @@ def crypto_valets(lang):
     sett.adjust(2, 2, 2, 2, 1, 1)
     return sett
 
-
+def add_cur_offline(lang):
+    adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text="RUB", callback_data=f"RUB1")
+    adm_exc_add.button(text="IDR", callback_data=f"IDR1")
+    adm_exc_add.button(text="USD", callback_data=f"USD1")
+    adm_exc_add.button(text="USDT", callback_data=f"USDT1")
+    adm_exc_add.button(text="BTC", callback_data=f"BTC1")
+    adm_exc_add.button(text="LTC", callback_data=f"LTC1")
+    adm_exc_add.button(text=f"{_('Отмена', lang[0])}⭕️", callback_data="back_start")
+    adm_exc_add.adjust(3, 3, 1)
+    return adm_exc_add
 """MYZONE"""
 
                 ### АДМИН ПАНЕЛЬ ###

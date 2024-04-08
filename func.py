@@ -10,11 +10,11 @@ from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
                      print_deals, add_amount_out, add_t_p)
 from translate import _
-from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list
+from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, add_cur_offline
 from limits import limits_currency_pairs
 from translate import _
 from currency import get_pars_rub
-
+import sqlite3
 # ERTYU
 router = Router()
 bot = Bot(config.token[0])
@@ -24,6 +24,7 @@ logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
 
 class FSM(StatesGroup):
     set_amount = State()
+
 
 
 def sql_start():
@@ -159,16 +160,20 @@ async def start_c(call):
         reply_markup=start_but(lang[0]).as_markup(), photo=photo)
 
 
+
+
+
+
+
 """ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
 
 
-async def get_crypto(call: types.CallbackQuery):
-    try:
-        lang = await check_lang(call.message.chat.id)
-        await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
-                                     reply_markup=crypto_valets(lang).as_markup())
-    except Exception as err:
-        logging.exception(err)
+
+
+
+
+
+
 
 
 async def get_black_list(call: types.CallbackQuery):

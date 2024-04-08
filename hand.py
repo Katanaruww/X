@@ -13,15 +13,14 @@ import config
 from inline_but import *
 from routers import (start_db, check_us, add_lang, check_lang, db_rep_lang, add_amount_deals_onl, add_cards_start,
                      add_rekv_cards)
-from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2, ban
+from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2, ban, add_cur_offline
 from function import get_pars
 from func import (get_user_value, replace_language, start_c, deals_online_start,
-                  deals_online_type_add, deals_online_cancel, get_crypto, get_messa, deals_add_curr,
+                  deals_online_type_add, deals_online_cancel, get_messa, deals_add_curr,
                   deals_add_curr_finish,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
-
 
 router = Router()
 
@@ -35,6 +34,9 @@ class fsm(StatesGroup):
     rekv = State()
     rekv_us = State()
 
+class DealState(StatesGroup):
+    choosing_currency = State()
+    entering_amount = State()
 
 class Form(StatesGroup):
     description1 = State()
@@ -270,7 +272,14 @@ async def cal(call, state: FSMContext):
     # ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
     elif call.data == "offline_deals":
         try:
-            await get_crypto(call)
+            try:
+                lang = await check_lang(call.message.chat.id)
+
+                await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
+                                             reply_markup=add_cur_offline(lang).as_markup())
+
+            except Exception as err:
+                logging.exception(err)
         except Exception as err:
             logging.exception(err)
     elif call.data == "deal":
@@ -298,6 +307,19 @@ async def cal(call, state: FSMContext):
         except Exception as err:
             logging.exception(err)
 
+
+
+
+
+
+
+
+
+    elif call.data == "RUB1":
+        try:
+            pass
+        except Exception as err:
+            logging.exception(err)
 #sdfghjk
 
 
@@ -332,6 +354,19 @@ async def cal(call, state: FSMContext):
             await get_start_card(call)
         except Exception as err:
             logging.exception(err)
+
+
+
+
+
+"""ЭТО ОФФЛАЙН НАХУЙ"""
+
+
+
+
+
+
+"""ЭТО КОНЕЦ ОФФЛАЙН НАХУЙ"""
 
 @router.message(Black_list2.black_id)
 async def get_userr(message: types.Message, state: FSMContext):

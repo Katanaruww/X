@@ -11,7 +11,7 @@ from middlewares.antiflood import AntiFloodUsers
 from middlewares.black_list import BlackListUsers
 from middlewares.id_black_list import BlackListUsers2
 from middlewares.subscribe import Subscrube
-import offline_deals
+
 
 #vbnm
 async def main():
@@ -23,7 +23,6 @@ async def main():
     dp.message.middleware.register(BlackListUsers2())
 
     dp.include_router(router)
-    dp.include_router(offline_deals.router)
     sql_start()
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
 
