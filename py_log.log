@@ -8,3 +8,5 @@
 2024-04-09 23:37:39,459 - INFO - feed_update: 172 - Update id=377107372 is handled. Duration 1219 ms by bot id=6243740464
 2024-04-09 23:37:54,795 - WARNING - add_t_p: 133 - Incorrect number of bindings supplied. The current statement uses 2, and there are 1 supplied.
 2024-04-09 23:37:55,444 - INFO - feed_update: 172 - Update id=377107373 is handled. Duration 657 ms by bot id=6243740464
+2024-04-09 23:38:45,665 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-09 23:38:45,666 - INFO - start_polling: 554 - Polling stopped
