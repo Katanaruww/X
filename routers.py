@@ -133,7 +133,7 @@ async def add_t_p(call_id):
         logging.warning(e)
 
 
-async def add_type_our(t_p, rekv_our, call_id):
+async def add_type_our(rekv_our, call_id, t_p="None"):
     try:
         curs.execute("UPDATE deals_onl SET type_pay = ?, rekv_our = ? WHERE id_call = ?", (t_p, rekv_our, call_id))
         conn.commit()
@@ -148,10 +148,10 @@ async def get_data_deals(st):
         logging.warning(e)
 
 
-async def get_card_db(name_bank):
+async def get_card_db(value, name_bank=None):
     try:
-        row = conn.execute("SELECT rekv FROM cards WHERE type_pay = ? AND st = '1' AND status ='1'",
-                           (name_bank,)).fetchone()
+        row = conn.execute("SELECT rekv FROM cards WHERE curr = ? AND type_pay = ? AND st = '1' AND status ='1'",
+                           (value, name_bank,)).fetchone()
         rekv = row[0]
         return rekv
     except TypeError as e:
@@ -159,6 +159,13 @@ async def get_card_db(name_bank):
     except Exception as e:
         logging.warning(e)
 
+
+async def edit_amount(deal_onl, amount):
+    try:
+        conn.execute('UPDATE deals_onl SET amount_in = ? WHERE id_call = ?', (amount, deal_onl))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
 
 ### НИЖЕ НЕ ЛЕЗТЬ ###
 

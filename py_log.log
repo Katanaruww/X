@@ -1,26 +1,10 @@
-2024-04-08 23:30:09,211 - INFO - start_polling: 527 - Start polling
-2024-04-08 23:30:09,737 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-08 23:30:16,489 - INFO - feed_update: 172 - Update id=377107247 is handled. Duration 2308 ms by bot id=6243740464
-2024-04-08 23:30:19,805 - INFO - feed_update: 172 - Update id=377107248 is handled. Duration 812 ms by bot id=6243740464
-2024-04-08 23:30:21,430 - INFO - feed_update: 172 - Update id=377107249 is handled. Duration 267 ms by bot id=6243740464
-2024-04-08 23:30:25,126 - INFO - feed_update: 172 - Update id=377107250 is not handled. Duration 3 ms by bot id=6243740464
-2024-04-04 20:59:03,221 - INFO - start_polling: 527 - Start polling
-2024-04-04 20:59:03,804 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-04 20:59:09,945 - WARNING - check_us: 24 - database disk image is malformed
-2024-04-04 20:59:09,945 - ERROR - start_handler: 79 - database disk image is malformed
-Traceback (most recent call last):
-  File "C:\Users\kali\PycharmProjects\X\hand.py", line 75, in start_handler
-    await start_db(msg.chat.id, msg.chat.username, msg.chat.first_name)
-  File "C:\Users\kali\PycharmProjects\X\routers.py", line 11, in start_db
-    curs.execute("INSERT INTO users (id_us, tag, name) VALUES (?, ?, ?)", (user_id, f_name, l_name))
-sqlite3.DatabaseError: database disk image is malformed
-2024-04-04 20:59:09,946 - INFO - feed_update: 172 - Update id=377106994 is handled. Duration 0 ms by bot id=6243740464
-2024-04-04 20:59:26,667 - WARNING - check_us: 24 - database disk image is malformed
-2024-04-04 20:59:26,667 - ERROR - start_handler: 79 - database disk image is malformed
-Traceback (most recent call last):
-  File "C:\Users\kali\PycharmProjects\X\hand.py", line 75, in start_handler
-    await start_db(msg.chat.id, msg.chat.username, msg.chat.first_name)
-  File "C:\Users\kali\PycharmProjects\X\routers.py", line 11, in start_db
-    curs.execute("INSERT INTO users (id_us, tag, name) VALUES (?, ?, ?)", (user_id, f_name, l_name))
-sqlite3.DatabaseError: database disk image is malformed
-2024-04-04 20:59:26,667 - INFO - feed_update: 172 - Update id=377106995 is handled. Duration 0 ms by bot id=6243740464
+2024-04-09 23:35:10,749 - INFO - start_polling: 527 - Start polling
+2024-04-09 23:35:11,236 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-09 23:37:27,224 - INFO - feed_update: 172 - Update id=377107367 is handled. Duration 562 ms by bot id=6243740464
+2024-04-09 23:37:28,635 - INFO - feed_update: 172 - Update id=377107368 is handled. Duration 234 ms by bot id=6243740464
+2024-04-09 23:37:30,078 - INFO - feed_update: 172 - Update id=377107369 is handled. Duration 219 ms by bot id=6243740464
+2024-04-09 23:37:31,197 - INFO - feed_update: 172 - Update id=377107370 is handled. Duration 204 ms by bot id=6243740464
+2024-04-09 23:37:36,008 - INFO - feed_update: 172 - Update id=377107371 is handled. Duration 219 ms by bot id=6243740464
+2024-04-09 23:37:39,459 - INFO - feed_update: 172 - Update id=377107372 is handled. Duration 1219 ms by bot id=6243740464
+2024-04-09 23:37:54,795 - WARNING - add_t_p: 133 - Incorrect number of bindings supplied. The current statement uses 2, and there are 1 supplied.
+2024-04-09 23:37:55,444 - INFO - feed_update: 172 - Update id=377107373 is handled. Duration 657 ms by bot id=6243740464

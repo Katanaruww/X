@@ -10,15 +10,16 @@ from aiogram import types
 from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
                      add_cards_start, delete_cards, add_cards_rub_type, view_list_card, check_status_card_bd,
-                     see_cards_db, get_card_db)
+                     see_cards_db, get_card_db, get_data_deals, edit_amount, print_deals)
 from routers import conn, curs
 from translate import _
 from inline_but import setting_rasilka, crypto_valets
 from limits import limits_currency_pairs
-from func import bot
 from datetime import datetime
+import traceback
 
 # ertyui
+bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
                     format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 
@@ -201,3 +202,21 @@ async def get_card_check(name_bank):
         return await get_card_db(name_bank)
     except Exception as e:
         logging.warning(e)
+
+
+async def get_card_check_deals(deal_id):
+    try:
+        data_our = await print_deals(deal_id)
+        data = await get_data_deals(1)
+        if len(data) == 1 and data[0][11] == deal_id:
+            return await get_card_db(data[2], data[7])
+        else:
+            for a in range(len(data)):  # тут сравниваем сделки между собой
+                if data_our[5] == data[a][5]:
+                    amount_high = await limits_currency_pairs(data_our[2])
+                    amount = float(data_our[5]) + float(amount_high[0])
+                    await edit_amount(data_our[11], amount)
+                    return await get_card_db(data_our[2], data[a][7])
+    except Exception as e:
+        logging.warning(e)
+        logging.error(traceback.print_exc())

@@ -1,17 +1,14 @@
 import asyncio
 
 limits = {
-    "RUB": 10000,
-    "USD": 500,
-    "IDR": 100000,
-    "USDT": 500,
-    "BTC": 0.0001,
-    "LTC": 0.01
+    "RUB": [10000, 10],
+    "USD": [500, 0.1],
+    "IDR": [100000, 100],
+    "USDT": [500, 0.1],
+    "BTC": [0.0001, 0.00001],
+    "LTC": [0.01, 0.001]
 }
 
 
 async def limits_currency_pairs(value):
     return limits[value]
-
-#wertyhujik
-asyncio.run(limits_currency_pairs("USD"))

@@ -9,6 +9,7 @@ import config
 from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
                      print_deals, add_amount_out, add_t_p, add_type_our, get_card_db)
+from cards import get_card_check_deals
 from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, add_cur_offline
 from limits import limits_currency_pairs
@@ -251,9 +252,9 @@ async def deals_add_curr_finish(call, state: FSMContext):
         min_am = await limits_currency_pairs(view_give[0])
         await call.message.edit_text(f"<i>{_('Отлично! Теперь введите сумму в', lang[0])} <i>{view_give[0]}</i>, "
                                      f"{_('которую хотите обменять на', lang[0])} {view_get[0]}</i>\n"
-                                     f"<b><i>{_('Минимальная сумма', lang[0])}:</i></b> <i>{min_am} {view_give[0]}</i>",
+                                     f"<b><i>{_('Минимальная сумма', lang[0])}:</i></b> <i>{min_am[0]} {view_give[0]}</i>",
                                      reply_markup=exc_btn_cancel(idd, lang[0], ).as_markup())
-        return idd, min_am
+        return idd, min_am[0]
     except Exception as e:
         logging.exception(e)
 
@@ -274,11 +275,11 @@ async def transaction_con(message, call_id):
         row = await print_deals(call_id)
         curr = round(float(await get_pars_rub("1", row[2], row[3])), 6)
         amount_out = round(float(curr * row[5] * config.percent), 6)
-        print(amount_out)
         oper = config.operators[0][0]
         await add_amount_out(amount_out, curr, oper, call_id)
         deal = await print_deals(call_id)
         lang = await check_lang(message.chat.id)
+
         mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{curr}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
                 f"<b>{_('Вы получите', lang[0])}:</b> <code>{amount_out}</code> <i>{deal[3]}</i>\n\n")
@@ -286,6 +287,8 @@ async def transaction_con(message, call_id):
             mess += f"<i>{_('Для продолжения выберите способ оплаты', lang[0])}:</i>"
             await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id).as_markup())
         else:
+            rekv = await get_card_check_deals(deal[11])
+            await add_type_our(rekv, call_id)
             await message.answer(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
 
 
@@ -300,8 +303,9 @@ async def choose_pay_method(call):
         deal = await print_deals(call_id)
         t_p = call.data.split("_")[1]
         await add_t_p(call_id)
-        rekv = await get_card_db(t_p)
-        await add_type_our(t_p, rekv, call_id)
+        rekv = await get_card_check_deals(deal[11])
+        print(rekv)
+        await add_type_our(rekv, call_id, t_p)
         mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{deal[4]}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
                 f"<b>{_('Вы получите', lang[0])}:</b> <code>{deal[6]}</code> <i>{deal[3]}</i>\n\n"
@@ -313,7 +317,7 @@ async def choose_pay_method(call):
 
 async def continue_in_deals(call):
     try:
-        pass  ## дописать сбор общей сделки и подтвердение для клиента
+        pass
     except Exception as e:
         logging.exception(e)
 

@@ -39,7 +39,7 @@ translates = {
         "Вы получите": "You'll get",
         "Для продолжения выберите способ оплаты": "To continue, select a payment method",
         "Продолжить": "Continue",
-        "Тип оплаты": "Type of payment"
+        "Тип оплаты": "Type of payment",
     }
 }
 
