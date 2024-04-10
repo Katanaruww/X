@@ -40,6 +40,9 @@ translates = {
         "Для продолжения выберите способ оплаты": "To continue, select a payment method",
         "Продолжить": "Continue",
         "Тип оплаты": "Type of payment",
+        "Повторите попытку": "Try again",
+        "Отлично! Первый пункт выполнен!": "Great! The first point is completed!",
+        "Введите сумму на обмен": "Enter the amount to exchange"
     }
 }
 

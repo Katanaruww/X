@@ -21,10 +21,14 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
+from func import get_cur
+from aiogram import Bot, Dispatcher, types
 
 router = Router()
 
-
+bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
+# Диспетчер
+dp = Dispatcher()
 class fsm(StatesGroup):
     adm_id = State()
     set_amount = State()
@@ -36,7 +40,11 @@ class fsm(StatesGroup):
 
 class DealState(StatesGroup):
     choosing_currency = State()
-    entering_amount = State()
+    currency1 = State()
+    choosing_currency2 = State()
+    currency2 = State()
+    gps = State()
+    time = State()
 
 class Form(StatesGroup):
     description1 = State()
@@ -83,6 +91,43 @@ async def start_handler(msg: Message):
 @router.message(Command("rate"))
 async def rate(msg: Message):
     await get_pars(msg)
+
+
+
+# ЭТО КОРОЧЕ ОТСЛЕЖАНИЕ КОЛЛБЕКА НАХУЙ
+@router.callback_query(DealState.choosing_currency, lambda call: call.data)
+async def swertyhbubh(call, state: FSMContext):
+    try:
+        global curs
+        lang = await check_lang(call.message.chat.id)
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        curs = str(ban_user["nameban"]).replace("1", "")
+        currency = await get_cur(curs, call)
+        await call.message.answer(currency)
+        await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен", lang=lang[0])}</i></b>')
+        await state.set_state(DealState.currency1)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+# ЭТО КОРОЧЕ СУММА НА ОБМЕН НАХУЙ Я УСТАЛ СУКА
+@router.message(DealState.currency1)
+async def zrextcyvgubhi(message: types.Message, state: FSMContext):
+    try:
+        global currens
+        await state.update_data(name=message.text)
+        currens = await state.get_data()
+        await message.answer(f'Вы выбрали обмен на - {curs}, на сумму - {currens["name"]}')
+
+
+    except Exception as err:
+        logging.exception(err)
+
+
+# ЭТО КОРОЧЕ ПРОВЕРКА НАХУЙ
+@router.message(DealState.currency1, ~F.text)
+async def get_trext(message: types.Message, state: FSMContext):
+    await message.answer(f'Отправь текст!')
+    await state.clear()
 
 
 @router.message(Command("admin"))
@@ -272,14 +317,10 @@ async def cal(call, state: FSMContext):
     # ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
     elif call.data == "offline_deals":
         try:
-            try:
-                lang = await check_lang(call.message.chat.id)
-
-                await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
+            lang = await check_lang(call.message.chat.id)
+            await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
                                              reply_markup=add_cur_offline(lang).as_markup())
-
-            except Exception as err:
-                logging.exception(err)
+            await state.set_state(DealState.choosing_currency)
         except Exception as err:
             logging.exception(err)
     elif call.data == "deal":
@@ -293,6 +334,7 @@ async def cal(call, state: FSMContext):
         try:
             await call.message.answer(f'Введите username пользователя для бана\nНапример: qwerty')
             await state.set_state(Black_list.black_user)
+            await call.message.answer(f'Введи текст')
         except Exception as err:
             logging.exception(err)
     elif call.data == "black_list":
@@ -310,20 +352,6 @@ async def cal(call, state: FSMContext):
 
 
 
-
-
-
-
-
-    elif call.data == "RUB1":
-        try:
-            pass
-        except Exception as err:
-            logging.exception(err)
-#sdfghjk
-
-
-    # КОНЕЦ ПРОЦЕСС СОЗДАНИ ОФЛАЙН ЗАКАЗА
 
 
 
@@ -360,6 +388,7 @@ async def cal(call, state: FSMContext):
 
 
 """ЭТО ОФФЛАЙН НАХУЙ"""
+
 
 
 

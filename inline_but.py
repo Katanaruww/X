@@ -115,8 +115,9 @@ def add_cur_offline(lang):
     adm_exc_add.button(text="USDT", callback_data=f"USDT1")
     adm_exc_add.button(text="BTC", callback_data=f"BTC1")
     adm_exc_add.button(text="LTC", callback_data=f"LTC1")
+    adm_exc_add.button(text=f"{_('Как происходит сделка?', lang[0])}💸", callback_data="deal")
     adm_exc_add.button(text=f"{_('Отмена', lang[0])}⭕️", callback_data="back_start")
-    adm_exc_add.adjust(3, 3, 1)
+    adm_exc_add.adjust(3, 3, 1, 1)
     return adm_exc_add
 """MYZONE"""
 

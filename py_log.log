@@ -1,12 +1,18 @@
-2024-04-09 23:35:10,749 - INFO - start_polling: 527 - Start polling
-2024-04-09 23:35:11,236 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-09 23:37:27,224 - INFO - feed_update: 172 - Update id=377107367 is handled. Duration 562 ms by bot id=6243740464
-2024-04-09 23:37:28,635 - INFO - feed_update: 172 - Update id=377107368 is handled. Duration 234 ms by bot id=6243740464
-2024-04-09 23:37:30,078 - INFO - feed_update: 172 - Update id=377107369 is handled. Duration 219 ms by bot id=6243740464
-2024-04-09 23:37:31,197 - INFO - feed_update: 172 - Update id=377107370 is handled. Duration 204 ms by bot id=6243740464
-2024-04-09 23:37:36,008 - INFO - feed_update: 172 - Update id=377107371 is handled. Duration 219 ms by bot id=6243740464
-2024-04-09 23:37:39,459 - INFO - feed_update: 172 - Update id=377107372 is handled. Duration 1219 ms by bot id=6243740464
-2024-04-09 23:37:54,795 - WARNING - add_t_p: 133 - Incorrect number of bindings supplied. The current statement uses 2, and there are 1 supplied.
-2024-04-09 23:37:55,444 - INFO - feed_update: 172 - Update id=377107373 is handled. Duration 657 ms by bot id=6243740464
-2024-04-09 23:38:45,665 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-09 23:38:45,666 - INFO - start_polling: 554 - Polling stopped
+2024-04-10 23:37:06,148 - INFO - start_polling: 527 - Start polling
+2024-04-10 23:37:06,710 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-10 23:37:15,121 - INFO - feed_update: 172 - Update id=377107540 is handled. Duration 4533 ms by bot id=6243740464
+2024-04-10 23:37:44,852 - INFO - feed_update: 172 - Update id=377107541 is handled. Duration 1253 ms by bot id=6243740464
+2024-04-10 23:37:53,250 - INFO - feed_update: 172 - Update id=377107542 is handled. Duration 1296 ms by bot id=6243740464
+2024-04-10 23:37:57,574 - INFO - feed_update: 172 - Update id=377107543 is handled. Duration 1430 ms by bot id=6243740464
+2024-04-10 23:38:03,768 - INFO - feed_update: 172 - Update id=377107544 is handled. Duration 287 ms by bot id=6243740464
+2024-04-10 23:48:26,316 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-10 23:48:26,319 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)
+2024-04-10 23:48:30,052 - INFO - _listen_updates: 233 - Connection established (tryings = 1, bot id = 6243740464)
+2024-04-10 23:48:31,791 - INFO - feed_update: 172 - Update id=377107545 is handled. Duration 1737 ms by bot id=6243740464
+2024-04-10 23:48:35,626 - INFO - feed_update: 172 - Update id=377107546 is handled. Duration 928 ms by bot id=6243740464
+2024-04-10 23:48:37,535 - INFO - feed_update: 172 - Update id=377107547 is handled. Duration 312 ms by bot id=6243740464
+2024-04-10 23:48:40,011 - INFO - feed_update: 172 - Update id=377107548 is handled. Duration 545 ms by bot id=6243740464
+2024-04-10 23:48:49,339 - INFO - feed_update: 172 - Update id=377107549 is handled. Duration 221 ms by bot id=6243740464
+2024-04-10 23:51:25,905 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-04-10 23:51:25,906 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-10 23:51:25,906 - INFO - start_polling: 554 - Polling stopped

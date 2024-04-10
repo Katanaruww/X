@@ -15,6 +15,7 @@ from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, ad
 from limits import limits_currency_pairs
 from translate import _
 from currency import get_pars_rub
+from routers import check_lang
 import sqlite3
 # ERTYU
 router = Router()
@@ -168,6 +169,17 @@ async def start_c(call):
 
 """ПРОЦЕСС СОЗДАНИЯ ОФФАЙН СДЕЛКИ"""
 
+cur111 = ["RUB", "IDR", "USD", "USDT", "BTC", "LTC"]
+
+async def get_cur(a111, call: types.CallbackQuery):
+    lang = await check_lang(call.message.chat.id)
+    try:
+        if a111 in cur111:
+            return f"<b><i>💸{_(text=f"Отлично! Первый пункт выполнен!", lang=lang[0])}</i></b>"
+        else:
+            return f"{_(text="Повторите попытку", lang=lang[0])}"
+    except Exception as err:
+        logging.exception(err)
 
 
 
