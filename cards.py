@@ -36,12 +36,13 @@ async def add_start_card(call):
 async def add_currency_card(call):
     try:
         call_id = call.data.split("_")[2]
+        print(call_id, "в ахуе х2")
         type_v = call.data.split("_")[1]
         await add_cards_start(type_v, call_id)
         if type_v == "RUB":
             await call.message.edit_text("<b>Добавили🟢</b>\n"
                                          "<i>Теперь выберите тип оплаты:</i>",
-                                         reply_markup=admin_exc_rub_add_card("add", call_id).as_markup())
+                                         reply_markup=admin_exc_rub_add_card("add", call_id=call_id).as_markup())
         else:
             await call.message.edit_text("<b>Добавили🟢</b>\n"
                                          "<i>Теперь введите реквизит:</i>",
@@ -55,6 +56,7 @@ async def add_type_pay_exc_admin(call):
     try:
         type_b = call.data.split("_")[1]
         call_id = call.data.split("_")[2]
+        print(type_b, call_id)
         await add_cards_rub_type(type_b, call_id)
         await call.message.edit_text("<b>Добавили🟢</b>\n"
                                      "<i>Теперь введите реквизит:</i>",
@@ -209,14 +211,24 @@ async def get_card_check_deals(deal_id):
         data_our = await print_deals(deal_id)
         data = await get_data_deals(1)
         if len(data) == 1 and data[0][11] == deal_id:
-            return await get_card_db(data[2], data[7])
+            print(data_our[2], "валюта епта")
+            if data_our[2] == "RUB":
+                return await get_card_db(data_our[2], data_our[7])
+            else:
+                return await get_card_db(data_our[2])
+
         else:
             for a in range(len(data)):  # тут сравниваем сделки между собой
+                print(data_our[2], "валюта епта много")
                 if data_our[5] == data[a][5]:
                     amount_high = await limits_currency_pairs(data_our[2])
-                    amount = float(data_our[5]) + float(amount_high[0])
+                    amount = float(data_our[5]) + float(amount_high[1])
                     await edit_amount(data_our[11], amount)
-                    return await get_card_db(data_our[2], data[a][7])
+                    if data_our[2] == "RUB":
+                        print(data_our[2], data_our[7])
+                        return await get_card_db(data_our[2], data_our[7])
+                    else:
+                        return await get_card_db(data_our[2])
     except Exception as e:
         logging.warning(e)
         logging.error(traceback.print_exc())

@@ -175,9 +175,9 @@ async def get_cur(a111, call: types.CallbackQuery):
     lang = await check_lang(call.message.chat.id)
     try:
         if a111 in cur111:
-            return f"<b><i>💸{_(text=f"Отлично! Первый пункт выполнен!", lang=lang[0])}</i></b>"
+            return f"<b><i>💸{_(text='Отлично! Первый пункт выполнен!', lang=lang[0])}</i></b>"
         else:
-            return f"{_(text="Повторите попытку", lang=lang[0])}"
+            return f"{_(text='Повторите попытку', lang=lang[0])}"
     except Exception as err:
         logging.exception(err)
 
@@ -314,6 +314,7 @@ async def choose_pay_method(call):
         call_id = call.data.split("_")[2]
         deal = await print_deals(call_id)
         t_p = call.data.split("_")[1]
+        print(t_p, type(t_p), "Тип етпа")
         await add_t_p(call_id)
         rekv = await get_card_check_deals(deal[11])
         print(rekv)
@@ -329,7 +330,19 @@ async def choose_pay_method(call):
 
 async def continue_in_deals(call):
     try:
-        pass
+        id_deals = call.data.split("_")[1]
+        lang = await check_lang(call.message.chat.id)
+        data = await print_deals(id_deals)
+        message = (f"<b>Сделка №{data[0]}</b>\n\n"
+                   f"<b>Курс сделки:</b> <code>{data[4]} {data[3]}</code>\n\n"
+                   f"<b>Отдаете:</b> <code>{data[5]} {data[2]}</code>\n"
+                   f"<b>Получаете:</b> <code>{data[6]} {data[3]}</code>\n\n"
+                   f"<b>Вы переводите на:</b> <code>{data[8]}</code>\n")
+        if data[7] is not None and data[2] == "RUB":
+            message += f"<b>Тип оплаты:</b> <code>{data[7]}</code>\n\n"
+        message += (f"<b>Получаете сюда:</b> <code>{data[9]}\n\n</code>"
+                    f"<b>По всем вопросам:</b> @{data[10]}")
+        await call.message.edit_text(message, reply_markup=accept_deals(id_deals, lang[0]).as_markup())
     except Exception as e:
         logging.exception(e)
 

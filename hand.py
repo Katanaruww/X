@@ -228,6 +228,7 @@ async def card(call, state: FSMContext):
 @router.callback_query(lambda call: call.data and call.data.startswith("add-RUB-cards_"))
 async def card(call, state: FSMContext):
     try:
+        print(call.data)
         call_id = await add_type_pay_exc_admin(call)
         await state.update_data(call_id_cards=call_id)
         await state.set_state(fsm.rekv)
@@ -521,6 +522,8 @@ async def setrt(message: types.Message, state: FSMContext):
         data = await state.get_data()
         rekv_get = data["rekv"]
         call_id = data["call_id_cards"]
+        print(rekv_get, call_id)
+
         await add_rekv_cards(rekv_get, call_id)
         await message.answer(f"<b>Успешно!</b>\n"
                              f"<i>Добавим еще реквизит?</i>", reply_markup=admin_exc().as_markup())

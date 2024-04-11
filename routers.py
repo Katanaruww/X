@@ -71,11 +71,11 @@ async def db_add_start_deals(id_us, call_id):
         logging.warning(e)
 
 
-async def db_view_type_give(id_call, type):
+async def db_view_type_give(id_call, typ):
     try:
-        if type == "give":
+        if typ == "give":
             return curs.execute("SELECT give FROM deals_onl WHERE id_call = ?", (id_call,)).fetchone()
-        elif type == "get":
+        elif typ == "get":
             return curs.execute("SELECT get FROM deals_onl WHERE id_call = ?", (id_call,)).fetchone()
     except Exception as e:
         logging.warning(e)
@@ -89,12 +89,12 @@ async def db_delete_deal(call_id):
         logging.warning(e)
 
 
-async def add_pars_deals_onl(call_id, type, val):
+async def add_pars_deals_onl(call_id, typ, val):
     try:
-        if type == "give":
+        if typ == "give":
             curs.execute("UPDATE deals_onl SET give = ? WHERE id_call = ?", (val, call_id))
             conn.commit()
-        elif type == "get":
+        elif typ == "get":
             curs.execute("UPDATE deals_onl SET get = ? WHERE id_call = ?", (val, call_id))
             conn.commit()
     except Exception as e:
@@ -150,11 +150,15 @@ async def get_data_deals(st):
 
 async def get_card_db(value, name_bank=None):
     try:
-        row = conn.execute("SELECT rekv FROM cards WHERE curr = ? AND type_pay = ? AND st = '1' AND status ='1'",
-                           (value, name_bank,)).fetchone()
+        if name_bank is None:
+            row = conn.execute("SELECT rekv FROM cards WHERE curr = ? AND st = '1' AND status ='1'",
+                               (value,)).fetchone()
+        else:
+            row = conn.execute("SELECT rekv FROM cards WHERE curr = ? AND type_pay = ? AND st = '1' AND status ='1'",
+                               (value, name_bank,)).fetchone()
         rekv = row[0]
         return rekv
-    except TypeError as e:
+    except TypeError:
         return None
     except Exception as e:
         logging.warning(e)
@@ -166,6 +170,7 @@ async def edit_amount(deal_onl, amount):
         conn.commit()
     except Exception as e:
         logging.warning(e)
+
 
 ### НИЖЕ НЕ ЛЕЗТЬ ###
 
