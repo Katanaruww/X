@@ -42,7 +42,10 @@ translates = {
         "Тип оплаты": "Type of payment",
         "Повторите попытку": "Try again",
         "Отлично! Первый пункт выполнен!": "Great! The first point is completed!",
-        "Введите сумму на обмен": "Enter the amount to exchange"
+        "Введите сумму на обмен": "Enter the amount to exchange",
+        "Пожалуйста, введите сумму чисел (только цифры).": "Please enter the sum of the numbers (digits only).",
+        "Отлично! Двжемся дальше": "Great! Let's move on",
+        "Отлично! Третий пункт выполнен!": "Great! The third point is completed!"
     }
 }
 

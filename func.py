@@ -181,7 +181,15 @@ async def get_cur(a111, call: types.CallbackQuery):
     except Exception as err:
         logging.exception(err)
 
-
+async def get_cur2(a111, call: types.CallbackQuery):
+    lang = await check_lang(call.message.chat.id)
+    try:
+        if a111 in cur111:
+            return f"<b><i>💸{_(text='Отлично! Третий пункт выполнен!', lang=lang[0])}</i></b>"
+        else:
+            return f"{_(text='Повторите попытку', lang=lang[0])}"
+    except Exception as err:
+        logging.exception(err)
 
 
 
