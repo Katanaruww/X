@@ -16,6 +16,7 @@ from limits import limits_currency_pairs
 from translate import _
 from currency import get_pars_rub
 from routers import check_lang
+
 import sqlite3
 # ERTYU
 router = Router()
@@ -180,6 +181,24 @@ async def get_cur(a111, call: types.CallbackQuery):
             return f"{_(text='Повторите попытку', lang=lang[0])}"
     except Exception as err:
         logging.exception(err)
+
+
+async def get_messs(a000, call: types.CallbackQuery):
+    lang = await check_lang(call.message.chat.id)
+    name = await limits_currency_pairs(f"{a000}")
+    await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
+
+async def get_mon(curs, summ, message: types.Message, state: FSMContext):
+    lang = await check_lang(message.chat.id)
+    name = await limits_currency_pairs(f"{curs}")
+    if float(summ) < float(name[0]):
+        await message.answer(f'<b><i>{_(text="Вы ввели не правильное значение. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
+        await state.set_data({})
+        await state.clear()
+    else:
+        await message.answer(f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {summ}</i></b>')
+        await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
+
 
 async def get_cur2(a111, call: types.CallbackQuery):
     lang = await check_lang(call.message.chat.id)

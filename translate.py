@@ -45,7 +45,11 @@ translates = {
         "Введите сумму на обмен": "Enter the amount to exchange",
         "Пожалуйста, введите сумму чисел (только цифры).": "Please enter the sum of the numbers (digits only).",
         "Отлично! Двжемся дальше": "Great! Let's move on",
-        "Отлично! Третий пункт выполнен!": "Great! The third point is completed!"
+        "Отлично! Третий пункт выполнен!": "Great! The third point is completed!",
+        "Введите сумму на обмен. Минимальное значение - ": "Enter the amount to exchange. Minimum value -",
+        "Вы ввели не правильное значение. Минимальное значение - ": "You entered an incorrect value. Minimum value -",
+        "Вы выбрали обмен на - ": "You have chosen to exchange for -",
+        "на сумму -": "for the amount -"
     }
 }
 

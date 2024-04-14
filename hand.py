@@ -21,7 +21,7 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
-from func import get_cur, get_cur2
+from func import get_cur, get_cur2, get_messs, get_mon
 from aiogram import Bot, Dispatcher, types
 
 router = Router()
@@ -104,8 +104,8 @@ async def swertyhbubh(call, state: FSMContext):
         ban_user = await state.get_data()
         curs = str(ban_user["nameban"]).replace("1", "")
         currency = await get_cur(curs, call)
-        await call.message.answer(currency)
-        await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен", lang=lang[0])}</i></b>')
+        await call.message.edit_text(currency)
+        await get_messs(curs, call)
         await state.set_state(DealState.currency1)
     except Exception as e:
         print(f"Произошла ошибка: {e}")
@@ -117,12 +117,11 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
     try:
         lang = await check_lang(message.chat.id)
         # Проверяем, состоит ли сообщение только из цифр
-        if message.text.isdigit():
+        if float(message.text):
             global currens
             await state.update_data(name=message.text)
             currens = await state.get_data()
-            await message.answer(f'<b><i>Вы выбрали обмен на - {curs}, на сумму - {currens["name"]}</i></b>')
-            await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
+            await get_mon(curs=curs, summ=currens["name"], message=message, state=state)
             await state.set_state(DealState.choosing_currency2)
         else:
             await message.answer(f"{_(text="Пожалуйста, введите сумму чисел (только цифры).", lang=lang[0])}")
