@@ -49,7 +49,10 @@ translates = {
         "Введите сумму на обмен. Минимальное значение - ": "Enter the amount to exchange. Minimum value -",
         "Вы ввели не правильное значение. Минимальное значение - ": "You entered an incorrect value. Minimum value -",
         "Вы выбрали обмен на - ": "You have chosen to exchange for -",
-        "на сумму -": "for the amount -"
+        "на сумму -": "for the amount -",
+        "Выберите интересующие направление для обмена на - ": "Select the direction you are interested in to exchange for -",
+        "Отлично! Обмен выбран на - ": "Great! Exchange selected for -",
+        "Невозможно обменять одинаковою валюту!": "It is impossible to exchange the same currency!"
     }
 }
 

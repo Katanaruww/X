@@ -16,7 +16,7 @@ from limits import limits_currency_pairs
 from translate import _
 from currency import get_pars_rub
 from routers import check_lang
-
+from inline_but import add_cur_offline, dell_state
 import sqlite3
 # ERTYU
 router = Router()
@@ -182,37 +182,58 @@ async def get_cur(a111, call: types.CallbackQuery):
     except Exception as err:
         logging.exception(err)
 
-
-async def get_messs(a000, call: types.CallbackQuery):
-    lang = await check_lang(call.message.chat.id)
-    name = await limits_currency_pairs(f"{a000}")
-    await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
-
-async def get_mon(curs, summ, message: types.Message, state: FSMContext):
-    lang = await check_lang(message.chat.id)
-    name = await limits_currency_pairs(f"{curs}")
-    if float(summ) < float(name[0]):
-        await message.answer(f'<b><i>{_(text="Вы ввели не правильное значение. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
-        await state.set_data({})
-        await state.clear()
-    else:
-        await message.answer(f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {summ}</i></b>')
-        await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
-
-
-async def get_cur2(a111, call: types.CallbackQuery):
+async def get_cur2(a777, call: types.CallbackQuery):
     lang = await check_lang(call.message.chat.id)
     try:
-        if a111 in cur111:
-            return f"<b><i>💸{_(text='Отлично! Третий пункт выполнен!', lang=lang[0])}</i></b>"
+        if a777 in cur111:
+            return f"<b><i>💸{_(text='Отлично! Обмен выбран на - ', lang=lang[0])} {a777}</i></b>"
         else:
             return f"{_(text='Повторите попытку', lang=lang[0])}"
     except Exception as err:
         logging.exception(err)
 
+async def get_messs(a000, call: types.CallbackQuery):
+    lang = await check_lang(call.message.chat.id)
+    name = await limits_currency_pairs(f"{a000}")
+    await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>', reply_markup=dell_state(lang).as_markup())
+
+async def get_mon(curs, summ, message: types.Message, state: FSMContext):
+    try:
+        lang = await check_lang(message.chat.id)
+        name = await limits_currency_pairs(f"{curs}")
+        if float(summ) < float(name[0]):
+            await message.answer(f'<b><i>{_(text="Вы ввели не правильное значение. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
+            await state.set_data({})
+            await state.clear()
+        else:
+            await message.answer(f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {summ}</i></b>')
+            await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
+            await message.answer(f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
+                                         reply_markup=add_cur_offline(lang).as_markup())
+
+    except Exception as err:
+        logging.exception(err)
+
+# async def get_cur2(a111, call: types.CallbackQuery):
+#     lang = await check_lang(call.message.chat.id)
+#     try:
+#         if a111 in cur111:
+#             return f"<b><i>💸{_(text='Отлично! Третий пункт выполнен!', lang=lang[0])}</i></b>"
+#         else:
+#             return f"{_(text='Повторите попытку', lang=lang[0])}"
+#     except Exception as err:
+#         logging.exception(err)
 
 
-
+async def get_cb(call: types.CallbackQuery, state: FSMContext):
+    try:
+        lang = await check_lang(call.message.chat.id)
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await call.message.answer(f"<b>{_('Выберите действие', lang[0])}:</b>",
+                                  reply_markup=exc_btn_start(lang[0]).as_markup())
+        await state.clear()
+    except Exception as err:
+        logging.exception(err)
 
 
 

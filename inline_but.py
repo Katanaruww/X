@@ -122,7 +122,10 @@ def crypto_valets(lang):
     sett.adjust(2, 2, 2, 2, 1, 1)
     return sett
 
-
+def dell_state(lang):
+    adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text=f"{_(text="Отмена", lang=lang[0])}⭕️", callback_data=f"back_state")
+    return adm_exc_add
 def add_cur_offline(lang):
     adm_exc_add = InlineKeyboardBuilder()
     adm_exc_add.button(text="RUB", callback_data=f"RUB1")

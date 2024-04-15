@@ -21,7 +21,7 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
-from func import get_cur, get_cur2, get_messs, get_mon
+from func import get_cur, get_cur2, get_messs, get_mon, get_cb
 from aiogram import Bot, Dispatcher, types
 
 router = Router()
@@ -42,7 +42,7 @@ class DealState(StatesGroup):
     choosing_currency = State()
     currency1 = State()
     choosing_currency2 = State()
-    currency2 = State()
+    rate = State()
     gps = State()
     time = State()
 
@@ -92,7 +92,20 @@ async def start_handler(msg: Message):
 async def rate(msg: Message):
     await get_pars(msg)
 
-
+@router.callback_query(DealState.choosing_currency2, lambda call: call.data)
+async def rextryftugiu(call, state: FSMContext):
+    try:
+        global curs2
+        lang = await check_lang(call.message.chat.id)
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        curs2 = str(ban_user["nameban"]).replace("1", "")
+        currency = await get_cur2(curs2, call)
+        await call.message.edit_text(currency)
+        if curs2 == curs:
+            await call.message.edit_text(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+    except Exception as err:
+        logging.exception(err)
 
 # ЭТО КОРОЧЕ ОТСЛЕЖАНИЕ КОЛЛБЕКА НАХУЙ
 @router.callback_query(DealState.choosing_currency, lambda call: call.data)
@@ -336,7 +349,8 @@ async def cal(call, state: FSMContext):
             await get_messa(call)
         except Exception as err:
             logging.exception(err)
-
+    elif call.data == "back_state":
+        await get_cb(call=call, state=state)
 
     elif call.data == "adm_usr":
         try:
