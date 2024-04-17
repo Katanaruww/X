@@ -52,7 +52,8 @@ translates = {
         "на сумму -": "for the amount -",
         "Выберите интересующие направление для обмена на - ": "Select the direction you are interested in to exchange for -",
         "Отлично! Обмен выбран на - ": "Great! Exchange selected for -",
-        "Невозможно обменять одинаковою валюту!": "It is impossible to exchange the same currency!"
+        "Невозможно обменять одинаковою валюту!": "It is impossible to exchange the same currency!",
+        "Отлично! Обмен по актуальному курсу будет составлять - ": "Great! The exchange at the current rate will be -"
     }
 }
 

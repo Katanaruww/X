@@ -1,16 +1,37 @@
-2024-04-15 20:40:43,589 - INFO - start_polling: 527 - Start polling
-2024-04-15 20:40:44,188 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-15 20:40:47,859 - INFO - feed_update: 172 - Update id=377108074 is handled. Duration 3428 ms by bot id=6243740464
-2024-04-15 20:40:50,717 - INFO - feed_update: 172 - Update id=377108075 is handled. Duration 917 ms by bot id=6243740464
-2024-04-15 20:40:52,376 - INFO - feed_update: 172 - Update id=377108076 is handled. Duration 244 ms by bot id=6243740464
-2024-04-15 20:40:55,846 - INFO - feed_update: 172 - Update id=377108077 is handled. Duration 1587 ms by bot id=6243740464
-2024-04-15 20:40:57,727 - INFO - feed_update: 172 - Update id=377108078 is handled. Duration 579 ms by bot id=6243740464
-2024-04-15 20:41:12,458 - INFO - feed_update: 172 - Update id=377108080 is handled. Duration 560 ms by bot id=6243740464
-2024-04-15 20:41:13,698 - INFO - feed_update: 172 - Update id=377108079 is handled. Duration 5557 ms by bot id=6243740464
-2024-04-15 20:41:15,854 - INFO - feed_update: 172 - Update id=377108081 is handled. Duration 188 ms by bot id=6243740464
-2024-04-15 20:41:19,718 - INFO - feed_update: 172 - Update id=377108082 is handled. Duration 181 ms by bot id=6243740464
-2024-04-15 20:41:30,238 - INFO - feed_update: 172 - Update id=377108083 is handled. Duration 7873 ms by bot id=6243740464
-2024-04-15 20:41:32,035 - INFO - feed_update: 172 - Update id=377108084 is handled. Duration 205 ms by bot id=6243740464
-2024-04-15 20:41:43,123 - INFO - feed_update: 172 - Update id=377108085 is handled. Duration 1528 ms by bot id=6243740464
-2024-04-15 20:41:50,267 - INFO - feed_update: 172 - Update id=377108086 is handled. Duration 1261 ms by bot id=6243740464
-2024-04-15 20:41:54,289 - INFO - feed_update: 172 - Update id=377108087 is handled. Duration 206 ms by bot id=6243740464
+2024-04-17 22:33:44,461 - INFO - start_polling: 527 - Start polling
+2024-04-17 22:33:45,140 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-17 22:33:53,923 - INFO - feed_update: 172 - Update id=377108214 is handled. Duration 7516 ms by bot id=6243740464
+2024-04-17 22:37:35,402 - INFO - feed_update: 172 - Update id=377108215 is handled. Duration 1316 ms by bot id=6243740464
+2024-04-17 22:37:37,134 - INFO - feed_update: 172 - Update id=377108216 is handled. Duration 267 ms by bot id=6243740464
+2024-04-17 22:37:39,308 - INFO - feed_update: 172 - Update id=377108217 is handled. Duration 510 ms by bot id=6243740464
+2024-04-17 22:37:42,957 - INFO - feed_update: 172 - Update id=377108218 is handled. Duration 665 ms by bot id=6243740464
+2024-04-17 22:37:44,685 - ERROR - rextryftugiu: 113 - name 'currency' is not defined
+Traceback (most recent call last):
+  File "/Users/danilbatyuk/PycharmProjects/X/hand.py", line 108, in rextryftugiu
+    await call.message.answer(currency)
+                              ^^^^^^^^
+NameError: name 'currency' is not defined. Did you mean: 'currens'?
+2024-04-17 22:37:44,694 - INFO - feed_update: 172 - Update id=377108219 is handled. Duration 238 ms by bot id=6243740464
+2024-04-17 22:37:55,283 - INFO - feed_update: 172 - Update id=377108220 is handled. Duration 1372 ms by bot id=6243740464
+2024-04-17 22:37:59,457 - INFO - feed_update: 172 - Update id=377108221 is handled. Duration 4 ms by bot id=6243740464
+2024-04-17 22:38:02,971 - INFO - feed_update: 172 - Update id=377108222 is handled. Duration 1029 ms by bot id=6243740464
+2024-04-17 22:38:06,073 - INFO - feed_update: 172 - Update id=377108223 is handled. Duration 896 ms by bot id=6243740464
+2024-04-17 22:38:08,435 - INFO - feed_update: 172 - Update id=377108224 is handled. Duration 354 ms by bot id=6243740464
+2024-04-17 22:38:16,781 - INFO - feed_update: 172 - Update id=377108225 is handled. Duration 421 ms by bot id=6243740464
+2024-04-17 22:38:25,460 - INFO - feed_update: 172 - Update id=377108226 is handled. Duration 821 ms by bot id=6243740464
+2024-04-17 22:38:28,488 - INFO - feed_update: 172 - Update id=377108227 is handled. Duration 1258 ms by bot id=6243740464
+2024-04-17 22:38:38,327 - INFO - feed_update: 172 - Update id=377108228 is handled. Duration 960 ms by bot id=6243740464
+2024-04-17 22:38:40,908 - INFO - feed_update: 172 - Update id=377108229 is handled. Duration 918 ms by bot id=6243740464
+2024-04-17 22:38:43,195 - INFO - feed_update: 172 - Update id=377108230 is handled. Duration 245 ms by bot id=6243740464
+2024-04-17 22:38:46,621 - INFO - feed_update: 172 - Update id=377108231 is handled. Duration 591 ms by bot id=6243740464
+2024-04-17 22:39:53,584 - INFO - feed_update: 172 - Update id=377108232 is handled. Duration 907 ms by bot id=6243740464
+2024-04-17 22:39:57,750 - INFO - feed_update: 172 - Update id=377108233 is handled. Duration 1446 ms by bot id=6243740464
+2024-04-17 22:40:07,420 - INFO - feed_update: 172 - Update id=377108234 is handled. Duration 1467 ms by bot id=6243740464
+2024-04-17 22:40:09,997 - INFO - feed_update: 172 - Update id=377108235 is handled. Duration 987 ms by bot id=6243740464
+2024-04-17 22:40:11,840 - INFO - feed_update: 172 - Update id=377108236 is handled. Duration 220 ms by bot id=6243740464
+2024-04-17 22:40:14,679 - INFO - feed_update: 172 - Update id=377108237 is handled. Duration 666 ms by bot id=6243740464
+2024-04-17 22:40:18,264 - INFO - feed_update: 172 - Update id=377108238 is handled. Duration 500 ms by bot id=6243740464
+2024-04-17 22:40:21,558 - INFO - feed_update: 172 - Update id=377108239 is handled. Duration 1508 ms by bot id=6243740464
+2024-04-17 23:07:28,579 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-04-17 23:07:28,581 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-17 23:07:28,581 - INFO - start_polling: 554 - Polling stopped

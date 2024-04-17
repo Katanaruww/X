@@ -96,14 +96,19 @@ async def rate(msg: Message):
 async def rextryftugiu(call, state: FSMContext):
     try:
         global curs2
+        global currency
         lang = await check_lang(call.message.chat.id)
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
         curs2 = str(ban_user["nameban"]).replace("1", "")
-        currency = await get_cur2(curs2, call)
-        await call.message.edit_text(currency)
+        if curs2 != curs:
+            currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call)
         if curs2 == curs:
-            await call.message.edit_text(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+            await call.message.answer(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+        await call.message.answer(currency)
+        await state.clear()
+        if curs2 == curs:
+            await call.message.answer(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
     except Exception as err:
         logging.exception(err)
 

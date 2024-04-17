@@ -17,6 +17,7 @@ from translate import _
 from currency import get_pars_rub
 from routers import check_lang
 from inline_but import add_cur_offline, dell_state
+from currency import get_pars_rub
 import sqlite3
 # ERTYU
 router = Router()
@@ -182,11 +183,12 @@ async def get_cur(a111, call: types.CallbackQuery):
     except Exception as err:
         logging.exception(err)
 
-async def get_cur2(a777, call: types.CallbackQuery):
+async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount):
     lang = await check_lang(call.message.chat.id)
     try:
-        if a777 in cur111:
-            return f"<b><i>💸{_(text='Отлично! Обмен выбран на - ', lang=lang[0])} {a777}</i></b>"
+        if val_in in cur111:
+            curs = round(float(await get_pars_rub(amount=amount, val_in=val_in, val_out=val_out)))
+            return f"<b><i>💸{_(text='Отлично! Обмен по актуальному курсу будет составлять - ', lang=lang[0])} {curs}</i></b>"
         else:
             return f"{_(text='Повторите попытку', lang=lang[0])}"
     except Exception as err:
@@ -207,7 +209,7 @@ async def get_mon(curs, summ, message: types.Message, state: FSMContext):
             await state.clear()
         else:
             await message.answer(f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {summ}</i></b>')
-            await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
+            # await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
             await message.answer(f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
                                          reply_markup=add_cur_offline(lang).as_markup())
 
