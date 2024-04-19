@@ -211,7 +211,6 @@ async def get_card_check_deals(deal_id):
         data_our = await print_deals(deal_id)
         data = await get_data_deals(1)
         if len(data) == 1 and data[0][11] == deal_id:
-            print(data_our[2], "валюта епта")
             if data_our[2] == "RUB":
                 return await get_card_db(data_our[2], data_our[7])
             else:
@@ -219,13 +218,18 @@ async def get_card_check_deals(deal_id):
 
         else:
             for a in range(len(data)):  # тут сравниваем сделки между собой
-                print(data_our[2], "валюта епта много")
                 if data_our[5] == data[a][5]:
                     amount_high = await limits_currency_pairs(data_our[2])
                     amount = float(data_our[5]) + float(amount_high[1])
                     await edit_amount(data_our[11], amount)
                     if data_our[2] == "RUB":
-                        print(data_our[2], data_our[7])
+
+                        return await get_card_db(data_our[2], data_our[7])
+                    else:
+                        return await get_card_db(data_our[2])
+                else:
+                    if data_our[2] == "RUB":
+                        print(data_our, "епта")
                         return await get_card_db(data_our[2], data_our[7])
                     else:
                         return await get_card_db(data_our[2])

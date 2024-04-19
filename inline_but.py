@@ -84,7 +84,7 @@ def continue_add_deal(call_id, lang):
 
 def accept_deals(call_id, lang):
     acc_d = InlineKeyboardBuilder()
-    acc_d.button(text=f"{_('Принять', lang)}🟢", callback_data=f"accept_deals_{call_id}")
+    acc_d.button(text=f"{_('Продолжить', lang)}🟢", callback_data=f"accept_deals_{call_id}")
     acc_d.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call_id}")
     acc_d.adjust(1, 1)
     return acc_d
@@ -124,7 +124,7 @@ def crypto_valets(lang):
 
 def dell_state(lang):
     adm_exc_add = InlineKeyboardBuilder()
-    adm_exc_add.button(text=f"{_(text="Отмена", lang=lang[0])}⭕️", callback_data=f"back_state")
+    adm_exc_add.button(text=f"{_(text='Отмена', lang=lang[0])}⭕️", callback_data=f"back_state")
     return adm_exc_add
 def add_cur_offline(lang):
     adm_exc_add = InlineKeyboardBuilder()

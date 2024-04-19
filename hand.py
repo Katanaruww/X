@@ -142,7 +142,7 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
             await get_mon(curs=curs, summ=currens["name"], message=message, state=state)
             await state.set_state(DealState.choosing_currency2)
         else:
-            await message.answer(f"{_(text="Пожалуйста, введите сумму чисел (только цифры).", lang=lang[0])}")
+            await message.answer(f"{_(text='Пожалуйста, введите сумму чисел (только цифры).', lang=lang[0])}")
     except Exception as err:
         logging.exception(err)
 

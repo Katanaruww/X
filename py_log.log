@@ -1,37 +1,26 @@
-2024-04-17 22:33:44,461 - INFO - start_polling: 527 - Start polling
-2024-04-17 22:33:45,140 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-17 22:33:53,923 - INFO - feed_update: 172 - Update id=377108214 is handled. Duration 7516 ms by bot id=6243740464
-2024-04-17 22:37:35,402 - INFO - feed_update: 172 - Update id=377108215 is handled. Duration 1316 ms by bot id=6243740464
-2024-04-17 22:37:37,134 - INFO - feed_update: 172 - Update id=377108216 is handled. Duration 267 ms by bot id=6243740464
-2024-04-17 22:37:39,308 - INFO - feed_update: 172 - Update id=377108217 is handled. Duration 510 ms by bot id=6243740464
-2024-04-17 22:37:42,957 - INFO - feed_update: 172 - Update id=377108218 is handled. Duration 665 ms by bot id=6243740464
-2024-04-17 22:37:44,685 - ERROR - rextryftugiu: 113 - name 'currency' is not defined
-Traceback (most recent call last):
-  File "/Users/danilbatyuk/PycharmProjects/X/hand.py", line 108, in rextryftugiu
-    await call.message.answer(currency)
-                              ^^^^^^^^
-NameError: name 'currency' is not defined. Did you mean: 'currens'?
-2024-04-17 22:37:44,694 - INFO - feed_update: 172 - Update id=377108219 is handled. Duration 238 ms by bot id=6243740464
-2024-04-17 22:37:55,283 - INFO - feed_update: 172 - Update id=377108220 is handled. Duration 1372 ms by bot id=6243740464
-2024-04-17 22:37:59,457 - INFO - feed_update: 172 - Update id=377108221 is handled. Duration 4 ms by bot id=6243740464
-2024-04-17 22:38:02,971 - INFO - feed_update: 172 - Update id=377108222 is handled. Duration 1029 ms by bot id=6243740464
-2024-04-17 22:38:06,073 - INFO - feed_update: 172 - Update id=377108223 is handled. Duration 896 ms by bot id=6243740464
-2024-04-17 22:38:08,435 - INFO - feed_update: 172 - Update id=377108224 is handled. Duration 354 ms by bot id=6243740464
-2024-04-17 22:38:16,781 - INFO - feed_update: 172 - Update id=377108225 is handled. Duration 421 ms by bot id=6243740464
-2024-04-17 22:38:25,460 - INFO - feed_update: 172 - Update id=377108226 is handled. Duration 821 ms by bot id=6243740464
-2024-04-17 22:38:28,488 - INFO - feed_update: 172 - Update id=377108227 is handled. Duration 1258 ms by bot id=6243740464
-2024-04-17 22:38:38,327 - INFO - feed_update: 172 - Update id=377108228 is handled. Duration 960 ms by bot id=6243740464
-2024-04-17 22:38:40,908 - INFO - feed_update: 172 - Update id=377108229 is handled. Duration 918 ms by bot id=6243740464
-2024-04-17 22:38:43,195 - INFO - feed_update: 172 - Update id=377108230 is handled. Duration 245 ms by bot id=6243740464
-2024-04-17 22:38:46,621 - INFO - feed_update: 172 - Update id=377108231 is handled. Duration 591 ms by bot id=6243740464
-2024-04-17 22:39:53,584 - INFO - feed_update: 172 - Update id=377108232 is handled. Duration 907 ms by bot id=6243740464
-2024-04-17 22:39:57,750 - INFO - feed_update: 172 - Update id=377108233 is handled. Duration 1446 ms by bot id=6243740464
-2024-04-17 22:40:07,420 - INFO - feed_update: 172 - Update id=377108234 is handled. Duration 1467 ms by bot id=6243740464
-2024-04-17 22:40:09,997 - INFO - feed_update: 172 - Update id=377108235 is handled. Duration 987 ms by bot id=6243740464
-2024-04-17 22:40:11,840 - INFO - feed_update: 172 - Update id=377108236 is handled. Duration 220 ms by bot id=6243740464
-2024-04-17 22:40:14,679 - INFO - feed_update: 172 - Update id=377108237 is handled. Duration 666 ms by bot id=6243740464
-2024-04-17 22:40:18,264 - INFO - feed_update: 172 - Update id=377108238 is handled. Duration 500 ms by bot id=6243740464
-2024-04-17 22:40:21,558 - INFO - feed_update: 172 - Update id=377108239 is handled. Duration 1508 ms by bot id=6243740464
-2024-04-17 23:07:28,579 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
-2024-04-17 23:07:28,581 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-04-17 23:07:28,581 - INFO - start_polling: 554 - Polling stopped
+2024-04-18 18:59:02,695 - INFO - start_polling: 527 - Start polling
+2024-04-18 18:59:03,193 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-04-18 18:59:03,939 - INFO - feed_update: 172 - Update id=377108334 is handled. Duration 547 ms by bot id=6243740464
+2024-04-18 18:59:05,887 - INFO - feed_update: 172 - Update id=377108335 is handled. Duration 186 ms by bot id=6243740464
+2024-04-18 18:59:07,374 - INFO - feed_update: 172 - Update id=377108336 is handled. Duration 203 ms by bot id=6243740464
+2024-04-18 18:59:08,733 - INFO - feed_update: 172 - Update id=377108337 is handled. Duration 233 ms by bot id=6243740464
+2024-04-18 18:59:12,726 - INFO - feed_update: 172 - Update id=377108338 is handled. Duration 219 ms by bot id=6243740464
+2024-04-18 18:59:15,888 - INFO - feed_update: 172 - Update id=377108339 is handled. Duration 1139 ms by bot id=6243740464
+2024-04-18 18:59:25,754 - INFO - feed_update: 172 - Update id=377108340 is handled. Duration 266 ms by bot id=6243740464
+2024-04-18 18:59:29,872 - INFO - feed_update: 172 - Update id=377108341 is handled. Duration 281 ms by bot id=6243740464
+2024-04-18 19:07:32,937 - INFO - feed_update: 172 - Update id=377108342 is handled. Duration 1327 ms by bot id=6243740464
+2024-04-18 19:07:35,032 - INFO - feed_update: 172 - Update id=377108343 is handled. Duration 858 ms by bot id=6243740464
+2024-04-18 19:07:36,623 - INFO - feed_update: 172 - Update id=377108344 is handled. Duration 203 ms by bot id=6243740464
+2024-04-18 19:09:03,697 - INFO - feed_update: 172 - Update id=377108345 is handled. Duration 608 ms by bot id=6243740464
+2024-04-18 19:09:04,884 - INFO - feed_update: 172 - Update id=377108346 is handled. Duration 217 ms by bot id=6243740464
+2024-04-18 19:09:07,471 - INFO - feed_update: 172 - Update id=377108347 is handled. Duration 250 ms by bot id=6243740464
+2024-04-18 19:09:08,973 - INFO - feed_update: 172 - Update id=377108348 is handled. Duration 0 ms by bot id=6243740464
+2024-04-18 20:49:17,109 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-04-18 20:49:17,110 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)
+2024-04-18 20:49:28,654 - INFO - _listen_updates: 233 - Connection established (tryings = 1, bot id = 6243740464)
+2024-04-18 20:54:44,285 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-04-18 20:54:44,286 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)
+2024-04-18 20:54:55,831 - INFO - _listen_updates: 233 - Connection established (tryings = 1, bot id = 6243740464)
+2024-04-18 20:54:55,833 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-04-18 20:54:55,833 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)
+2024-04-18 20:55:07,565 - INFO - _listen_updates: 233 - Connection established (tryings = 1, bot id = 6243740464)

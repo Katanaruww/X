@@ -304,10 +304,10 @@ async def deals_add_curr(call):
 
 async def deals_add_curr_finish(call, state: FSMContext):
     try:
-        type = "get"
+        tep = "get"
         val = call.data.split("_")[1]
         idd = call.data.split("_")[2]
-        await add_pars_deals_onl(idd, type, val)
+        await add_pars_deals_onl(idd, tep, val)
         lang = await check_lang(call.message.chat.id)
         view_give = await db_view_type_give(idd, "give")
         view_get = await db_view_type_give(idd, "get")
@@ -364,8 +364,7 @@ async def choose_pay_method(call):
         call_id = call.data.split("_")[2]
         deal = await print_deals(call_id)
         t_p = call.data.split("_")[1]
-        print(t_p, type(t_p), "Тип етпа")
-        await add_t_p(call_id)
+        await add_t_p(t_p, call_id)
         rekv = await get_card_check_deals(deal[11])
         print(rekv)
         await add_type_our(rekv, call_id, t_p)
