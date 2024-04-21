@@ -164,6 +164,7 @@ async def swertyhbubh(call, state: FSMContext):
 @router.message(DealState.currency1)
 async def zrextcyvgubhi(message: types.Message, state: FSMContext):
     try:
+        global name
         lang = await check_lang(message.chat.id)
         # Проверяем, состоит ли сообщение только из цифр
         if float(message.text):
@@ -178,8 +179,8 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
                 await state.set_data({})
                 await state.clear()
             else:
-                await message.answer(
-                    f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {currens["name"]}</i></b>')
+                # await message.answer(
+                #     f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {currens["name"]}</i></b>')
                 # await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
                 await message.answer(
                     f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
