@@ -128,18 +128,34 @@ def dell_state(lang):
     return adm_exc_add
 def add_cur_offline(lang):
     adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text=f"{_(text='Начать обмен', lang=lang[0])}", callback_data=f"start_offline")
+    adm_exc_add.button(text=f"{_('Как происходит сделка?', lang[0])}💸", callback_data="deal")
+    adm_exc_add.button(text=f"{_('Отмена', lang[0])}⭕️", callback_data="back_start")
+    adm_exc_add.adjust(1,1,1)
+    return adm_exc_add
+
+def oflline(lang):
+    adm_exc_add = InlineKeyboardBuilder()
     adm_exc_add.button(text="RUB", callback_data=f"RUB1")
     adm_exc_add.button(text="IDR", callback_data=f"IDR1")
     adm_exc_add.button(text="USD", callback_data=f"USD1")
     adm_exc_add.button(text="USDT", callback_data=f"USDT1")
     adm_exc_add.button(text="BTC", callback_data=f"BTC1")
     adm_exc_add.button(text="LTC", callback_data=f"LTC1")
-    adm_exc_add.button(text=f"{_('Как происходит сделка?', lang[0])}💸", callback_data="deal")
-    adm_exc_add.button(text=f"{_('Отмена', lang[0])}⭕️", callback_data="back_start")
-    adm_exc_add.adjust(3, 3, 1, 1)
+    adm_exc_add.button(text=f"{_(text='Отмена', lang=lang[0])}⭕️", callback_data=f"back_state")
+    adm_exc_add.adjust(3, 3)
     return adm_exc_add
 
-
+def oflline2(lang):
+    adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text="RUB", callback_data=f"RUB1")
+    adm_exc_add.button(text="IDR", callback_data=f"IDR1")
+    adm_exc_add.button(text="USD", callback_data=f"USD1")
+    adm_exc_add.button(text="USDT", callback_data=f"USDT1")
+    adm_exc_add.button(text="BTC", callback_data=f"BTC1")
+    adm_exc_add.button(text="LTC", callback_data=f"LTC1")
+    adm_exc_add.adjust(3, 3)
+    return adm_exc_add
 """MYZONE"""
 
 

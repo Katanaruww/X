@@ -183,48 +183,40 @@ async def get_cur(a111, call: types.CallbackQuery):
     except Exception as err:
         logging.exception(err)
 
-async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount):
+# async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount):
+#     lang = await check_lang(call.message.chat.id)
+#     try:
+#         if val_in in cur111:
+#             curs = round(float(await get_pars_rub(amount=amount, val_in=val_in, val_out=val_out)))
+#             return f"<b><i>💸{_(text='Отлично! Обмен по актуальному курсу будет составлять - ', lang=lang[0])} {curs}</i></b>"
+#         else:
+#             return f"{_(text='Повторите попытку', lang=lang[0])}"
+#     except Exception as err:
+#         logging.exception(err)
+async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FSMContext):
     lang = await check_lang(call.message.chat.id)
     try:
         if val_in in cur111:
-            curs = round(float(await get_pars_rub(amount=amount, val_in=val_in, val_out=val_out)))
-            return f"<b><i>💸{_(text='Отлично! Обмен по актуальному курсу будет составлять - ', lang=lang[0])} {curs}</i></b>"
+            result = await get_pars_rub(amount=amount, val_in=val_in, val_out=val_out)
+            if result is not None:
+                curs = round(float(result))
+                return f"<b><i>💸{_(text='Отлично! Обмен по актуальному курсу будет составлять - ', lang=lang[0])} {curs} {val_out}</i></b>"
+            else:
+                # Если результат None, то сообщение об ошибке
+                return f"{_(text='Не удалось получить курс. Повторите попытку позже.', lang=lang[0])}"
         else:
             return f"{_(text='Повторите попытку', lang=lang[0])}"
     except Exception as err:
         logging.exception(err)
+        return f"{_(text='Произошла ошибка. Повторите попытку позже.', lang=lang[0])}"
+
 
 async def get_messs(a000, call: types.CallbackQuery):
     lang = await check_lang(call.message.chat.id)
     name = await limits_currency_pairs(f"{a000}")
     await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>', reply_markup=dell_state(lang).as_markup())
 
-async def get_mon(curs, summ, message: types.Message, state: FSMContext):
-    try:
-        lang = await check_lang(message.chat.id)
-        name = await limits_currency_pairs(f"{curs}")
-        if float(summ) < float(name[0]):
-            await message.answer(f'<b><i>{_(text="Вы ввели не правильное значение. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
-            await state.set_data({})
-            await state.clear()
-        else:
-            await message.answer(f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {summ}</i></b>')
-            # await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
-            await message.answer(f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
-                                         reply_markup=add_cur_offline(lang).as_markup())
 
-    except Exception as err:
-        logging.exception(err)
-
-# async def get_cur2(a111, call: types.CallbackQuery):
-#     lang = await check_lang(call.message.chat.id)
-#     try:
-#         if a111 in cur111:
-#             return f"<b><i>💸{_(text='Отлично! Третий пункт выполнен!', lang=lang[0])}</i></b>"
-#         else:
-#             return f"{_(text='Повторите попытку', lang=lang[0])}"
-#     except Exception as err:
-#         logging.exception(err)
 
 
 async def get_cb(call: types.CallbackQuery, state: FSMContext):

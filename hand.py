@@ -21,9 +21,9 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
-from func import get_cur, get_cur2, get_messs, get_mon, get_cb
+from func import get_cur, get_cur2, get_messs, get_cb
 from aiogram import Bot, Dispatcher, types
-
+from limits import limits_currency_pairs
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
@@ -92,6 +92,7 @@ async def start_handler(msg: Message):
 async def rate(msg: Message):
     await get_pars(msg)
 
+
 @router.callback_query(DealState.choosing_currency2, lambda call: call.data)
 async def rextryftugiu(call, state: FSMContext):
     try:
@@ -100,17 +101,36 @@ async def rextryftugiu(call, state: FSMContext):
         lang = await check_lang(call.message.chat.id)
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
+
+
+        ifcur = str(ban_user["nameban"])
         curs2 = str(ban_user["nameban"]).replace("1", "")
-        if curs2 != curs:
-            currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call)
-        if curs2 == curs:
-            await call.message.answer(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
-        await call.message.answer(currency)
-        await state.clear()
-        if curs2 == curs:
-            await call.message.answer(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+        print(ifcur, curs2)
+
+
+        if ifcur == "RUB1" or ifcur == "IDR1" or ifcur == "USD1" or ifcur == "USDT1" or ifcur == "BTC1" or ifcur == "LTC1":
+            if curs2 == curs:
+
+                await call.message.edit_text(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+                await state.clear()
+                return  # Завершаем функцию, если валюты одинаковые
+
+            currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
+
+            if currency:
+
+                await call.message.edit_text(currency)
+
+                await state.clear()
+            else:
+
+                await state.clear()
+        else:
+            await state.clear()
     except Exception as err:
         logging.exception(err)
+        await state.clear()
+
 
 # ЭТО КОРОЧЕ ОТСЛЕЖАНИЕ КОЛЛБЕКА НАХУЙ
 @router.callback_query(DealState.choosing_currency, lambda call: call.data)
@@ -121,14 +141,25 @@ async def swertyhbubh(call, state: FSMContext):
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
         curs = str(ban_user["nameban"]).replace("1", "")
-        currency = await get_cur(curs, call)
-        await call.message.edit_text(currency)
-        await get_messs(curs, call)
-        await state.set_state(DealState.currency1)
+        off = str(ban_user["nameban"])
+        if off == "RUB1" or off == "IDR1" or off == "USD1" or off == "USDT1" or off == "BTC1" or off == "LTC1":
+            currency = await get_cur(curs, call)
+            await call.message.edit_text(currency)
+            await get_messs(curs, call)
+            await state.set_state(DealState.currency1)
+        else:
+            lang = await check_lang(call.message.chat.id)
+            await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
+                                         reply_markup=add_cur_offline(lang).as_markup())
+            await state.clear()
     except Exception as e:
         print(f"Произошла ошибка: {e}")
 
 
+
+
+    except Exception as err:
+        logging.exception(err)
 
 @router.message(DealState.currency1)
 async def zrextcyvgubhi(message: types.Message, state: FSMContext):
@@ -139,14 +170,25 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
             global currens
             await state.update_data(name=message.text)
             currens = await state.get_data()
-            await get_mon(curs=curs, summ=currens["name"], message=message, state=state)
-            await state.set_state(DealState.choosing_currency2)
+
+            name = await limits_currency_pairs(f"{curs}")
+            if float(currens["name"]) < float(name[0]):
+                await message.answer(
+                    f'<b><i>{_(text="Вы ввели не правильное значение. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
+                await state.set_data({})
+                await state.clear()
+            else:
+                await message.answer(
+                    f'<b><i>{_(text="Вы выбрали обмен на - ", lang=lang[0])} {curs}, {_(text="на сумму -", lang=lang[0])} {currens["name"]}</i></b>')
+                # await message.answer(f'{_(text="Отлично! Двжемся дальше", lang=lang[0])}')
+                await message.answer(
+                    f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
+                    reply_markup=oflline2(lang).as_markup())
+                await state.set_state(DealState.choosing_currency2)
         else:
             await message.answer(f"{_(text='Пожалуйста, введите сумму чисел (только цифры).', lang=lang[0])}")
     except Exception as err:
         logging.exception(err)
-
-
 
 # ЭТО КОРОЧЕ ПРОВЕРКА НАХУЙ
 @router.message(DealState.currency1, ~F.text)
@@ -346,9 +388,18 @@ async def cal(call, state: FSMContext):
             lang = await check_lang(call.message.chat.id)
             await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
                                              reply_markup=add_cur_offline(lang).as_markup())
+
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "start_offline":
+        try:
+            lang = await check_lang(call.message.chat.id)
+            await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
+                                             reply_markup=oflline(lang).as_markup())
             await state.set_state(DealState.choosing_currency)
         except Exception as err:
             logging.exception(err)
+
     elif call.data == "deal":
         try:
             await get_messa(call)

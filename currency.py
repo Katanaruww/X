@@ -20,5 +20,6 @@ async def get_pars_rub(amount, val_in, val_out):
                     return new[0].get("value")
                 else:
                     return None
+
             else:
                 return None
