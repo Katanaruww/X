@@ -201,8 +201,8 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
             resultone = await get_pars_rub(amount="1", val_in=val_in, val_out=val_out)
             if result is not None:
                 curs = round(float(result))
-                curs2 = resultone
-                return f"<b><i>{_(text="Актуальный курс", lang=lang[0])}: {curs2} {val_out}\n{_(text="Вы отдадите", lang=lang[0])}: {amount} {val_in}\n💸{_(text='Отлично! Обмен по актуальному курсу будет составлять - ', lang=lang[0])} {curs} {val_out}</i></b>"
+
+                return f"<b><i>💰 {_(text="Актуальный курс", lang=lang[0])}: {resultone} {val_out}\n💳 {_(text="Вы отдадите", lang=lang[0])}: {amount} {val_in}\n💸 {_(text='Обмен по актуальному курсу будет составлять:', lang=lang[0])}{curs} {val_out}</i></b>"
             else:
                 # Если результат None, то сообщение об ошибке
                 return f"{_(text='Не удалось получить курс. Повторите попытку позже.', lang=lang[0])}"

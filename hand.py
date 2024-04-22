@@ -119,7 +119,7 @@ async def rextryftugiu(call, state: FSMContext):
 
             if currency:
 
-                await call.message.edit_text(currency)
+                await call.message.edit_text(currency, reply_markup=get_offline(lang).as_markup())
 
                 await state.clear()
             else:
@@ -190,6 +190,27 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
             await message.answer(f"{_(text='Пожалуйста, введите сумму чисел (только цифры).', lang=lang[0])}")
     except Exception as err:
         logging.exception(err)
+
+
+
+
+
+locations = {}
+
+@router.message(F.location)
+async def location_handler(message: types.Message):
+    global cu1
+    global cu2
+    latitude = message.location.latitude
+    longitude = message.location.longitude
+    locations['latitude'] = latitude
+    locations['longitude'] = longitude
+    cu1 = str(locations['latitude'])
+    cu2 = str(locations['longitude'])
+    await message.answer(str(cu1))
+    await message.answer(str(cu2))
+
+
 
 # ЭТО КОРОЧЕ ПРОВЕРКА НАХУЙ
 @router.message(DealState.currency1, ~F.text)

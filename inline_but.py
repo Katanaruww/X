@@ -134,6 +134,20 @@ def add_cur_offline(lang):
     adm_exc_add.adjust(1,1,1)
     return adm_exc_add
 
+
+def get_offline(lang):
+    adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text=f"{_(text='Продолжить', lang=lang[0])}🟢", callback_data=f"get")
+    adm_exc_add.button(text=f"{_('Отмена', lang[0])}🚫", callback_data="delleate")
+
+
+    adm_exc_add.adjust(1,1,1)
+    return adm_exc_add
+
+
+
+
+
 def oflline(lang):
     adm_exc_add = InlineKeyboardBuilder()
     adm_exc_add.button(text="RUB", callback_data=f"RUB1")
