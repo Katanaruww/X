@@ -202,7 +202,10 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
             if result is not None:
                 curs = round(float(result))
 
-                return f"<b><i>💰 {_(text="Актуальный курс", lang=lang[0])}: {resultone} {val_out}\n💳 {_(text="Вы отдадите", lang=lang[0])}: {amount} {val_in}\n💸 {_(text='Обмен по актуальному курсу будет составлять:', lang=lang[0])}{curs} {val_out}</i></b>"
+                return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {resultone} {val_out}\n💳 "
+                        f"{_(text='Вы отдадите', lang=lang[0])}: {amount} {val_in}\n💸 "
+                        f"{_(text='Обмен по актуальному курсу будет составлять:', lang=lang[0])}"
+                        f"{curs} {val_out}</i></b>")
             else:
                 # Если результат None, то сообщение об ошибке
                 return f"{_(text='Не удалось получить курс. Повторите попытку позже.', lang=lang[0])}"
@@ -329,8 +332,8 @@ async def deals_online_cancel(call):
 async def transaction_con(message, call_id):
     try:
         row = await print_deals(call_id)
-        curr = round(float(await get_pars_rub("1", row[2], row[3])), 6)
-        amount_out = round(float(curr * row[5] * config.percent), 6)
+        curr = float(await get_pars_rub("1", row[2], row[3]))
+        amount_out = float(curr * row[5] * config.percent)
         oper = config.operators[0][0]
         await add_amount_out(amount_out, curr, oper, call_id)
         deal = await print_deals(call_id)
@@ -360,7 +363,6 @@ async def choose_pay_method(call):
         t_p = call.data.split("_")[1]
         await add_t_p(t_p, call_id)
         rekv = await get_card_check_deals(deal[11])
-        print(rekv)
         await add_type_our(rekv, call_id, t_p)
         mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{deal[4]}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
