@@ -22,7 +22,7 @@ async def check_address(t_p, text):
         else:
             return 500
     elif t_p == "LTC":
-        if (len(text) <= 37) and (text[0] == "M" or text[0] == "3" or text[:3] == "ltc"):
+        if (len(text) <= 50) and (text[0] == "M" or text[0] == "3" or text[:3] == "ltc"):
             return 200
         else:
             return 500

@@ -14,10 +14,9 @@ from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, add_cur_offline
 from limits import limits_currency_pairs
 from translate import _
-from currency import get_pars_rub
+from currency import get_pars
 from routers import check_lang
 from inline_but import add_cur_offline, dell_state
-from currency import get_pars_rub
 import sqlite3
 # ERTYU
 router = Router()
@@ -197,8 +196,8 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
     lang = await check_lang(call.message.chat.id)
     try:
         if val_in in cur111:
-            result = await get_pars_rub(amount=amount, val_in=val_in, val_out=val_out)
-            resultone = await get_pars_rub(amount="1", val_in=val_in, val_out=val_out)
+            result = await get_pars(amount=amount, val_in=val_in, val_out=val_out)
+            resultone = await get_pars(amount="1", val_in=val_in, val_out=val_out)
             if result is not None:
                 curs = round(float(result))
 
@@ -332,16 +331,16 @@ async def deals_online_cancel(call):
 async def transaction_con(message, call_id):
     try:
         row = await print_deals(call_id)
-        curr = float(await get_pars_rub("1", row[2], row[3]))
+        curr = float(await get_pars("1", row[2], row[3]))
         amount_out = float(curr * row[5] * config.percent)
         oper = config.operators[0][0]
         await add_amount_out(amount_out, curr, oper, call_id)
         deal = await print_deals(call_id)
         lang = await check_lang(message.chat.id)
 
-        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{curr}</code></b> <i>{deal[3]}</i>\n\n"
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{'{:.10g}'.format(curr)}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
-                f"<b>{_('Вы получите', lang[0])}:</b> <code>{amount_out}</code> <i>{deal[3]}</i>\n\n")
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{'{:.5g}'.format(amount_out)}</code> <i>{deal[3]}</i>\n\n")
         if deal[2] == "RUB":
             mess += f"<i>{_('Для продолжения выберите способ оплаты', lang[0])}:</i>"
             await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id).as_markup())
@@ -364,10 +363,11 @@ async def choose_pay_method(call):
         await add_t_p(t_p, call_id)
         rekv = await get_card_check_deals(deal[11])
         await add_type_our(rekv, call_id, t_p)
-        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{deal[4]}</code></b> <i>{deal[3]}</i>\n\n"
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{'{:.10g}'.format(deal[4])}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
-                f"<b>{_('Вы получите', lang[0])}:</b> <code>{deal[6]}</code> <i>{deal[3]}</i>\n\n"
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{'{:.5g}'.format(deal[6])}</code> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Тип оплаты', lang[0])}:</b> <code>{t_p}</code>")
+
         await call.message.edit_text(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
     except Exception as e:
         logging.exception(e)
@@ -379,9 +379,9 @@ async def continue_in_deals(call):
         lang = await check_lang(call.message.chat.id)
         data = await print_deals(id_deals)
         message = (f"<b>Сделка №{data[0]}</b>\n\n"
-                   f"<b>Курс сделки:</b> <code>{data[4]} {data[3]}</code>\n\n"
+                   f"<b>Курс сделки:</b> <code>{'{:.10g}'.format(data[4])} {data[3]}</code>\n\n"
                    f"<b>Отдаете:</b> <code>{data[5]} {data[2]}</code>\n"
-                   f"<b>Получаете:</b> <code>{data[6]} {data[3]}</code>\n\n"
+                   f"<b>Получаете:</b> <code>{'{:.5g}'.format(data[6])} {data[3]}</code>\n\n"
                    f"<b>Вы переводите на:</b> <code>{data[8]}</code>\n")
         if data[7] is not None and data[2] == "RUB":
             message += f"<b>Тип оплаты:</b> <code>{data[7]}</code>\n\n"
