@@ -141,8 +141,8 @@ async def rextryftugiu(call, state: FSMContext):
             currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
 
             if currency:
-
-                await call.message.edit_text(f'В каком районе вы находитесь?', reply_markup=get_geo(lang).as_markup())
+                await call.message.answer(currency)
+                await call.message.answer(f'В каком районе вы находитесь?', reply_markup=get_geo(lang).as_markup())
 
                 await state.set_state(DealState.gps)
             else:
