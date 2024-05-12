@@ -3,8 +3,6 @@ import asyncio
 import logging
 import json
 
-logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
-                    format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 api = "bd729e895e84210bcfd8e985b7feb8226eefba79a5fb72d35ed0625adc074252"
 
 
@@ -15,8 +13,14 @@ async def get_pars(amount, val_in, val_out):
             async with session.get(url) as response:
                 if response.status == 200:
                     content = json.loads(await response.text())
-                    return content[val_in][val_out]
+                    print(content[val_in][val_out] * amount)
                 else:
-                    logging.warning(response)
+                    print("пиздарики")
+
+
     except Exception as e:
         logging.warning(e)
+
+
+if __name__ == "__main__":
+    asyncio.run(get_pars(0.001, "LTC", "RUB"))

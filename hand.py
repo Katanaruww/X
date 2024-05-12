@@ -12,7 +12,7 @@ from func import send_broadcast2, send_broadcast, ban_us, ban_us2
 import config
 from inline_but import *
 from routers import (start_db, check_us, add_lang, check_lang, db_rep_lang, add_amount_deals_onl, add_cards_start,
-                     add_rekv_cards)
+                     add_rekv_cards, print_deals)
 from inline_but import admin_but_send, admin_bc_fsm, admin_bc_fsm2, ban, add_cur_offline
 from function import get_pars
 from func import (get_user_value, replace_language, start_c, deals_online_start,
@@ -24,6 +24,7 @@ from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_
 from func import get_cur, get_cur2, get_messs, get_cb
 from aiogram import Bot, Dispatcher, types
 from limits import limits_currency_pairs
+import check_address
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
@@ -604,20 +605,22 @@ async def get_trext(message: types.Message, state: FSMContext):
 async def setrt(message: types.Message, state: FSMContext):
     try:
         await state.update_data(set_amount=message.text)
+        print(message.text)
         data = await state.get_data()
-        amount_get = round(float(data["set_amount"]))
+        amount_get = float(data["set_amount"])
         call_id = data["call_id"]
         lang = await check_lang(message.chat.id)
+        row = await print_deals(call_id=call_id)
         min_am = data["min_am"]
+        messag = ""
         if amount_get >= min_am:
-            await message.answer(f"<b>{_('Очень хорошо', lang[0])}!</b>\n"
-                                 f"<i>{_('Введите реквизиты, на который вам отправить средства', lang[0])}:</i>",
-                                 reply_markup=exc_btn_cancel(call_id, lang[0]).as_markup())
+            messag += (f"<b>{_('Очень хорошо', lang[0])}!</b>\n"
+                       f"<i>{_('Введите реквизиты, на который вам отправить средства', lang[0])}:</i>\n\n")
+            messag += f"<b>{check_address.data[row[3]]}</b>"
+            await message.answer(messag, reply_markup=exc_btn_cancel(call_id, lang[0]).as_markup())
             await state.set_state(fsm.rekv_us)
         else:
-            await state.clear()
             await message.answer(f"<b>Нахуй пошел! Русским языком сказали же минимум {min_am}</b>")
-            await state.set_state(fsm.set_amount)
     except Exception as e:
         logging.exception(e)
 
@@ -627,13 +630,19 @@ async def setrt(message: types.Message, state: FSMContext):
     try:
         await state.update_data(rekv_us=message.text)
         data = await state.get_data()
-        amount_get = round(float(data["set_amount"]))
+        amount_get = float(data["set_amount"])
+        lang = await check_lang(message.chat.id)
         call_id = data["call_id"]
         rekv_user_get = data["rekv_us"]
-        print(call_id, amount_get, rekv_user_get)
-        await add_amount_deals_onl(call_id, amount_get, rekv_user_get)
-        await transaction_con(message, call_id)
-        await state.clear()
+        row = await print_deals(call_id=call_id)
+        check_ad = await check_address.check_address(row[3], rekv_user_get)
+        if check_ad == 200:
+            await add_amount_deals_onl(call_id, amount_get, rekv_user_get)
+            await transaction_con(message, call_id)
+            await state.clear()
+        else:
+            await message.answer("Введите реквизиты правильно!",
+                                 reply_markup=exc_btn_cancel(call_id, lang[0]).as_markup())
     except Exception as e:
         logging.exception(e)
 @router.message(fsm.rekv)
@@ -643,8 +652,6 @@ async def setrt(message: types.Message, state: FSMContext):
         data = await state.get_data()
         rekv_get = data["rekv"]
         call_id = data["call_id_cards"]
-        print(rekv_get, call_id)
-
         await add_rekv_cards(rekv_get, call_id)
         await message.answer(f"<b>Успешно!</b>\n"
                              f"<i>Добавим еще реквизит?</i>", reply_markup=admin_exc().as_markup())
