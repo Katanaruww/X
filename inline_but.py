@@ -18,7 +18,15 @@ def start_but(lang):
     st.adjust(1, 1, 2, 1)
     return st
 
+def get_geo(lang):
+    st = InlineKeyboardBuilder()
+    st.button(text=f"{_('Чангу', lang[0])}", callback_data="Changu")
+    st.button(text=f"{_('Семеньяк', lang[0])}", callback_data="Semen")
+    st.button(text=f"{_('Убуд', lang[0])}", callback_data="Ubud")
+    st.button(text=f"{_('Отправить геопозицию', lang[0])}", callback_data="Geo")
 
+    st.adjust(1, 1, 1)
+    return st
 def rules(lang):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Согласен', lang)}🟢", callback_data="agree_rules")
@@ -185,7 +193,7 @@ def admin_but_send():
 def sub():
     sub = InlineKeyboardBuilder()
     sub.button(text="Подпишись!", url="https://t.me/lucky_bali_group")
-
+    return sub
 
 def admin_but():
     adm = InlineKeyboardBuilder()

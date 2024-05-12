@@ -55,6 +55,10 @@ translates = {
         "Невозможно обменять одинаковою валюту!": "It is impossible to exchange the same currency!",
         "Обмен по актуальному курсу будет составлять:": "The exchange at the current rate will be: ",
         "Начать обмен": "Start exchange",
+        "Чангу": "Changu",
+        "Семеньяк": "Seminyak",
+        "Убуд": "Ubud",
+        "Отправить геопозицию": "Send geolocation"
 
     }
 }

@@ -44,6 +44,7 @@ class DealState(StatesGroup):
     choosing_currency2 = State()
     rate = State()
     gps = State()
+    geo = State()
     time = State()
 
 class Form(StatesGroup):
@@ -92,7 +93,28 @@ async def start_handler(msg: Message):
 async def rate(msg: Message):
     await get_pars(msg)
 
+@router.callback_query(DealState.gps, lambda call: call.data)
+async def swertyhbubh(call, state: FSMContext):
+    try:
+        global geo
+        lang = await check_lang(call.message.chat.id)
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        goe = str(ban_user["nameban"])
+        currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
 
+        if geo == "Changu" or geo == "Semen" or geo == "Ubud":
+            geo = "Чангу"
+            await call.message.answer(text=currency, reply_markup=get_offline(lang).as_markup())
+        if geo == "Semen":
+            geo = "Сменьяк"
+        if geo == "Ubud":
+            geo = "Убуд"
+        if geo == "Geo":
+            await state.set_state(DealState.gps)
+
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
 @router.callback_query(DealState.choosing_currency2, lambda call: call.data)
 async def rextryftugiu(call, state: FSMContext):
     try:
@@ -119,9 +141,9 @@ async def rextryftugiu(call, state: FSMContext):
 
             if currency:
 
-                await call.message.edit_text(currency, reply_markup=get_offline(lang).as_markup())
+                await call.message.edit_text(f'В каком районе вы находитесь?', reply_markup=get_geo(lang).as_markup())
 
-                await state.clear()
+                await state.set_state(DealState.gps)
             else:
 
                 await state.clear()
