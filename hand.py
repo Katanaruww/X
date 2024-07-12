@@ -47,6 +47,7 @@ class DealState(StatesGroup):
     gps = State()
     geo = State()
     time = State()
+    yesorno = State()
 
 class Form(StatesGroup):
     description1 = State()
@@ -94,28 +95,84 @@ async def start_handler(msg: Message):
 async def rate(msg: Message):
     await get_pars(msg)
 
-@router.callback_query(DealState.gps, lambda call: call.data)
+
+@router.callback_query(DealState.yesorno, lambda call: call.data)
+async def swertyhbubh(call, state: FSMContext):
+    try:
+        global ggg
+        lang = await check_lang(call.message.chat.id)
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        ggg= str(ban_user["nameban"])
+        if ggg == "yesgeo":
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await call.message.answer(f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
+            await state.clear()
+        if ggg == "nogeo":
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
+            await state.clear()
+
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+locations = {}
+
+@router.message(DealState.gps, F.location)
+async def location_handler(message: types.Message, state: FSMContext):
+    global cu1
+    global cu2
+    global rai1, rai2
+    latitude = message.location.latitude
+    longitude = message.location.longitude
+    locations['latitude'] = latitude
+    locations['longitude'] = longitude
+
+    cu1 = str(locations['latitude'])
+    cu2 = str(locations['longitude'])
+    await state.update_data(name=str(cu1))
+    await state.update_data(name2=str(cu2))
+    currens2 = await state.get_data()
+    currens3 = await state.get_data()
+    rai1 = currens2["name"]
+    rai2 = currens3["name2"]
+    await message.answer(str(rai1))
+    await message.answer(str(rai2))
+
+@router.callback_query(DealState.geo, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
     try:
         global geo
         lang = await check_lang(call.message.chat.id)
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
-        goe = str(ban_user["nameban"])
+        geo = str(ban_user["nameban"])
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+
         currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
 
-        if geo == "Changu" or geo == "Semen" or geo == "Ubud":
+        if geo == "Changu":
             geo = "Чангу"
-            await call.message.answer(text=currency, reply_markup=get_offline(lang).as_markup())
+            # await call.message.answer(text=currency, reply_markup=get_offline(lang).as_markup())
+            await call.message.answer(f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\nВы отдаёте - ', lang[0])} {su} 💵</b>\n<b><i>{_("Обмениваете - ", lang[0])} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {curs2} 💳 </i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>", reply_markup=inline_geo(lang).as_markup())
+            await state.set_state(DealState.yesorno)
         if geo == "Semen":
             geo = "Сменьяк"
+            await call.message.answer(f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\nВы отдаёте - ', lang[0])} {su} 💵</b>\n<b><i>{_("Обмениваете - ", lang[0])} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {curs2} 💳 </i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>", reply_markup=inline_geo(lang).as_markup())
+            await state.set_state(DealState.yesorno)
+
         if geo == "Ubud":
             geo = "Убуд"
+            await call.message.answer(f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\nВы отдаёте - ', lang[0])} {su} 💵</b>\n<b><i>{_("Обмениваете - ", lang[0])} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {curs2} 💳 </i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>", reply_markup=inline_geo(lang).as_markup())
+            await state.set_state(DealState.yesorno)
+
         if geo == "Geo":
             await state.set_state(DealState.gps)
 
     except Exception as e:
         print(f"Произошла ошибка: {e}")
+
+
 @router.callback_query(DealState.choosing_currency2, lambda call: call.data)
 async def rextryftugiu(call, state: FSMContext):
     try:
@@ -138,13 +195,14 @@ async def rextryftugiu(call, state: FSMContext):
                 await state.clear()
                 return  # Завершаем функцию, если валюты одинаковые
 
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
 
             if currency:
                 await call.message.answer(currency)
-                await call.message.answer(f'В каком районе вы находитесь?', reply_markup=get_geo(lang).as_markup())
+                await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}', reply_markup=get_geo(lang).as_markup())
 
-                await state.set_state(DealState.gps)
+                await state.set_state(DealState.geo)
             else:
 
                 await state.clear()
@@ -188,15 +246,16 @@ async def swertyhbubh(call, state: FSMContext):
 async def zrextcyvgubhi(message: types.Message, state: FSMContext):
     try:
         global name
+        global su
         lang = await check_lang(message.chat.id)
         # Проверяем, состоит ли сообщение только из цифр
         if float(message.text):
             global currens
             await state.update_data(name=message.text)
             currens = await state.get_data()
-
+            su = currens["name"]
             name = await limits_currency_pairs(f"{curs}")
-            if float(currens["name"]) < float(name[0]):
+            if float(su) < float(name[0]):
                 await message.answer(
                     f'<b><i>{_(text="Вы ввели не правильное значение. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>')
                 await state.set_data({})
@@ -218,20 +277,6 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
 
 
 
-locations = {}
-
-@router.message(F.location)
-async def location_handler(message: types.Message):
-    global cu1
-    global cu2
-    latitude = message.location.latitude
-    longitude = message.location.longitude
-    locations['latitude'] = latitude
-    locations['longitude'] = longitude
-    cu1 = str(locations['latitude'])
-    cu2 = str(locations['longitude'])
-    await message.answer(str(cu1))
-    await message.answer(str(cu2))
 
 
 

@@ -33,6 +33,12 @@ def rules(lang):
     rul.adjust(1)
     return rul
 
+def inline_geo(lang):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Да', lang[0])}🟢", callback_data="yesgeo")
+    rul.button(text=f"{_('Нет', lang[0])}🔴", callback_data="nogeo")
+    rul.adjust(2)
+    return rul
 
 def lang_btn():
     lang = InlineKeyboardBuilder()

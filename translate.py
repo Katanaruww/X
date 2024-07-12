@@ -58,8 +58,19 @@ translates = {
         "Чангу": "Changu",
         "Семеньяк": "Seminyak",
         "Убуд": "Ubud",
-        "Отправить геопозицию": "Send geolocation"
-
+        "Отправить геопозицию": "Send geolocation",
+        "В каком районе вы находитесь?": "What area are you in?",
+        "Отлично!\nПроверьте свои данные для оформления заявки\nВы отдаёте - ": "Great!\nCheck your details to complete the application\nYou are giving -",
+        "Обмениваете - ": "Exchange -",
+        "Получаете - ": "You get -",
+        "Ваш район - ": "Your area -",
+        "Чангу": "Canggu",
+        "Убуд": "Ubud",
+        "Сменьяк": "Smenyak",
+        "Да": "Yes",
+        "Нет": "No",
+        "Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!": "Your application has been successfully saved\nThe courier will contact you soon!",
+        "Ваша заявка успешно отменена": "Your application has been successfully canceled"
     }
 }
 
