@@ -18,13 +18,15 @@ from function import get_pars
 from func import (get_user_value, replace_language, start_c, deals_online_start,
                   deals_online_type_add, deals_online_cancel, get_messa, deals_add_curr,
                   deals_add_curr_finish,
-                  ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method)
+                  ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method, send_deals)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
 from func import get_cur, get_cur2, get_messs, get_cb
 from aiogram import Bot, Dispatcher, types
 from limits import limits_currency_pairs
 import check_address
+import datetime
+
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
@@ -104,8 +106,10 @@ async def swertyhbubh(call, state: FSMContext):
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
         ggg= str(ban_user["nameban"])
+        current_time = datetime.datetime.now()
         if ggg == "yesgeo":
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await send_deals(call.message.from_user.username, call.message.from_user.id, curs, curs2, geo, current_time)
             await call.message.answer(f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
             await state.clear()
         if ggg == "nogeo":
@@ -550,6 +554,16 @@ async def cal(call, state: FSMContext):
             await get_start_card(call)
         except Exception as err:
             logging.exception(err)
+    elif call.data == "lk":
+        try:
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            photo = FSInputFile("media/logo.png")
+            lang = await check_lang(call.message.chat.id)
+            await call.message.answer_photo(
+                caption=f"<b>{_('Личный кабинет', lang[0])}\n{_("Завершенные сделки курьером - ", lang[0])}</b>",
+                reply_markup=setting_rasilka(lang).as_markup(), photo=photo)
+        except Exception as err:
+            logging.warning(err)
 
 
 

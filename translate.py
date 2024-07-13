@@ -70,7 +70,9 @@ translates = {
         "Да": "Yes",
         "Нет": "No",
         "Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!": "Your application has been successfully saved\nThe courier will contact you soon!",
-        "Ваша заявка успешно отменена": "Your application has been successfully canceled"
+        "Ваша заявка успешно отменена": "Your application has been successfully canceled",
+        "Личный кабинет": "Personal Area",
+        "Завершенные сделки курьером - ": "Completed transactions by courier -"
     }
 }
 

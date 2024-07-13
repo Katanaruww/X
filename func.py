@@ -40,10 +40,19 @@ def sql_start():
 
     base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY, id INTEGER)')
 
+    base.execute('CREATE TABLE IF NOT EXISTS courier(username TEXT PRIMARY KEY, id INTEGER, area TEXT, Like INTEGER, stars INTEGER)')
+
+    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, area TEXT, time TEXT)')
+
+
     base.commit()
 
 
 """РАССЫЛКА"""
+
+async def send_deals(o, n, e, r, w, t):
+    cur.execute("INSERT INTO deals (username, id, onecur, twocur, area, time) VALUES (?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, ))
+    base.commit()
 
 
 async def send_broadcast(message_text, photo_url):

@@ -14,6 +14,7 @@ def start_but(lang):
     st.button(text=f"{_('Наш чат', lang)}", url="google.com")
     st.button(text=f"{_('Наш канал', lang)}", url="google.com")
     st.button(text=f"{_('Связь с админом', lang)}", url="google.com")
+    st.button(text=f"{_('Личный кабинет', lang)}", callback_data="lk")
     st.button(text=f"{_('Настройки', lang)}⚙", callback_data="setting")
     st.adjust(1, 1, 2, 1)
     return st
