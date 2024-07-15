@@ -79,7 +79,11 @@ translates = {
 
 # werftghyjuk
 
-def _(text, lang="RU"):
+def _(text: object, lang: object = "RU") -> object:
+    """
+
+    :rtype: object
+    """
     if lang == "RU":
         return text
     else:
