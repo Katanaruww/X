@@ -105,12 +105,13 @@ async def swertyhbubh(call, state: FSMContext):
         lang = await check_lang(call.message.chat.id)
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
-        ggg= str(ban_user["nameban"])
+        ggg = str(ban_user["nameban"])
         current_time = datetime.datetime.now()
         if ggg == "yesgeo":
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             await send_deals(call.message.from_user.username, call.message.from_user.id, curs, curs2, geo, current_time)
             await call.message.answer(f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
+            await bot.send_message(chat_id=6630175448, text="Новая заявка!!!", reply_markup=get_curiers(call.from_user.id).as_markup())
             await state.clear()
         if ggg == "nogeo":
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
@@ -136,12 +137,17 @@ async def location_handler(message: types.Message, state: FSMContext):
     cu2 = str(locations['longitude'])
     await state.update_data(name=str(cu1))
     await state.update_data(name2=str(cu2))
+    lang = await check_lang(message.chat.id)
     currens2 = await state.get_data()
     currens3 = await state.get_data()
     rai1 = currens2["name"]
     rai2 = currens3["name2"]
-    await message.answer(str(rai1))
-    await message.answer(str(rai2))
+    # await message.answer(str(rai1))
+    # await message.answer(str(rai2))
+    await message.answer(
+        f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\nВы отдаёте - ', lang[0])} {su} 💵</b>\n<b><i>{_("Обмениваете - ", lang[0])} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {curs2} 💳 </i></b>\n<b><i>{_("Ваш район - ", lang[0])} {str(rai1)}  {str(rai2)}🏠</i></b>",
+        reply_markup=inline_geo(lang).as_markup())
+
 
 @router.callback_query(DealState.geo, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
@@ -171,6 +177,7 @@ async def swertyhbubh(call, state: FSMContext):
             await state.set_state(DealState.yesorno)
 
         if geo == "Geo":
+            await call.message.answer(f"<b>{_('Отправьте свою геопозицию', lang[0])}</b>")
             await state.set_state(DealState.gps)
 
     except Exception as e:
@@ -301,7 +308,24 @@ async def admin(msg: Message):
     except Exception as err:
         logging.exception(err)
 
+@router.callback_query(lambda call: call.data and call.data.startswith("get_"))
+async def card(call, state: FSMContext):
+    try:
+        global text_id
+        text_id = str(call.data).replace("get_", "")
+        await bot.send_message(chat_id=int(text_id), text=f"Ваша заявка принята!!!\nВаш курьер - username {call.from_user.username}")
+        await bot.send_message(chat_id=6630175448, text=f"Завершить заказ!", reply_markup=finish_curiers(str(text_id)).as_markup())
 
+    except Exception as e:
+        logging.exception(e)
+@router.callback_query(lambda call: call.data and call.data.startswith("finish_"))
+async def card(call, state: FSMContext):
+    try:
+        text = str(call.data).replace("finish_", "")
+        await bot.send_message(chat_id=int(text), text=f"Оставьте отзыв на курьера!!!")
+
+    except Exception as e:
+        logging.exception(e)
 @router.callback_query(lambda call: call.data and call.data.startswith("lang_"))
 async def lang(call):
     try:

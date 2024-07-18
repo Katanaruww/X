@@ -40,7 +40,7 @@ def sql_start():
 
     base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY, id INTEGER)')
 
-    base.execute('CREATE TABLE IF NOT EXISTS courier(username TEXT PRIMARY KEY, id INTEGER, area TEXT, Like INTEGER, stars INTEGER)')
+    base.execute('CREATE TABLE IF NOT EXISTS courier(id INTEGER PRIMARY KEY AUTOINCREMENT ,username TEXT PRIMARY KEY, tg_id INTEGER, name TEXT, area TEXT, Like INTEGER)')
 
     base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, area TEXT, time TEXT)')
 

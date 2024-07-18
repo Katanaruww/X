@@ -34,6 +34,17 @@ def rules(lang):
     rul.adjust(1)
     return rul
 
+def get_curiers(id):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"Принять", callback_data=f"get_{id}")
+    rul.adjust(1)
+    return rul
+
+def finish_curiers(id):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"Завершить заказ", callback_data=f"finish_{id}")
+    rul.adjust(1)
+    return rul
 def inline_geo(lang):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Да', lang[0])}🟢", callback_data="yesgeo")

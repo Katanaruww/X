@@ -1,14 +1,22 @@
-2024-07-14 03:13:45,942 - INFO - start_polling: 527 - Start polling
-2024-07-14 03:13:46,603 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-07-14 03:14:39,576 - INFO - feed_update: 172 - Update id=377109780 is handled. Duration 1715 ms by bot id=6243740464
-2024-07-14 03:14:41,966 - INFO - feed_update: 172 - Update id=377109781 is handled. Duration 776 ms by bot id=6243740464
-2024-07-14 03:14:43,923 - INFO - feed_update: 172 - Update id=377109782 is handled. Duration 318 ms by bot id=6243740464
-2024-07-14 03:14:45,563 - INFO - feed_update: 172 - Update id=377109783 is handled. Duration 205 ms by bot id=6243740464
-2024-07-14 03:14:47,885 - INFO - feed_update: 172 - Update id=377109784 is handled. Duration 568 ms by bot id=6243740464
-2024-07-14 03:14:50,887 - INFO - feed_update: 172 - Update id=377109785 is handled. Duration 283 ms by bot id=6243740464
-2024-07-14 03:14:56,598 - INFO - feed_update: 172 - Update id=377109786 is handled. Duration 3169 ms by bot id=6243740464
-2024-07-14 03:15:04,074 - INFO - feed_update: 172 - Update id=377109787 is handled. Duration 5896 ms by bot id=6243740464
-2024-07-14 03:15:06,620 - INFO - feed_update: 172 - Update id=377109788 is handled. Duration 451 ms by bot id=6243740464
-2024-07-14 03:15:31,543 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
-2024-07-14 03:15:31,544 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-07-14 03:15:31,544 - INFO - start_polling: 554 - Polling stopped
+2024-07-19 01:55:20,792 - INFO - start_polling: 527 - Start polling
+2024-07-19 01:55:21,326 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-07-19 01:55:28,034 - INFO - feed_update: 172 - Update id=377109897 is handled. Duration 1853 ms by bot id=6243740464
+2024-07-19 01:55:30,052 - INFO - feed_update: 172 - Update id=377109898 is handled. Duration 818 ms by bot id=6243740464
+2024-07-19 01:55:32,014 - INFO - feed_update: 172 - Update id=377109899 is handled. Duration 339 ms by bot id=6243740464
+2024-07-19 01:55:33,474 - INFO - feed_update: 172 - Update id=377109900 is handled. Duration 356 ms by bot id=6243740464
+2024-07-19 01:55:35,145 - INFO - feed_update: 172 - Update id=377109901 is handled. Duration 406 ms by bot id=6243740464
+2024-07-19 01:55:37,615 - INFO - feed_update: 172 - Update id=377109902 is handled. Duration 213 ms by bot id=6243740464
+2024-07-19 01:55:41,111 - INFO - feed_update: 172 - Update id=377109903 is not handled. Duration 2 ms by bot id=6243740464
+2024-07-19 01:55:43,711 - INFO - feed_update: 172 - Update id=377109904 is handled. Duration 823 ms by bot id=6243740464
+2024-07-19 01:55:46,169 - INFO - feed_update: 172 - Update id=377109905 is handled. Duration 1088 ms by bot id=6243740464
+2024-07-19 01:55:49,555 - INFO - feed_update: 172 - Update id=377109906 is handled. Duration 225 ms by bot id=6243740464
+2024-07-19 01:55:51,028 - INFO - feed_update: 172 - Update id=377109907 is handled. Duration 210 ms by bot id=6243740464
+2024-07-19 01:55:52,917 - INFO - feed_update: 172 - Update id=377109908 is handled. Duration 563 ms by bot id=6243740464
+2024-07-19 01:55:55,823 - INFO - feed_update: 172 - Update id=377109909 is handled. Duration 232 ms by bot id=6243740464
+2024-07-19 01:56:00,224 - INFO - feed_update: 172 - Update id=377109910 is handled. Duration 2981 ms by bot id=6243740464
+2024-07-19 01:56:03,991 - INFO - feed_update: 172 - Update id=377109911 is handled. Duration 2151 ms by bot id=6243740464
+2024-07-19 01:56:10,160 - INFO - feed_update: 172 - Update id=377109912 is handled. Duration 332 ms by bot id=6243740464
+2024-07-19 01:56:19,925 - INFO - feed_update: 172 - Update id=377109913 is handled. Duration 4 ms by bot id=6243740464
+2024-07-19 01:57:09,652 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-07-19 01:57:09,655 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-07-19 01:57:09,655 - INFO - start_polling: 554 - Polling stopped
