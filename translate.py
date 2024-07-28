@@ -64,8 +64,6 @@ translates = {
         "Обмениваете - ": "Exchange -",
         "Получаете - ": "You get -",
         "Ваш район - ": "Your area -",
-        "Чангу": "Canggu",
-        "Убуд": "Ubud",
         "Сменьяк": "Smenyak",
         "Да": "Yes",
         "Нет": "No",
@@ -73,7 +71,9 @@ translates = {
         "Ваша заявка успешно отменена": "Your application has been successfully canceled",
         "Личный кабинет": "Personal Area",
         "Завершенные сделки курьером - ": "Completed transactions by courier -",
-        "Отправьте свою геопозицию": "Submit your location"
+        "Отправьте свою геопозицию": "Submit your location",
+        "Сделка отменена": "Deal canceled",
+        "Отлично!\nПроверьте свои данные для оформления заявки": "Great!\nCheck your details to complete your application"
     }
 }
 

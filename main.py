@@ -12,7 +12,7 @@ from middlewares.antiflood import AntiFloodUsers
 from middlewares.black_list import BlackListUsers
 from middlewares.id_black_list import BlackListUsers2
 from middlewares.subscribe import Subscrube
-
+from middlewares.username import CancelHandler
 #vbnm
 async def main():
     bot = Bot(token=config.token[0], parse_mode=ParseMode.HTML)
@@ -21,6 +21,7 @@ async def main():
     dp.message.middleware.register(AntiFloodUsers())
     dp.message.middleware.register(BlackListUsers())
     dp.message.middleware.register(BlackListUsers2())
+    dp.message.middleware.register(CancelHandler())
 
     dp.include_router(router)
     sql_start()

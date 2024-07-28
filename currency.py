@@ -8,16 +8,23 @@ logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
 api = "bd729e895e84210bcfd8e985b7feb8226eefba79a5fb72d35ed0625adc074252"
 
 
-async def get_pars(amount, val_in, val_out):
+async def get_pars(val_in, val_out):
     try:
         async with aiohttp.ClientSession(trust_env=True) as session:
             url = f"https://min-api.cryptocompare.com/data/pricemulti?fsyms={val_in}&tsyms={val_out}&api_key={api}"
-            async with session.get(url) as response:
-                if response.status == 200:
-                    content = json.loads(await response.text())
-                    return content[val_in][val_out]
-                else:
-                    logging.warning(response)
+            headers = {
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,"
+                          "application/signed-exchange;v=b3;q=0.7",
+                "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+            }
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                print("xer")
+                content = response.json()
+                print(content[val_in][val_out])
+                return content[val_in][val_out]
+            else:
+                logging.warning(response)
     except Exception as e:
         logging.warning(e)
 

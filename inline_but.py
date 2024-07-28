@@ -21,12 +21,13 @@ def start_but(lang):
 
 def get_geo(lang):
     st = InlineKeyboardBuilder()
-    st.button(text=f"{_('Чангу', lang[0])}", callback_data="Changu")
-    st.button(text=f"{_('Семеньяк', lang[0])}", callback_data="Semen")
-    st.button(text=f"{_('Убуд', lang[0])}", callback_data="Ubud")
-    st.button(text=f"{_('Отправить геопозицию', lang[0])}", callback_data="Geo")
+    st.button(text=f"{_('Чангу', lang[0])}🏖", callback_data="Changu")
+    st.button(text=f"{_('Семеньяк', lang[0])}🏖", callback_data="Semen")
+    st.button(text=f"{_('Убуд', lang[0])}🏖", callback_data="Ubud")
+    st.button(text=f"{_('Отправить геопозицию', lang[0])}📍", callback_data="Geo")
+    st.button(text=f"{_('Отмена', lang[0])}🔴", callback_data="dell_gps")
 
-    st.adjust(1, 1, 1)
+    st.adjust(1, 1, 1, 1)
     return st
 def rules(lang):
     rul = InlineKeyboardBuilder()
@@ -52,6 +53,10 @@ def inline_geo(lang):
     rul.adjust(2)
     return rul
 
+def dell_gps000(lang):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Отмена', lang[0])}🔴", callback_data="dell_geo")
+    return rul
 def lang_btn():
     lang = InlineKeyboardBuilder()
     lang.button(text="Русский", callback_data="lang_RU")

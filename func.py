@@ -204,6 +204,7 @@ async def get_cur(a111, call: types.CallbackQuery):
 async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FSMContext):
     lang = await check_lang(call.message.chat.id)
     try:
+
         if val_in in cur111:
             result = await get_pars2(amount=int(amount), val_in=val_in, val_out=val_out)
             resultone = await get_pars2(amount=1, val_in=val_in, val_out=val_out)
@@ -342,7 +343,9 @@ async def deals_online_cancel(call):
 async def transaction_con(message, call_id):
     try:
         row = await print_deals(call_id)
-        curr = float(await get_pars("1", row[2], row[3]))
+        curr = await get_pars(row[2], row[3])
+        print(curr)
+        print(row[2], row[3])
         amount_out = float(curr * row[5] * config.percent)
         oper = config.operators[0][0]
         await add_amount_out(amount_out, curr, oper, call_id)
