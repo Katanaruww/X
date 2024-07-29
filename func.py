@@ -18,6 +18,7 @@ from currency import get_pars, get_pars2
 from routers import check_lang
 from inline_but import add_cur_offline, dell_state
 import sqlite3
+from dop_func.func_float import format_number
 # ERTYU
 router = Router()
 bot = Bot(config.token[0])
@@ -352,9 +353,9 @@ async def transaction_con(message, call_id):
         deal = await print_deals(call_id)
         lang = await check_lang(message.chat.id)
 
-        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{'{:.10g}'.format(curr)}</code></b> <i>{deal[3]}</i>\n\n"
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{format_number(deal[4])}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
-                f"<b>{_('Вы получите', lang[0])}:</b> <code>{'{:.5g}'.format(amount_out)}</code> <i>{deal[3]}</i>\n\n")
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6])}</code> <i>{deal[3]}</i>\n\n")
         if deal[2] == "RUB":
             mess += f"<i>{_('Для продолжения выберите способ оплаты', lang[0])}:</i>"
             await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id).as_markup())
@@ -377,9 +378,9 @@ async def choose_pay_method(call):
         await add_t_p(t_p, call_id)
         rekv = await get_card_check_deals(deal[11])
         await add_type_our(rekv, call_id, t_p)
-        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{'{:.10g}'.format(deal[4])}</code></b> <i>{deal[3]}</i>\n\n"
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{format_number(deal[4])}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
-                f"<b>{_('Вы получите', lang[0])}:</b> <code>{'{:.5g}'.format(deal[6])}</code> <i>{deal[3]}</i>\n\n"
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6])}</code> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Тип оплаты', lang[0])}:</b> <code>{t_p}</code>")
 
         await call.message.edit_text(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
@@ -393,9 +394,9 @@ async def continue_in_deals(call):
         lang = await check_lang(call.message.chat.id)
         data = await print_deals(id_deals)
         message = (f"<b>Сделка №{data[0]}</b>\n\n"
-                   f"<b>Курс сделки:</b> <code>{'{:.10g}'.format(data[4])} {data[3]}</code>\n\n"
+                   f"<b>Курс сделки:</b> <code>{format_number(data[4])} {data[3]}</code>\n\n"
                    f"<b>Отдаете:</b> <code>{data[5]} {data[2]}</code>\n"
-                   f"<b>Получаете:</b> <code>{'{:.5g}'.format(data[6])} {data[3]}</code>\n\n"
+                   f"<b>Получаете:</b> <code>{format_number(data[6])} {data[3]}</code>\n\n"
                    f"<b>Вы переводите на:</b> <code>{data[8]}</code>\n")
         if data[7] is not None and data[2] == "RUB":
             message += f"<b>Тип оплаты:</b> <code>{data[7]}</code>\n\n"
