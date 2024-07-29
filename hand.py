@@ -50,7 +50,7 @@ class DealState(StatesGroup):
     geo = State()
     time = State()
     yesorno = State()
-
+    yesornogps = State()
 class Form(StatesGroup):
     description1 = State()
     photo_adm = State()
@@ -98,9 +98,10 @@ async def rate(msg: Message):
     await get_pars(msg)
 
 
+
 @router.callback_query(DealState.yesorno, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
-    try:
+    # try:
         global ggg
         lang = await check_lang(call.message.chat.id)
         await state.update_data(nameban=call.data)
@@ -110,7 +111,7 @@ async def swertyhbubh(call, state: FSMContext):
         current_time = datetime.datetime.now()
         if ggg == "yesgeo":
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await send_deals(call.from_user.username, call.from_user.id, curs, curs2, geo, current_time)
+            await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))), geo, current_time)
             await call.message.answer(f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
             await bot.send_message(chat_id=6630175448, text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {round(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}", reply_markup=get_curiers(call.from_user.id).as_markup())
             await state.clear()
@@ -118,19 +119,36 @@ async def swertyhbubh(call, state: FSMContext):
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
             await state.clear()
+        if ggg == "yesgps":
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))),
+                             str(f"{cu1} {cu2}"), current_time)
+            await call.message.answer(
+                f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
+            await bot.send_message(chat_id=6630175448,
+                                   text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {round(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
+                                   reply_markup=get_curiers(call.from_user.id).as_markup())
+            await state.clear()
+        if ggg == "nogps":
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
+            await state.clear()
 
-    except Exception as e:
-        print(f"Произошла ошибка: {e}")
+    # except Exception as e:
+    #     print(f"Произошла ошибка: {e}")
 
 locations = {}
 
 @router.message(DealState.gps, F.location)
-async def location_handler(call: types.CallbackQuery, state: FSMContext):
+async def location_handler(message: types.Message, state: FSMContext):
     global cu1
     global cu2
-    global rai1, rai2
-    latitude = call.message.location.latitude
-    longitude = call.message.location.longitude
+    global rai1
+    global rai2
+    global currens2
+    global currens3
+    latitude = message.location.latitude
+    longitude = message.location.longitude
     locations['latitude'] = latitude
     locations['longitude'] = longitude
 
@@ -138,18 +156,17 @@ async def location_handler(call: types.CallbackQuery, state: FSMContext):
     cu2 = str(locations['longitude'])
     await state.update_data(name=str(cu1))
     await state.update_data(name2=str(cu2))
-    lang = await check_lang(cal.message.chat.id)
+    lang = await check_lang(message.chat.id)
     currens2 = await state.get_data()
     currens3 = await state.get_data()
     rai1 = currens2["name"]
     rai2 = currens3["name2"]
     # await message.answer(str(rai1))
     # await message.answer(str(rai2))
-    await cal.message.answer(
+    await message.answer(
         f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\nВы отдаёте - ', lang[0])} {su} 💵</b>\n<b><i>{_("Обмениваете - ", lang[0])} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {curs2} 💳 </i></b>\n<b><i>{_("Ваш район - ", lang[0])} {str(rai1)}  {str(rai2)}🏠</i></b>",
-        reply_markup=inline_geo(lang).as_markup())
-
-
+        reply_markup=in_gps(lang).as_markup())
+    await state.set_state(DealState.yesorno)
 
 @router.callback_query(DealState.geo, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
@@ -313,16 +330,16 @@ async def admin(msg: Message):
     except Exception as err:
         logging.exception(err)
 
-# @router.callback_query(lambda call: call.data and call.data.startswith("get_"))
-# async def card(call, state: FSMContext):
-#     try:
-#         global text_id
-#         text_id = str(call.data).replace("get_", "")
-#         await bot.send_message(chat_id=int(text_id), text=f"Ваша заявка принята!!!\nВаш курьер - username {call.from_user.username}")
-#         await bot.send_message(chat_id=6630175448, text=f"Завершить заказ!", reply_markup=finish_curiers(str(text_id)).as_markup())
-#
-#     except Exception as e:
-#         logging.exception(e)
+@router.callback_query(lambda call: call.data and call.data.startswith("pri_"))
+async def card(call, state: FSMContext):
+    try:
+        global text_id
+        text_id = str(call.data).replace("get_", "")
+        await bot.send_message(chat_id=int(text_id), text=f"Ваша заявка принята!!!\nВаш курьер - username {call.from_user.username}")
+        await bot.send_message(chat_id=6630175448, text=f"Завершить заказ!", reply_markup=finish_curiers(str(text_id)).as_markup())
+
+    except Exception as e:
+        logging.exception(e)
 @router.callback_query(lambda call: call.data and call.data.startswith("finish_"))
 async def card(call, state: FSMContext):
     try:

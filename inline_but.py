@@ -37,7 +37,7 @@ def rules(lang):
 
 def get_curiers(id):
     rul = InlineKeyboardBuilder()
-    rul.button(text=f"Принять", callback_data=f"get_{id}")
+    rul.button(text=f"Принять", callback_data=f"pri_{id}")
     rul.adjust(1)
     return rul
 
@@ -50,6 +50,13 @@ def inline_geo(lang):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Да', lang[0])}🟢", callback_data="yesgeo")
     rul.button(text=f"{_('Нет', lang[0])}🔴", callback_data="nogeo")
+    rul.adjust(2)
+    return rul
+
+def in_gps(lang):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Да', lang[0])}🟢", callback_data="yesgps")
+    rul.button(text=f"{_('Нет', lang[0])}🔴", callback_data="nogps")
     rul.adjust(2)
     return rul
 

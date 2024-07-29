@@ -40,9 +40,9 @@ def sql_start():
 
     base.execute('CREATE TABLE IF NOT EXISTS ban_users(username TEXT PRIMARY KEY, id INTEGER)')
 
-    base.execute('CREATE TABLE IF NOT EXISTS courier(id INTEGER PRIMARY KEY AUTOINCREMENT ,username TEXT PRIMARY KEY, tg_id INTEGER, name TEXT, area TEXT, Like INTEGER)')
+    base.execute('CREATE TABLE IF NOT EXISTS courier(id INTEGER PRIMARY KEY AUTOINCREMENT ,username TEXT, tg_id INTEGER, name TEXT, area TEXT, Like INTEGER)')
 
-    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, area TEXT, time TEXT)')
+    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, innn TEXT, out TEXT, area TEXT, time TEXT)')
 
 
     base.commit()
@@ -50,8 +50,8 @@ def sql_start():
 
 """РАССЫЛКА"""
 
-async def send_deals(o, n, e, r, w, t):
-    cur.execute("INSERT INTO deals (username, id, onecur, twocur, area, time) VALUES (?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, ))
+async def send_deals(o, n, e, r, w, t, j, i):
+    cur.execute("INSERT INTO deals (username, id, onecur, twocur, innn, out, area, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, j, i))
     base.commit()
 
 
