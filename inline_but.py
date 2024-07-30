@@ -129,7 +129,7 @@ def continue_add_deal(call_id, lang):
 
 def accept_deals(call_id, lang):
     acc_d = InlineKeyboardBuilder()
-    acc_d.button(text=f"{_('Продолжить', lang)}🟢", callback_data=f"accept_deals_{call_id}")
+    acc_d.button(text=f"{_('Я оплатил(а)', lang)}🟢", callback_data=f"accept_deals_{call_id}")
     acc_d.button(text=f"{_('Отмена', lang)}⭕", callback_data=f"cancel-deal_{call_id}")
     acc_d.adjust(1, 1)
     return acc_d

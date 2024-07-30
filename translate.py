@@ -75,7 +75,17 @@ translates = {
         "Сделка отменена": "Deal canceled",
         "Отлично!\nПроверьте свои данные для оформления заявки": "Great!\nCheck your details to complete your application",
         "Подтвердить": "Сonfirm",
-        "Отказ": "Refusal"
+        "Отказ": "Refusal",
+        "Благодарим вас!": "Thank you!",
+        "Сделка №": "Deal No.",
+        "Отдаете": "You're giving",
+        "Получаете": "Receive",
+        "Ожидайте подтверждение перевода!": "Wait for transfer confirmation",
+        "По любым вопросам обращайтесь к своему оператору": "If you have any questions, please contact your operator",
+        "Я оплатил(а)": "I paid",
+        "Вы переводите на": "You're transferring to",
+        "Получаете сюда": "You get here",
+        "По всем вопросам": "Any questions"
     }
 }
 

@@ -8,7 +8,7 @@ from aiogram import types
 import config
 from inline_but import *
 from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
-                     print_deals, add_amount_out, add_t_p, add_type_our, get_card_db)
+                     print_deals, add_amount_out, add_t_p, add_type_our, get_card_db, change_number_deal)
 from cards import get_card_check_deals
 from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, add_cur_offline
@@ -354,9 +354,9 @@ async def transaction_con(message, call_id):
         deal = await print_deals(call_id)
         lang = await check_lang(message.chat.id)
 
-        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{format_number(deal[4])}</code></b> <i>{deal[3]}</i>\n\n"
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{format_number(deal[4], deal[3])}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
-                f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6])}</code> <i>{deal[3]}</i>\n\n")
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6], deal[3])}</code> <i>{deal[3]}</i>\n\n")
         if deal[2] == "RUB":
             mess += f"<i>{_('Для продолжения выберите способ оплаты', lang[0])}:</i>"
             await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id).as_markup())
@@ -379,9 +379,9 @@ async def choose_pay_method(call):
         await add_t_p(t_p, call_id)
         rekv = await get_card_check_deals(deal[11])
         await add_type_our(rekv, call_id, t_p)
-        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{format_number(deal[4])}</code></b> <i>{deal[3]}</i>\n\n"
+        mess = (f"<b>{_('Актуальный курс', lang[0])}: <code>{format_number(deal[4], deal[3])}</code></b> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Вы отдадите', lang[0])}:</b> <code>{deal[5]}</code> <i>{deal[2]}</i>\n"
-                f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6])}</code> <i>{deal[3]}</i>\n\n"
+                f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6], deal[3])}</code> <i>{deal[3]}</i>\n\n"
                 f"<b>{_('Тип оплаты', lang[0])}:</b> <code>{t_p}</code>")
 
         await call.message.edit_text(mess, reply_markup=continue_add_deal(call_id, lang[0]).as_markup())
@@ -394,17 +394,41 @@ async def continue_in_deals(call):
         id_deals = call.data.split("_")[1]
         lang = await check_lang(call.message.chat.id)
         data = await print_deals(id_deals)
-        message = (f"<b>Сделка №{data[0]}</b>\n\n"
-                   f"<b>Курс сделки:</b> <code>{format_number(data[4])} {data[3]}</code>\n\n"
-                   f"<b>Отдаете:</b> <code>{data[5]} {data[2]}</code>\n"
-                   f"<b>Получаете:</b> <code>{format_number(data[6])} {data[3]}</code>\n\n"
-                   f"<b>Вы переводите на:</b> <code>{data[8]}</code>\n")
+        message = (f"<b>{_('Сделка №', lang[0])}{data[0]}</b>\n\n"
+                   f"<b>{_('Актуальный курс', lang[0])}:</b> <code>{format_number(data[4], data[3])} {data[3]}</code>\n\n"
+                   f"<b>{_('Отдаете', lang[0])}:</b> <code>{data[5]} {data[2]}</code>\n"
+                   f"<b>{_('Получаете', lang[0])}:</b> <code>{format_number(data[6], data[3])} {data[3]}</code>\n\n"
+                   f"<b>{_('Вы переводите на', lang[0])}:</b> <code>{data[8]}</code>\n")
         if data[7] is not None and data[2] == "RUB":
-            message += f"<b>Тип оплаты:</b> <code>{data[7]}</code>\n\n"
-        message += (f"<b>Получаете сюда:</b> <code>{data[9]}\n\n</code>"
-                    f"<b>По всем вопросам:</b> @{data[10]}")
-        await call.message.edit_text(message, reply_markup=accept_deals(id_deals, lang[0]).as_markup())
+            message += f"<b>{_('Тип оплаты', lang[0])}:</b> <code>{data[7]}</code>\n\n"
+        message += (f"<b>{_('Получаете сюда', lang[0])}:</b> <code>{data[9]}\n\n</code>"
+                    f"<b>{_('По всем вопросам', lang[0])}:</b> @{data[10]}")
+        x = await change_number_deal(id_deals, 1)
+        if x == 200:
+            await call.message.edit_text(message, reply_markup=accept_deals(id_deals, lang[0]).as_markup())
     except Exception as e:
         logging.exception(e)
+
+async def accept_in_deals(call):
+    try:
+        id_deal = call.data.split("_")[2]
+        print(id_deal)
+        username = call.message.chat.username
+        lang = await check_lang(call.message.chat.id)
+        deal_info = await print_deals(id_deal)
+        stat = await change_number_deal(id_deal, 2)
+        if stat == 200:
+            await call.message.edit_text(
+                f"<b>{_('Благодарим вас!', lang[0])}</b>\n\n"
+                f"<i>{_('Сделка №', lang[0])}{deal_info[0]}</i>\n"
+                f"<i>{_('Актуальный курс', lang[0])}: <b>{format_number(deal_info[4], deal_info[3])} {deal_info[3]}\n</b></i>"
+                f"<i>{_('Отдаете', lang[0])}: <b>{deal_info[5]} {deal_info[2]}\n</b></i>"
+                f"<i>{_('Получаете', lang[0])}: <b>{format_number(deal_info[6], deal_info[3])} {deal_info[3]}\n\n</b></i>"
+                f"<code>{_('Ожидайте подтверждение перевода!', lang[0])}</code>\n"
+                f"<code>{_('По любым вопросам обращайтесь к своему оператору', lang[0])} @{deal_info[10]}</code>")
+
+    except Exception as e:
+        logging.exception(e)
+
 
 ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###

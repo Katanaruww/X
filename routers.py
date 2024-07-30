@@ -233,3 +233,12 @@ async def see_cards_db(call_id):
         return row
     except Exception as e:
         logging.warning(e)
+
+async def change_number_deal(call_id, num):
+    try:
+        curs.execute("UPDATE deals_onl SET status = ? WHERE id_call = ?", (num, call_id, ))
+        conn.commit()
+        return 200
+    except Exception as e:
+        logging.warning(e)
+

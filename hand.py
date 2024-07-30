@@ -18,7 +18,8 @@ from function import get_pars
 from func import (get_user_value, replace_language, start_c, deals_online_start,
                   deals_online_type_add, deals_online_cancel, get_messa, deals_add_curr,
                   deals_add_curr_finish,
-                  ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method, send_deals, get_pars2)
+                  ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method,
+                  send_deals, get_pars2, accept_in_deals)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
 from func import get_cur, get_cur2, get_messs, get_cb
@@ -27,11 +28,14 @@ from limits import limits_currency_pairs
 import check_address
 import datetime
 from dop_func.func_float import format_number
+
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
 # Диспетчер
 dp = Dispatcher()
+
+
 class fsm(StatesGroup):
     adm_id = State()
     set_amount = State()
@@ -40,6 +44,7 @@ class fsm(StatesGroup):
     call_id_cards = State()
     rekv = State()
     rekv_us = State()
+
 
 class DealState(StatesGroup):
     choosing_currency = State()
@@ -51,6 +56,8 @@ class DealState(StatesGroup):
     time = State()
     yesorno = State()
     yesornogps = State()
+
+
 class Form(StatesGroup):
     description1 = State()
     photo_adm = State()
@@ -59,17 +66,19 @@ class Form(StatesGroup):
 class Form2(StatesGroup):
     description0 = State()
 
+
 class Black_list(StatesGroup):
     black_user = State()
 
+
 class Black_list2(StatesGroup):
     black_id = State()
+
 
 bot = Bot(config.token[0])
 
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
                     format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
-
 
 
 @router.message(Command("start"))
@@ -93,51 +102,57 @@ async def start_handler(msg: Message):
     except Exception as e:
         logging.exception(e)
 
+
 @router.message(Command("rate"))
 async def rate(msg: Message):
     await get_pars(msg)
 
 
-
 @router.callback_query(DealState.yesorno, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
     # try:
-        global ggg
-        lang = await check_lang(call.message.chat.id)
-        await state.update_data(nameban=call.data)
-        laaaag = await get_pars2(curs, curs2, int(su))
-        ban_user = await state.get_data()
-        ggg = str(ban_user["nameban"])
-        current_time = datetime.datetime.now()
-        if ggg == "yesgeo":
-            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))), geo, current_time)
-            await call.message.answer(f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
-            await bot.send_message(chat_id=-1002244398985, text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}", reply_markup=get_curiers(call.from_user.id).as_markup())
-            await state.clear()
-        if ggg == "nogeo":
-            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
-            await state.clear()
-        if ggg == "yesgps":
-            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))),
-                             str(f"{cu1} {cu2}"), current_time)
-            await call.message.answer(
-                f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
-            await bot.send_message(chat_id=-1002244398985,
-                                   text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
-                                   reply_markup=get_curiers(call.from_user.id).as_markup())
-            await state.clear()
-        if ggg == "nogps":
-            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
-            await state.clear()
+    global ggg
+    lang = await check_lang(call.message.chat.id)
+    await state.update_data(nameban=call.data)
+    laaaag = await get_pars2(curs, curs2, int(su))
+    ban_user = await state.get_data()
+    ggg = str(ban_user["nameban"])
+    current_time = datetime.datetime.now()
+    if ggg == "yesgeo":
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))),
+                         geo, current_time)
+        await call.message.answer(
+            f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
+        await bot.send_message(chat_id=-1002244398985,
+                               text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
+                               reply_markup=get_curiers(call.from_user.id).as_markup())
+        await state.clear()
+    if ggg == "nogeo":
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
+        await state.clear()
+    if ggg == "yesgps":
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))),
+                         str(f"{cu1} {cu2}"), current_time)
+        await call.message.answer(
+            f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
+        await bot.send_message(chat_id=-1002244398985,
+                               text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
+                               reply_markup=get_curiers(call.from_user.id).as_markup())
+        await state.clear()
+    if ggg == "nogps":
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
+        await state.clear()
 
-    # except Exception as e:
-    #     print(f"Произошла ошибка: {e}")
+
+# except Exception as e:
+#     print(f"Произошла ошибка: {e}")
 
 locations = {}
+
 
 @router.message(DealState.gps, F.location)
 async def location_handler(message: types.Message, state: FSMContext):
@@ -169,43 +184,52 @@ async def location_handler(message: types.Message, state: FSMContext):
         reply_markup=in_gps(lang).as_markup())
     await state.set_state(DealState.yesorno)
 
+
 @router.callback_query(DealState.geo, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
     # try:
-        global geo
-        lang = await check_lang(call.message.chat.id)
-        await state.update_data(nameban=call.data)
-        ban_user = await state.get_data()
-        geo = str(ban_user["nameban"])
-        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-        llllll = await get_pars2(curs, curs2, int(su))
-        currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
-        act_cur = await get_pars2(curs, curs2, int(1))
-        if geo == "Changu":
-            geo = "Чангу"
-            # await call.message.answer(text=currency, reply_markup=get_offline(lang).as_markup())
-            await call.message.answer(f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>", reply_markup=inline_geo(lang).as_markup())
-            await state.set_state(DealState.yesorno)
-        if geo == "Semen":
-            geo = "Сменьяк"
-            await call.message.answer(f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс"), lang[0]} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>", reply_markup=inline_geo(lang).as_markup())
-            await state.set_state(DealState.yesorno)
+    global geo
+    lang = await check_lang(call.message.chat.id)
+    await state.update_data(nameban=call.data)
+    ban_user = await state.get_data()
+    geo = str(ban_user["nameban"])
+    await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+    llllll = await get_pars2(curs, curs2, int(su))
+    currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
+    act_cur = await get_pars2(curs, curs2, int(1))
+    if geo == "Changu":
+        geo = "Чангу"
+        # await call.message.answer(text=currency, reply_markup=get_offline(lang).as_markup())
+        await call.message.answer(
+            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+            reply_markup=inline_geo(lang).as_markup())
+        await state.set_state(DealState.yesorno)
+    if geo == "Semen":
+        geo = "Сменьяк"
+        await call.message.answer(
+            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс"), lang[0]} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+            reply_markup=inline_geo(lang).as_markup())
+        await state.set_state(DealState.yesorno)
 
-        if geo == "Ubud":
-            geo = "Убуд"
-            await call.message.answer(f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\n', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс"), lang[0]} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>", reply_markup=inline_geo(lang).as_markup())
-            await state.set_state(DealState.yesorno)
+    if geo == "Ubud":
+        geo = "Убуд"
+        await call.message.answer(
+            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\n', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс"), lang[0]} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+            reply_markup=inline_geo(lang).as_markup())
+        await state.set_state(DealState.yesorno)
 
-        if geo == "Geo":
-            await call.message.answer(f"<b>{_('Отправьте свою геопозицию', lang[0])}</b>", reply_markup=dell_gps000(lang).as_markup())
-            await state.set_state(DealState.gps)
-        if geo == "dell_gps":
-            # await call.message.answer(f"<b>{_(text='Сделка отменена', lang=lang[0])}</b>🚫")
-            await get_cb(call, state)
-            # await state.clear()
+    if geo == "Geo":
+        await call.message.answer(f"<b>{_('Отправьте свою геопозицию', lang[0])}</b>",
+                                  reply_markup=dell_gps000(lang).as_markup())
+        await state.set_state(DealState.gps)
+    if geo == "dell_gps":
+        # await call.message.answer(f"<b>{_(text='Сделка отменена', lang=lang[0])}</b>🚫")
+        await get_cb(call, state)
+        # await state.clear()
 
-    # except Exception as e:
-    #     print(f"Произошла ошибка: {e}")
+
+# except Exception as e:
+#     print(f"Произошла ошибка: {e}")
 
 
 @router.callback_query(DealState.choosing_currency2, lambda call: call.data)
@@ -217,16 +241,14 @@ async def rextryftugiu(call, state: FSMContext):
         await state.update_data(nameban=call.data)
         ban_user = await state.get_data()
 
-
         ifcur = str(ban_user["nameban"])
         curs2 = str(ban_user["nameban"]).replace("1", "")
         print(ifcur, curs2)
 
-
         if ifcur == "RUB1" or ifcur == "IDR1" or ifcur == "USD1" or ifcur == "USDT1" or ifcur == "BTC1" or ifcur == "LTC1":
             if curs2 == curs:
-
-                await call.message.edit_text(f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+                await call.message.edit_text(
+                    f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
                 await state.clear()
                 return  # Завершаем функцию, если валюты одинаковые
 
@@ -235,7 +257,8 @@ async def rextryftugiu(call, state: FSMContext):
 
             if currency:
                 await call.message.answer(currency)
-                await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}', reply_markup=get_geo(lang).as_markup())
+                await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}',
+                                          reply_markup=get_geo(lang).as_markup())
 
                 await state.set_state(DealState.geo)
             else:
@@ -280,6 +303,7 @@ async def swertyhbubh(call, state: FSMContext):
     except Exception as err:
         logging.exception(err)
 
+
 @router.message(DealState.currency1)
 async def zrextcyvgubhi(message: types.Message, state: FSMContext):
     try:
@@ -311,12 +335,6 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
         logging.exception(err)
 
 
-
-
-
-
-
-
 # ЭТО КОРОЧЕ ПРОВЕРКА НАХУЙ
 @router.message(DealState.currency1, ~F.text)
 async def get_trext(message: types.Message, state: FSMContext):
@@ -334,6 +352,7 @@ async def admin(msg: Message):
     except Exception as err:
         logging.exception(err)
 
+
 @router.callback_query(lambda call: call.data and call.data.startswith("pri_"))
 async def card(call, state: FSMContext):
     try:
@@ -342,20 +361,27 @@ async def card(call, state: FSMContext):
         text_id = str(call.data).replace("pri_", "")
         ids = call.from_user.id
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-        await bot.send_message(chat_id=int(text_id), text=f"Ваша заявка принята!!!\nВаш курьер - username {call.from_user.username}")
-        await bot.send_message(chat_id=int(ids), text=f"Завершить заказ?", reply_markup=finish_curiers(str(text_id)).as_markup())
-        await bot.send_message(chat_id=-1002244398985, text=f"<b>Курьер - {call.from_user.username} принял заказ!!!</b>")
+        await bot.send_message(chat_id=int(text_id),
+                               text=f"Ваша заявка принята!!!\nВаш курьер - username {call.from_user.username}")
+        await bot.send_message(chat_id=int(ids), text=f"Завершить заказ?",
+                               reply_markup=finish_curiers(str(text_id)).as_markup())
+        await bot.send_message(chat_id=-1002244398985,
+                               text=f"<b>Курьер - {call.from_user.username} принял заказ!!!</b>")
     except Exception as e:
         logging.exception(e)
+
+
 @router.callback_query(lambda call: call.data and call.data.startswith("finish_"))
 async def card(call, state: FSMContext):
     try:
         lang = await check_lang(call.message.chat.id)
         text = str(call.data).replace("finish_", "")
-        await bot.send_message(chat_id=int(text), text=f"Курьер завершает заказ?\nПодтвердить выполнение?", reply_markup=i_cur(lang, ids).as_markup())
+        await bot.send_message(chat_id=int(text), text=f"Курьер завершает заказ?\nПодтвердить выполнение?",
+                               reply_markup=i_cur(lang, ids).as_markup())
 
     except Exception as e:
         logging.exception(e)
+
 
 @router.callback_query(lambda call: call.data and call.data.startswith("conf_"))
 async def card(call, state: FSMContext):
@@ -368,6 +394,8 @@ async def card(call, state: FSMContext):
 
     except Exception as e:
         logging.exception(e)
+
+
 @router.callback_query(lambda call: call.data and call.data.startswith("lang_"))
 async def lang(call):
     try:
@@ -382,12 +410,14 @@ async def lang(call):
 async def lang(call):
     await replace_language(call)
 
+
 @router.callback_query(lambda call: call.data and call.data.startswith("type_"))
 async def lang(call):
     try:
         await deals_online_type_add(call, "start")
     except Exception as e:
         logging.exception(e)
+
 
 @router.callback_query(lambda call: call.data and call.data.startswith("cancel-deal_"))
 async def lang(call):
@@ -411,18 +441,31 @@ async def lang(call):
         await continue_in_deals(call)
     except Exception as e:
         logging.exception(e)
+
+
+@router.callback_query(lambda call: call.data and call.data.startswith("accept_deals_"))
+async def lang(call):
+    try:
+        await accept_in_deals(call)
+    except Exception as e:
+        logging.exception(e)
+
+
 @router.callback_query(lambda call: call.data and call.data.startswith("cancel-card_"))
 async def lang(call):
     try:
         await cancel_add_card(call)
     except Exception as e:
         logging.exception(e)
+
+
 @router.callback_query(lambda call: call.data and call.data.startswith("give_"))
 async def lang(call):
     try:
         await deals_add_curr(call)
     except Exception as e:
         logging.exception(e)
+
 
 @router.callback_query(lambda call: call.data and call.data.startswith("get_"))
 async def lang(call, state: FSMContext):
@@ -442,6 +485,8 @@ async def car(call):
         await get_list_card(call)
     except Exception as e:
         logging.exception(e)
+
+
 @router.callback_query(lambda call: call.data and call.data.startswith("add-cards_"))
 async def card(call, state: FSMContext):
     try:
@@ -488,6 +533,8 @@ async def card(call, state: FSMContext):
         await activate_card(call)
     except Exception as e:
         logging.exception(e)
+
+
 @router.callback_query(lambda call: True)
 async def cal(call, state: FSMContext):
     if call.data == "agree_rules":
@@ -547,7 +594,7 @@ async def cal(call, state: FSMContext):
         try:
             lang = await check_lang(call.message.chat.id)
             await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
-                                             reply_markup=add_cur_offline(lang).as_markup())
+                                         reply_markup=add_cur_offline(lang).as_markup())
 
         except Exception as err:
             logging.exception(err)
@@ -555,7 +602,7 @@ async def cal(call, state: FSMContext):
         try:
             lang = await check_lang(call.message.chat.id)
             await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
-                                             reply_markup=oflline(lang).as_markup())
+                                         reply_markup=oflline(lang).as_markup())
             await state.set_state(DealState.choosing_currency)
         except Exception as err:
             logging.exception(err)
@@ -606,7 +653,6 @@ async def cal(call, state: FSMContext):
             logging.exception(err)
     ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ###
 
-
     ### АДМИНКА #### НИЖЕ НЕ ЛЕЗТЬ
     elif call.data == "adm_exc" or call.data == "back_admin":
         await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
@@ -632,18 +678,10 @@ async def cal(call, state: FSMContext):
             logging.warning(err)
 
 
-
-
-
 """ЭТО ОФФЛАЙН НАХУЙ"""
 
-
-
-
-
-
-
 """ЭТО КОНЕЦ ОФФЛАЙН НАХУЙ"""
+
 
 @router.message(Black_list2.black_id)
 async def get_userr(message: types.Message, state: FSMContext):
@@ -665,6 +703,7 @@ async def get_userr(message: types.Message, state: FSMContext):
         await message.answer(f'Юзер - {ban_user["nameban"]} успешно забанен')
     except Exception as err:
         logging.exception(err)
+
 
 @router.message(Form2.description0)
 async def get_userr(message: types.Message, state: FSMContext):
@@ -726,6 +765,7 @@ async def get_photo(message: types.Message, state: FSMContext):
 async def get_trext(message: types.Message, state: FSMContext):
     await message.answer(f'Отправь текст!')
 
+
 @router.message(fsm.set_amount)
 async def setrt(message: types.Message, state: FSMContext):
     try:
@@ -770,6 +810,8 @@ async def setrt(message: types.Message, state: FSMContext):
                                  reply_markup=exc_btn_cancel(call_id, lang[0]).as_markup())
     except Exception as e:
         logging.exception(e)
+
+
 @router.message(fsm.rekv)
 async def setrt(message: types.Message, state: FSMContext):
     try:
