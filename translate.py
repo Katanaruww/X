@@ -73,7 +73,9 @@ translates = {
         "Завершенные сделки курьером - ": "Completed transactions by courier -",
         "Отправьте свою геопозицию": "Submit your location",
         "Сделка отменена": "Deal canceled",
-        "Отлично!\nПроверьте свои данные для оформления заявки": "Great!\nCheck your details to complete your application"
+        "Отлично!\nПроверьте свои данные для оформления заявки": "Great!\nCheck your details to complete your application",
+        "Подтвердить": "Сonfirm",
+        "Отказ": "Refusal"
     }
 }
 

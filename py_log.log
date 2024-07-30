@@ -1,19 +1,32 @@
-2024-07-30 04:22:42,508 - INFO - start_polling: 527 - Start polling
-2024-07-30 04:22:43,274 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-07-30 04:22:57,612 - INFO - feed_update: 172 - Update id=377110555 is handled. Duration 3027 ms by bot id=6243740464
-2024-07-30 04:23:00,661 - INFO - feed_update: 172 - Update id=377110556 is handled. Duration 1381 ms by bot id=6243740464
-2024-07-30 04:23:02,396 - INFO - feed_update: 172 - Update id=377110557 is handled. Duration 360 ms by bot id=6243740464
-2024-07-30 04:23:04,303 - INFO - feed_update: 172 - Update id=377110558 is handled. Duration 322 ms by bot id=6243740464
-2024-07-30 04:23:06,070 - INFO - feed_update: 172 - Update id=377110559 is handled. Duration 350 ms by bot id=6243740464
-2024-07-30 04:23:11,430 - INFO - feed_update: 172 - Update id=377110560 is handled. Duration 266 ms by bot id=6243740464
-2024-07-30 04:23:20,020 - INFO - feed_update: 172 - Update id=377110561 is handled. Duration 1551 ms by bot id=6243740464
-2024-07-30 04:23:33,041 - INFO - feed_update: 172 - Update id=377110562 is handled. Duration 318 ms by bot id=6243740464
-2024-07-30 04:24:14,266 - INFO - feed_update: 172 - Update id=377110563 is handled. Duration 915 ms by bot id=6243740464
-2024-07-30 04:24:16,426 - INFO - feed_update: 172 - Update id=377110564 is handled. Duration 423 ms by bot id=6243740464
-2024-07-30 04:24:19,451 - INFO - feed_update: 172 - Update id=377110565 is handled. Duration 485 ms by bot id=6243740464
-2024-07-30 04:24:20,849 - INFO - feed_update: 172 - Update id=377110566 is handled. Duration 293 ms by bot id=6243740464
-2024-07-30 04:24:24,925 - INFO - feed_update: 172 - Update id=377110567 is handled. Duration 357 ms by bot id=6243740464
-2024-07-30 04:24:37,637 - INFO - feed_update: 172 - Update id=377110568 is handled. Duration 1451 ms by bot id=6243740464
-2024-07-30 04:25:19,702 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
-2024-07-30 04:25:19,703 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-07-30 04:25:19,703 - INFO - start_polling: 554 - Polling stopped
+2024-07-30 20:24:22,243 - INFO - start_polling: 527 - Start polling
+2024-07-30 20:24:23,431 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-07-30 20:25:21,908 - INFO - feed_update: 172 - Update id=377110855 is handled. Duration 1967 ms by bot id=6243740464
+2024-07-30 20:25:24,379 - INFO - feed_update: 172 - Update id=377110856 is handled. Duration 1156 ms by bot id=6243740464
+2024-07-30 20:25:30,551 - INFO - feed_update: 172 - Update id=377110857 is handled. Duration 469 ms by bot id=6243740464
+2024-07-30 20:25:32,230 - INFO - feed_update: 172 - Update id=377110858 is handled. Duration 299 ms by bot id=6243740464
+2024-07-30 20:25:39,089 - INFO - feed_update: 172 - Update id=377110859 is handled. Duration 1427 ms by bot id=6243740464
+2024-07-30 20:25:42,778 - INFO - feed_update: 172 - Update id=377110860 is handled. Duration 307 ms by bot id=6243740464
+2024-07-30 20:25:46,775 - INFO - feed_update: 172 - Update id=377110861 is handled. Duration 3 ms by bot id=6243740464
+2024-07-30 20:25:56,130 - INFO - feed_update: 172 - Update id=377110862 is handled. Duration 548 ms by bot id=6243740464
+2024-07-30 20:25:59,169 - INFO - feed_update: 172 - Update id=377110863 is handled. Duration 1237 ms by bot id=6243740464
+2024-07-30 20:26:00,589 - INFO - feed_update: 172 - Update id=377110864 is handled. Duration 277 ms by bot id=6243740464
+2024-07-30 20:26:02,341 - INFO - feed_update: 172 - Update id=377110865 is handled. Duration 309 ms by bot id=6243740464
+2024-07-30 20:26:04,491 - INFO - feed_update: 172 - Update id=377110866 is handled. Duration 299 ms by bot id=6243740464
+2024-07-30 20:26:07,560 - ERROR - zrextcyvgubhi: 311 - 'State' object has no attribute 'copy'
+Traceback (most recent call last):
+  File "/Users/danilbatyuk/PycharmProjects/X/hand.py", line 299, in zrextcyvgubhi
+    await state.set_data(DealState.currency1)
+  File "/Users/danilbatyuk/PycharmProjects/X/.venv/lib/python3.12/site-packages/aiogram/fsm/context.py", line 18, in set_data
+    await self.storage.set_data(key=self.key, data=data)
+  File "/Users/danilbatyuk/PycharmProjects/X/.venv/lib/python3.12/site-packages/aiogram/fsm/storage/memory.py", line 47, in set_data
+    self.storage[key].data = data.copy()
+                             ^^^^^^^^^
+AttributeError: 'State' object has no attribute 'copy'
+2024-07-30 20:26:07,566 - INFO - feed_update: 172 - Update id=377110867 is handled. Duration 315 ms by bot id=6243740464
+2024-07-30 20:26:12,070 - INFO - feed_update: 172 - Update id=377110868 is handled. Duration 1438 ms by bot id=6243740464
+2024-07-30 20:26:48,210 - INFO - feed_update: 172 - Update id=377110869 is handled. Duration 3836 ms by bot id=6243740464
+2024-07-30 20:26:59,510 - INFO - feed_update: 172 - Update id=377110870 is handled. Duration 4228 ms by bot id=6243740464
+2024-07-30 20:27:25,380 - INFO - feed_update: 172 - Update id=377110871 is handled. Duration 2657 ms by bot id=6243740464
+2024-07-30 20:27:43,511 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-07-30 20:27:43,513 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-07-30 20:27:43,513 - INFO - start_polling: 554 - Polling stopped

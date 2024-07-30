@@ -186,9 +186,10 @@ async def get_cur(a111, call: types.CallbackQuery):
     lang = await check_lang(call.message.chat.id)
     try:
         if a111 in cur111:
-            return f"<b><i>💸{_(text='Отлично! Первый пункт выполнен!', lang=lang[0])}</i></b>"
+            # return f"<b><i>💸{_(text='Отлично! Первый пункт выполнен!', lang=lang[0])}</i></b>"
+            return True
         else:
-            return f"{_(text='Повторите попытку', lang=lang[0])}"
+            return False
     except Exception as err:
         logging.exception(err)
 
@@ -214,10 +215,10 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
             if result is not None:
                 curs = round(float(result))
 
-                return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {str(resultone)} {val_out}\n💳 "
-                        f"{_(text='Вы отдадите', lang=lang[0])}: {amount} {val_in}\n💸 "
+                return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone))} {val_out}\n💳 "
+                        f"{_(text='Вы отдадите', lang=lang[0])}: {format_number(float(amount))} {val_in}\n💸 "
                         f"{_(text='Обмен по актуальному курсу будет составлять:', lang=lang[0])}"
-                        f"{str(curs)} {val_out}</i></b>")
+                        f"{str(round(float(format_number(float(resultone)))*float(format_number(float(amount))), 8))} {val_out}</i></b>")
             else:
                 # Если результат None, то сообщение об ошибке
                 return f"{_(text='Не удалось получить курс. Повторите попытку позже.', lang=lang[0])}"
@@ -231,7 +232,7 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
 async def get_messs(a000, call: types.CallbackQuery):
     lang = await check_lang(call.message.chat.id)
     name = await limits_currency_pairs(f"{a000}")
-    await call.message.answer(f'<b><i>{_(text="Введите сумму на обмен. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>', reply_markup=dell_state(lang).as_markup())
+    await call.message.edit_text(f'<b><i>{_(text="Введите сумму на обмен. Минимальное значение - ", lang=lang[0])} {name[0]}</i></b>', reply_markup=dell_state(lang).as_markup())
 
 
 
@@ -239,7 +240,7 @@ async def get_messs(a000, call: types.CallbackQuery):
 async def get_cb(call: types.CallbackQuery, state: FSMContext):
     try:
         lang = await check_lang(call.message.chat.id)
-        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        # await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         await call.message.answer(f"<b>{_('Выберите действие', lang[0])}:</b>",
                                   reply_markup=exc_btn_start(lang[0]).as_markup())
         await state.clear()

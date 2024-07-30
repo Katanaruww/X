@@ -53,6 +53,13 @@ def inline_geo(lang):
     rul.adjust(2)
     return rul
 
+def i_cur(lang, ids):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Подтвердить', lang[0])}🟢", callback_data=f"conf_{ids}")
+    rul.button(text=f"{_('Отказ', lang[0])}🔴", callback_data=f"noconf_{ids}")
+    rul.adjust(2)
+    return rul
+
 def in_gps(lang):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Да', lang[0])}🟢", callback_data="yesgps")
