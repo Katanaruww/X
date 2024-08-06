@@ -200,7 +200,9 @@ async def delete_cards(call_id):
 
 async def add_rekv_cards(rekv, call_id):
     try:
-        curs.execute("UPDATE cards SET rekv = ? WHERE id_c = ?", (rekv, call_id))
+        row = curs.execute("SELECT type_pay FROM cards WHERE id_c = ?", (call_id, )).fetchone()
+        curs.execute(f"UPDATE cards SET status = 0 WHERE type_pay = ?", (row[0], ))
+        curs.execute("UPDATE cards SET rekv = ?, status = 1 WHERE id_c = ?", (rekv, call_id))
         conn.commit()
     except Exception as e:
         logging.warning(e)

@@ -346,8 +346,6 @@ async def transaction_con(message, call_id):
     try:
         row = await print_deals(call_id)
         curr = await get_pars(row[2], row[3])
-        print(curr)
-        print(row[2], row[3])
         amount_out = float(curr * row[5] * config.percent)
         oper = config.operators[0][0]
         await add_amount_out(amount_out, curr, oper, call_id)
@@ -359,7 +357,7 @@ async def transaction_con(message, call_id):
                 f"<b>{_('Вы получите', lang[0])}:</b> <code>{format_number(deal[6], deal[3])}</code> <i>{deal[3]}</i>\n\n")
         if deal[2] == "RUB":
             mess += f"<i>{_('Для продолжения выберите способ оплаты', lang[0])}:</i>"
-            await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id).as_markup())
+            await message.answer(mess, reply_markup=admin_exc_rub_add_card("print", "deal", call_id,0, lang[0]).as_markup())
         else:
             rekv = await get_card_check_deals(deal[11])
             await add_type_our(rekv, call_id)

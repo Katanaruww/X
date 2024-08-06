@@ -294,13 +294,13 @@ def admin_exc_add_card(call_id, typ):
     return adm_exc_add
 
 
-def admin_exc_rub_add_card(type_d, t="card", call_id="None", other=0):
+def admin_exc_rub_add_card(type_d, t="card", call_id="None", other=0, lang="RU"):
     adm_e_r_add = InlineKeyboardBuilder()
-    adm_e_r_add.button(text="Сбербанк", callback_data=f"{type_d}-RUB-cards_Сбербанк_{call_id}_{other}")
-    adm_e_r_add.button(text="Тинькофф", callback_data=f"{type_d}-RUB-cards_Тинькофф_{call_id}_{other}")
-    adm_e_r_add.button(text="Карта", callback_data=f"{type_d}-RUB-cards_Карта_{call_id}_{other}")
-    adm_e_r_add.button(text="СБП", callback_data=f"{type_d}-RUB-cards_СБП_{call_id}_{other}")
-    adm_e_r_add.button(text="Отмена⭕️", callback_data=f"cancel-{t}_{call_id}_{other}")
+    adm_e_r_add.button(text=f"{_('Сбербанк', lang)}", callback_data=f"{type_d}-RUB-cards_Сбербанк_{call_id}_{other}")
+    adm_e_r_add.button(text=f"{_('Т-Банк', lang)}", callback_data=f"{type_d}-RUB-cards_Тинькофф_{call_id}_{other}")
+    adm_e_r_add.button(text=f"{_('Карта', lang)}", callback_data=f"{type_d}-RUB-cards_Карта_{call_id}_{other}")
+    adm_e_r_add.button(text=f"{_('СБП', lang)}", callback_data=f"{type_d}-RUB-cards_СБП_{call_id}_{other}")
+    adm_e_r_add.button(text=f"{_('Отмена', lang)}⭕️", callback_data=f"cancel-{t}_{call_id}_{other}")
     adm_e_r_add.adjust(1, 1, 1, 1, 1)
     return adm_e_r_add
 

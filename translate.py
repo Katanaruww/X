@@ -85,7 +85,11 @@ translates = {
         "Я оплатил(а)": "I paid",
         "Вы переводите на": "You're transferring to",
         "Получаете сюда": "You get here",
-        "По всем вопросам": "Any questions"
+        "По всем вопросам": "Any questions",
+        "Сбербанк" : "Sberbank",
+        "Т-Банк" : "T-Bank",
+        "СБП" : "SBP",
+        "Карта" : "Card"
     }
 }
 

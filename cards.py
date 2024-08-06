@@ -209,30 +209,40 @@ async def get_card_check(name_bank):
 async def get_card_check_deals(deal_id):
     try:
         data_our = await print_deals(deal_id)
-        data = await get_data_deals(1)
-        if len(data) == 1 and data[0][11] == deal_id:
+        a1 = await get_data_deals(1)
+        a2 = await get_data_deals(2)
+        sort = list(a1 + a2)
+        if len(sort) == 1 and sort[0][11] == deal_id:
             if data_our[2] == "RUB":
                 return await get_card_db(data_our[2], data_our[7])
             else:
                 return await get_card_db(data_our[2])
 
         else:
-            for a in range(len(data)):  # тут сравниваем сделки между собой
-                if data_our[5] == data[a][5]:
+            match = None
+            for a in range(len(sort)):  # тут сравниваем сделки между собой
+                print(data_our[5], sort[a][5])
+                if data_our[5] == sort[a][5] and data_our[3] == sort[a][3]:
+                    print("z nen")
                     amount_high = await limits_currency_pairs(data_our[2])
                     amount = float(data_our[5]) + float(amount_high[1])
                     await edit_amount(data_our[11], amount)
                     if data_our[2] == "RUB":
+                        match = await get_card_db(data_our[2], data_our[7])
+                    else:
+                        match = await get_card_db(data_our[2])
+                    break
 
-                        return await get_card_db(data_our[2], data_our[7])
-                    else:
-                        return await get_card_db(data_our[2])
+            if match is not None:  # If we found a match in the loop, return it
+                return match
+            else:  # If we didn't find a match in the loop, do something else
+                if data_our[2] == "RUB":
+                    print(data_our, "епта")
+                    return await get_card_db(data_our[2], data_our[7])
                 else:
-                    if data_our[2] == "RUB":
-                        print(data_our, "епта")
-                        return await get_card_db(data_our[2], data_our[7])
-                    else:
-                        return await get_card_db(data_our[2])
+                    print("[eq")
+                    return await get_card_db(data_our[2])
+
     except Exception as e:
         logging.warning(e)
         logging.error(traceback.print_exc())
