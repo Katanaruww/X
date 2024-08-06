@@ -19,6 +19,7 @@ from routers import check_lang
 from inline_but import add_cur_offline, dell_state
 import sqlite3
 from dop_func.func_float import format_number
+from aiogram.enums.parse_mode import ParseMode
 # ERTYU
 router = Router()
 bot = Bot(config.token[0])
@@ -215,10 +216,10 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
             if result is not None:
                 curs = round(float(result))
 
-                return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone))} {val_out}\n💳 "
-                        f"{_(text='Вы отдадите', lang=lang[0])}: {format_number(float(amount))} {val_in}\n💸 "
+                return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone), val_out)} {val_out}\n💳 "
+                        f"{_(text='Вы отдадите', lang=lang[0])}: {format_number(float(amount), val_in)} {val_in}\n💸 "
                         f"{_(text='Обмен по актуальному курсу будет составлять:', lang=lang[0])}"
-                        f"{str(round(float(format_number(float(resultone)))*float(format_number(float(amount))), 8))} {val_out}</i></b>")
+                        f"{str(float(format_number(float(resultone), val_out))*float(format_number(float(amount), val_in)))} {val_out}</i></b>")
             else:
                 # Если результат None, то сообщение об ошибке
                 return f"{_(text='Не удалось получить курс. Повторите попытку позже.', lang=lang[0])}"

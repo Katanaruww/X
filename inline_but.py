@@ -41,9 +41,9 @@ def get_curiers(id):
     rul.adjust(1)
     return rul
 
-def finish_curiers(id):
+def finish_curiers(id, lang):
     rul = InlineKeyboardBuilder()
-    rul.button(text=f"Завершить заказ", callback_data=f"finish_{id}")
+    rul.button(text=f"{_("Завершить заказ", lang=lang[0])}", callback_data=f"finish_{id}")
     rul.adjust(1)
     return rul
 def inline_geo(lang):
@@ -60,6 +60,12 @@ def i_cur(lang, ids):
     rul.adjust(2)
     return rul
 
+def beznal(lang):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Наличный засчёт', lang[0])}💵", callback_data=f"nal")
+    rul.button(text=f"{_('Безналичный засчёт', lang[0])}💳", callback_data=f"beznal")
+    rul.adjust(2)
+    return rul
 def in_gps(lang):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Да', lang[0])}🟢", callback_data="yesgps")

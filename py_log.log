@@ -1,81 +1,14 @@
-2024-08-06 17:38:46,300 - INFO - start_polling: 527 - Start polling
-2024-08-06 17:38:46,935 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-08-06 17:39:08,249 - INFO - feed_update: 172 - Update id=377111224 is handled. Duration 1604 ms by bot id=6243740464
-2024-08-06 17:39:09,909 - INFO - feed_update: 172 - Update id=377111225 is handled. Duration 268 ms by bot id=6243740464
-2024-08-06 17:39:38,338 - INFO - feed_update: 172 - Update id=377111226 is handled. Duration 1348 ms by bot id=6243740464
-2024-08-06 17:39:42,348 - INFO - feed_update: 172 - Update id=377111227 is handled. Duration 238 ms by bot id=6243740464
-2024-08-06 17:39:51,188 - INFO - feed_update: 172 - Update id=377111228 is handled. Duration 277 ms by bot id=6243740464
-2024-08-06 17:39:52,578 - INFO - feed_update: 172 - Update id=377111229 is handled. Duration 318 ms by bot id=6243740464
-2024-08-06 17:39:57,327 - INFO - feed_update: 172 - Update id=377111230 is handled. Duration 278 ms by bot id=6243740464
-2024-08-06 17:40:03,847 - INFO - feed_update: 172 - Update id=377111231 is handled. Duration 2044 ms by bot id=6243740464
-2024-08-06 17:40:24,573 - INFO - feed_update: 172 - Update id=377111232 is handled. Duration 683 ms by bot id=6243740464
-2024-08-06 17:40:36,207 - INFO - feed_update: 172 - Update id=377111233 is handled. Duration 257 ms by bot id=6243740464
-2024-08-06 17:43:04,068 - INFO - feed_update: 172 - Update id=377111234 is handled. Duration 1662 ms by bot id=6243740464
-2024-08-06 17:43:07,687 - INFO - feed_update: 172 - Update id=377111235 is handled. Duration 906 ms by bot id=6243740464
-2024-08-06 17:43:10,429 - INFO - feed_update: 172 - Update id=377111236 is handled. Duration 240 ms by bot id=6243740464
-2024-08-06 17:43:12,858 - INFO - feed_update: 172 - Update id=377111237 is handled. Duration 298 ms by bot id=6243740464
-2024-08-06 17:43:15,047 - INFO - feed_update: 172 - Update id=377111238 is handled. Duration 298 ms by bot id=6243740464
-2024-08-06 17:43:19,087 - INFO - feed_update: 172 - Update id=377111239 is handled. Duration 288 ms by bot id=6243740464
-2024-08-06 17:43:23,827 - ERROR - get_cur2: 228 - format_number() missing 1 required positional argument: 'value'
-Traceback (most recent call last):
-  File "/Users/dmitriifatkullin/PycharmProjects/X/func.py", line 218, in get_cur2
-    return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone))} {val_out}\n💳 "
-                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: format_number() missing 1 required positional argument: 'value'
-2024-08-06 17:43:23,829 - ERROR - rextryftugiu: 270 - 'Произошла ошибка. Повторите попытку позже.'
-Traceback (most recent call last):
-  File "/Users/dmitriifatkullin/PycharmProjects/X/func.py", line 218, in get_cur2
-    return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone))} {val_out}\n💳 "
-                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: format_number() missing 1 required positional argument: 'value'
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 256, in rextryftugiu
-    currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/dmitriifatkullin/PycharmProjects/X/func.py", line 229, in get_cur2
-    return f"{_(text='Произошла ошибка. Повторите попытку позже.', lang=lang[0])}"
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/dmitriifatkullin/PycharmProjects/X/translate.py", line 108, in _
-    return translates[lang][text]
-           ~~~~~~~~~~~~~~~~^^^^^^
-KeyError: 'Произошла ошибка. Повторите попытку позже.'
-2024-08-06 17:43:23,831 - INFO - feed_update: 172 - Update id=377111240 is handled. Duration 2412 ms by bot id=6243740464
-2024-08-06 17:43:39,108 - INFO - feed_update: 172 - Update id=377111241 is handled. Duration 1499 ms by bot id=6243740464
-2024-08-06 17:43:41,627 - INFO - feed_update: 172 - Update id=377111242 is handled. Duration 918 ms by bot id=6243740464
-2024-08-06 17:43:43,377 - INFO - feed_update: 172 - Update id=377111243 is handled. Duration 258 ms by bot id=6243740464
-2024-08-06 17:43:45,329 - INFO - feed_update: 172 - Update id=377111244 is handled. Duration 269 ms by bot id=6243740464
-2024-08-06 17:43:47,157 - INFO - feed_update: 172 - Update id=377111245 is handled. Duration 337 ms by bot id=6243740464
-2024-08-06 17:43:50,078 - INFO - feed_update: 172 - Update id=377111246 is handled. Duration 249 ms by bot id=6243740464
-2024-08-06 17:43:55,048 - ERROR - get_cur2: 228 - format_number() missing 1 required positional argument: 'value'
-Traceback (most recent call last):
-  File "/Users/dmitriifatkullin/PycharmProjects/X/func.py", line 218, in get_cur2
-    return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone))} {val_out}\n💳 "
-                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: format_number() missing 1 required positional argument: 'value'
-2024-08-06 17:43:55,049 - ERROR - rextryftugiu: 270 - 'Произошла ошибка. Повторите попытку позже.'
-Traceback (most recent call last):
-  File "/Users/dmitriifatkullin/PycharmProjects/X/func.py", line 218, in get_cur2
-    return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone))} {val_out}\n💳 "
-                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: format_number() missing 1 required positional argument: 'value'
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 256, in rextryftugiu
-    currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/dmitriifatkullin/PycharmProjects/X/func.py", line 229, in get_cur2
-    return f"{_(text='Произошла ошибка. Повторите попытку позже.', lang=lang[0])}"
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/dmitriifatkullin/PycharmProjects/X/translate.py", line 108, in _
-    return translates[lang][text]
-           ~~~~~~~~~~~~~~~~^^^^^^
-KeyError: 'Произошла ошибка. Повторите попытку позже.'
-2024-08-06 17:43:55,051 - INFO - feed_update: 172 - Update id=377111247 is handled. Duration 2742 ms by bot id=6243740464
-2024-08-06 17:44:42,049 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
-2024-08-06 17:44:42,051 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-08-06 17:44:42,051 - INFO - start_polling: 554 - Polling stopped
+2024-08-06 21:19:18,052 - INFO - start_polling: 527 - Start polling
+2024-08-06 21:19:18,782 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-08-06 21:19:20,711 - INFO - feed_update: 172 - Update id=377111573 is handled. Duration 1678 ms by bot id=6243740464
+2024-08-06 21:19:23,572 - INFO - feed_update: 172 - Update id=377111574 is handled. Duration 1041 ms by bot id=6243740464
+2024-08-06 21:19:26,370 - INFO - feed_update: 172 - Update id=377111575 is handled. Duration 252 ms by bot id=6243740464
+2024-08-06 21:19:28,585 - INFO - feed_update: 172 - Update id=377111576 is handled. Duration 325 ms by bot id=6243740464
+2024-08-06 21:19:30,480 - INFO - feed_update: 172 - Update id=377111577 is handled. Duration 257 ms by bot id=6243740464
+2024-08-06 21:19:36,521 - INFO - feed_update: 172 - Update id=377111578 is handled. Duration 267 ms by bot id=6243740464
+2024-08-06 21:19:42,632 - INFO - feed_update: 172 - Update id=377111579 is handled. Duration 3873 ms by bot id=6243740464
+2024-08-06 21:19:50,269 - INFO - feed_update: 172 - Update id=377111580 is handled. Duration 449 ms by bot id=6243740464
+2024-08-06 21:19:53,588 - INFO - feed_update: 172 - Update id=377111581 is handled. Duration 758 ms by bot id=6243740464
+2024-08-06 21:23:44,241 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-08-06 21:23:44,243 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-08-06 21:23:44,243 - INFO - start_polling: 554 - Polling stopped

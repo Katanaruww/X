@@ -28,7 +28,7 @@ from limits import limits_currency_pairs
 import check_address
 import datetime
 from dop_func.func_float import format_number
-
+from aiogram.enums.parse_mode import ParseMode
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
@@ -56,7 +56,8 @@ class DealState(StatesGroup):
     time = State()
     yesorno = State()
     yesornogps = State()
-
+    nalbeznal = State()
+    nalbeznal2 = State()
 
 class Form(StatesGroup):
     description1 = State()
@@ -125,7 +126,7 @@ async def swertyhbubh(call, state: FSMContext):
         await call.message.answer(
             f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
         await bot.send_message(chat_id=-1002244398985,
-                               text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
+                               text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag), curs2)} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
                                reply_markup=get_curiers(call.from_user.id).as_markup())
         await state.clear()
     if ggg == "nogeo":
@@ -139,7 +140,7 @@ async def swertyhbubh(call, state: FSMContext):
         await call.message.answer(
             f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
         await bot.send_message(chat_id=-1002244398985,
-                               text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag))} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
+                               text=f"Новая заявка!!!\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag), curs2)} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\ntime deals - {current_time}",
                                reply_markup=get_curiers(call.from_user.id).as_markup())
         await state.clear()
     if ggg == "nogps":
@@ -180,7 +181,7 @@ async def location_handler(message: types.Message, state: FSMContext):
     # await message.answer(str(rai1))
     # await message.answer(str(rai2))
     await message.answer(
-        f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(float(llllll))} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+        f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(float(llllll), curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
         reply_markup=in_gps(lang).as_markup())
     await state.set_state(DealState.yesorno)
 
@@ -201,20 +202,20 @@ async def swertyhbubh(call, state: FSMContext):
         geo = "Чангу"
         # await call.message.answer(text=currency, reply_markup=get_offline(lang).as_markup())
         await call.message.answer(
-            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll, curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<b><i>{_("Расчёт", lang[0])} {_(f"{ifcur}", lang[0])}</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
             reply_markup=inline_geo(lang).as_markup())
         await state.set_state(DealState.yesorno)
     if geo == "Semen":
         geo = "Сменьяк"
         await call.message.answer(
-            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс"), lang[0]} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll, curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n{_("Расчёт", lang[0])} {_(f"{ifcur}", lang[0])}\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
             reply_markup=inline_geo(lang).as_markup())
         await state.set_state(DealState.yesorno)
 
     if geo == "Ubud":
         geo = "Убуд"
         await call.message.answer(
-            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\n', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс"), lang[0]} - {format_number(act_cur)} 💵</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
+            f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\n', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll, curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n{_("Расчёт", lang[0])} {_(f"{ifcur}", lang[0])}\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
             reply_markup=inline_geo(lang).as_markup())
         await state.set_state(DealState.yesorno)
 
@@ -230,6 +231,40 @@ async def swertyhbubh(call, state: FSMContext):
 
 # except Exception as e:
 #     print(f"Произошла ошибка: {e}")
+@router.callback_query(DealState.nalbeznal2, lambda call: call.data)
+async def nalnal(call, state: FSMContext):
+    try:
+        global ifcur
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        lang = await check_lang(call.message.chat.id)
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+
+        ifcur = str(ban_user["nameban"])
+        if ifcur == "nal":
+            ifcur = "Наличный расчёт"
+            await call.message.answer("HELLO")
+            await state.set_state(DealState.geo)
+        if ifcur == "beznal":
+            await call.message.answer("HELLO")
+            await state.set_state(DealState.geo)
+            ifcur = "Безналичный расчёт"
+            await state.set_state(DealState.geo)
+    except Exception as err:
+        logging.exception(err)
+@router.callback_query(DealState.nalbeznal, lambda call: call.data)
+async def nalnal(call, state: FSMContext):
+    try:
+        global ifcur
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        lang = await check_lang(call.message.chat.id)
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}',
+                                  reply_markup=get_geo(lang).as_markup())
+        await state.set_state()
+    except Exception as err:
+        logging.exception(err)
 
 
 @router.callback_query(DealState.choosing_currency2, lambda call: call.data)
@@ -256,11 +291,10 @@ async def rextryftugiu(call, state: FSMContext):
             currency = await get_cur2(amount=currens["name"], val_in=curs, val_out=curs2, call=call, state=state)
 
             if currency:
-                await call.message.answer(currency)
-                await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}',
-                                          reply_markup=get_geo(lang).as_markup())
+                await call.message.answer(f'{currency}\n\n{_(text="Выберете действие", lang=lang[0])}', reply_markup=beznal(lang).as_markup())
 
-                await state.set_state(DealState.geo)
+                await state.set_state(DealState.nalbeznal)
+
             else:
 
                 await state.clear()
@@ -354,19 +388,22 @@ async def admin(msg: Message):
 
 
 @router.callback_query(lambda call: call.data and call.data.startswith("pri_"))
-async def card(call, state: FSMContext):
+async def card(call: types.CallbackQuery, state: FSMContext):
     try:
         global text_id
         global ids
         text_id = str(call.data).replace("pri_", "")
         ids = call.from_user.id
+        lang1 = await check_lang(str(text_id))
+        lang2 = await check_lang(str(ids))
+
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         await bot.send_message(chat_id=int(text_id),
-                               text=f"Ваша заявка принята!!!\nВаш курьер - username {call.from_user.username}")
-        await bot.send_message(chat_id=int(ids), text=f"Завершить заказ?",
-                               reply_markup=finish_curiers(str(text_id)).as_markup())
+                               text=f"<b>{_("Ваша заявка принята!\nВаш курьер: ", lang1[0])} <code>@{call.from_user.username}</code>👤 \n{call.from_user.first_name}👤\n\n{_("Свяжитесь с ним для дальнейших действий", lang1[0])}📞</b>", parse_mode=ParseMode.HTML)
+        await bot.send_message(chat_id=int(ids), text=f"<b>{_("Завершить заказ?", lang2[0])}</b>\n\n<b>{_("Завершать строго после выполнения!", lang2[0])}</b>",parse_mode=ParseMode.HTML,
+                               reply_markup=finish_curiers(str(text_id), lang2).as_markup())
         await bot.send_message(chat_id=-1002244398985,
-                               text=f"<b>Курьер - {call.from_user.username} принял заказ!!!</b>")
+                               text=f"<b>Курьер - {call.from_user.username} принял заказ!!!</b>", parse_mode=ParseMode.HTML)
     except Exception as e:
         logging.exception(e)
 
@@ -374,9 +411,10 @@ async def card(call, state: FSMContext):
 @router.callback_query(lambda call: call.data and call.data.startswith("finish_"))
 async def card(call, state: FSMContext):
     try:
-        lang = await check_lang(call.message.chat.id)
         text = str(call.data).replace("finish_", "")
-        await bot.send_message(chat_id=int(text), text=f"Курьер завершает заказ?\nПодтвердить выполнение?",
+        lang = await check_lang(int(text))
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await bot.send_message(chat_id=int(text), text=f"<b>{_("Курьер завершает заказ?\nПодтвердить выполнение?", lang[0])} ✔️</b>",parse_mode=ParseMode.HTML,
                                reply_markup=i_cur(lang, ids).as_markup())
 
     except Exception as e:
@@ -389,7 +427,7 @@ async def card(call, state: FSMContext):
 
         text = str(call.data).replace("finish_", "")
         idss = text.replace("conf_", "")
-        await bot.send_message(chat_id=int(idss), text=f"Заказ завершен!!!")
+        await bot.send_message(chat_id=int(idss), text=f"{_("Обмен успешно")}")
         await bot.send_message(chat_id=int(text_id), text=f"Заказ завершен!!!")
 
     except Exception as e:

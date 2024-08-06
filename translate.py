@@ -34,7 +34,6 @@ translates = {
         "Очень хорошо": "Very good",
         "Введите реквизиты, на который вам отправить средства": "Enter the details to which you want to send the funds",
         "Осталось совсем чуть-чуть": "There's just a little bit left",
-        "Актуальный курс": "Actual course",
         "Вы отдадите": "You will give",
         "Вы получите": "You'll get",
         "Для продолжения выберите способ оплаты": "To continue, select a payment method",
@@ -89,7 +88,19 @@ translates = {
         "Сбербанк" : "Sberbank",
         "Т-Банк" : "T-Bank",
         "СБП" : "SBP",
-        "Карта" : "Card"
+        "Карта" : "Card",
+        "Ваша заявка принята!\nВаш курьер: ": "Your application has been accepted!\nYour courier:",
+        "Свяжитесь с ним для дальнейших действий": "Contact him for further action",
+        "Завершить заказ?": "Complete the order?",
+        "Завершить заказ": "Complete order",
+        "Завершать строго после выполнения!": "Finish strictly after completion!",
+        "Курьер завершает заказ?\nПодтвердить выполнение?": "Does the courier complete the order?\nConfirm completion?",
+        "Актуальный курс": "Current rate",
+        "Отлично!\nПроверьте свои данные для оформления заявки\n": "Great!\nCheck your details to complete your application\n",
+        "Наличный засчёт": "Cash payment",
+        "Безналичный засчёт": "Cashless payment",
+        "Расчёт": "Calculation",
+        "Выберете действие": "Choose an action"
     }
 }
 
