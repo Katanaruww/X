@@ -15,7 +15,7 @@ from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, ad
 from limits import limits_currency_pairs
 from translate import _
 from currency import get_pars, get_pars2
-from routers import check_lang
+from routers import check_lang, st_move_cards
 from inline_but import add_cur_offline, dell_state
 import sqlite3
 from dop_func.func_float import format_number
@@ -403,6 +403,7 @@ async def continue_in_deals(call):
         message += (f"<b>{_('Получаете сюда', lang[0])}:</b> <code>{data[9]}\n\n</code>"
                     f"<b>{_('По всем вопросам', lang[0])}:</b> @{data[10]}")
         x = await change_number_deal(id_deals, 1)
+        await st_move_cards(data[2], data[7])
         if x == 200:
             await call.message.edit_text(message, reply_markup=accept_deals(id_deals, lang[0]).as_markup())
     except Exception as e:
@@ -425,6 +426,7 @@ async def accept_in_deals(call):
                 f"<i>{_('Получаете', lang[0])}: <b>{format_number(deal_info[6], deal_info[3])} {deal_info[3]}\n\n</b></i>"
                 f"<code>{_('Ожидайте подтверждение перевода!', lang[0])}</code>\n"
                 f"<code>{_('По любым вопросам обращайтесь к своему оператору', lang[0])} @{deal_info[10]}</code>")
+
 
     except Exception as e:
         logging.exception(e)

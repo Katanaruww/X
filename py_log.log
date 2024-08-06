@@ -1,14 +1,23 @@
-2024-08-06 21:19:18,052 - INFO - start_polling: 527 - Start polling
-2024-08-06 21:19:18,782 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-08-06 21:19:20,711 - INFO - feed_update: 172 - Update id=377111573 is handled. Duration 1678 ms by bot id=6243740464
-2024-08-06 21:19:23,572 - INFO - feed_update: 172 - Update id=377111574 is handled. Duration 1041 ms by bot id=6243740464
-2024-08-06 21:19:26,370 - INFO - feed_update: 172 - Update id=377111575 is handled. Duration 252 ms by bot id=6243740464
-2024-08-06 21:19:28,585 - INFO - feed_update: 172 - Update id=377111576 is handled. Duration 325 ms by bot id=6243740464
-2024-08-06 21:19:30,480 - INFO - feed_update: 172 - Update id=377111577 is handled. Duration 257 ms by bot id=6243740464
-2024-08-06 21:19:36,521 - INFO - feed_update: 172 - Update id=377111578 is handled. Duration 267 ms by bot id=6243740464
-2024-08-06 21:19:42,632 - INFO - feed_update: 172 - Update id=377111579 is handled. Duration 3873 ms by bot id=6243740464
-2024-08-06 21:19:50,269 - INFO - feed_update: 172 - Update id=377111580 is handled. Duration 449 ms by bot id=6243740464
-2024-08-06 21:19:53,588 - INFO - feed_update: 172 - Update id=377111581 is handled. Duration 758 ms by bot id=6243740464
-2024-08-06 21:23:44,241 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
-2024-08-06 21:23:44,243 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-08-06 21:23:44,243 - INFO - start_polling: 554 - Polling stopped
+2024-08-07 00:37:32,408 - INFO - start_polling: 527 - Start polling
+2024-08-07 00:37:33,064 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-08-07 00:38:10,602 - INFO - feed_update: 172 - Update id=377111623 is handled. Duration 663 ms by bot id=6243740464
+2024-08-07 00:38:13,551 - INFO - feed_update: 172 - Update id=377111624 is handled. Duration 1186 ms by bot id=6243740464
+2024-08-07 00:38:15,783 - INFO - feed_update: 172 - Update id=377111625 is handled. Duration 948 ms by bot id=6243740464
+2024-08-07 00:38:17,484 - INFO - feed_update: 172 - Update id=377111626 is handled. Duration 238 ms by bot id=6243740464
+2024-08-07 00:38:19,961 - INFO - feed_update: 172 - Update id=377111627 is handled. Duration 238 ms by bot id=6243740464
+2024-08-07 00:38:21,413 - INFO - feed_update: 172 - Update id=377111628 is handled. Duration 237 ms by bot id=6243740464
+2024-08-07 00:38:24,413 - INFO - feed_update: 172 - Update id=377111629 is handled. Duration 258 ms by bot id=6243740464
+2024-08-07 00:38:32,093 - INFO - feed_update: 172 - Update id=377111630 is handled. Duration 1128 ms by bot id=6243740464
+2024-08-07 00:38:35,374 - INFO - feed_update: 172 - Update id=377111631 is handled. Duration 328 ms by bot id=6243740464
+2024-08-07 00:38:41,313 - INFO - feed_update: 172 - Update id=377111632 is handled. Duration 367 ms by bot id=6243740464
+2024-08-07 00:38:52,463 - INFO - feed_update: 172 - Update id=377111633 is handled. Duration 357 ms by bot id=6243740464
+2024-08-07 00:40:13,142 - INFO - feed_update: 172 - Update id=377111634 is handled. Duration 707 ms by bot id=6243740464
+2024-08-07 00:40:14,671 - INFO - feed_update: 172 - Update id=377111635 is handled. Duration 278 ms by bot id=6243740464
+2024-08-07 00:40:15,932 - INFO - feed_update: 172 - Update id=377111636 is handled. Duration 258 ms by bot id=6243740464
+2024-08-07 00:40:19,092 - INFO - feed_update: 172 - Update id=377111637 is handled. Duration 399 ms by bot id=6243740464
+2024-08-07 00:40:23,100 - INFO - feed_update: 172 - Update id=377111638 is handled. Duration 1087 ms by bot id=6243740464
+2024-08-07 00:40:25,001 - INFO - feed_update: 172 - Update id=377111639 is handled. Duration 263 ms by bot id=6243740464
+2024-08-07 00:40:27,431 - INFO - feed_update: 172 - Update id=377111640 is handled. Duration 368 ms by bot id=6243740464
+2024-08-07 00:40:37,362 - INFO - feed_update: 172 - Update id=377111641 is handled. Duration 318 ms by bot id=6243740464
+2024-08-07 01:37:45,235 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-08-07 01:37:45,235 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)

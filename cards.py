@@ -36,7 +36,6 @@ async def add_start_card(call):
 async def add_currency_card(call):
     try:
         call_id = call.data.split("_")[2]
-        print(call_id, "в ахуе х2")
         type_v = call.data.split("_")[1]
         await add_cards_start(type_v, call_id)
         if type_v == "RUB":
@@ -246,3 +245,4 @@ async def get_card_check_deals(deal_id):
     except Exception as e:
         logging.warning(e)
         logging.error(traceback.print_exc())
+

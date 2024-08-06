@@ -244,3 +244,35 @@ async def change_number_deal(call_id, num):
     except Exception as e:
         logging.warning(e)
 
+
+async def st_move_cards(curr, name_bank=None):
+    try:
+        if curr == "RUB":
+            roww = conn.execute(
+                "SELECT rekv, id_c FROM cards WHERE type_pay = ? AND curr = ? AND st = '1' AND status ='1'",
+                (name_bank, curr)).fetchone()
+            next_card = conn.execute(
+                "SELECT id_c, rekv, status FROM cards WHERE type_pay = ? AND curr = ? AND st = '1'",
+                (name_bank, curr)).fetchall()
+        else:
+            roww = conn.execute("SELECT rekv, id_c FROM cards WHERE curr = ? AND st = '1' AND status ='1'",
+                                (curr,)).fetchone()
+            next_card = conn.execute("SELECT id_c, rekv, status FROM cards WHERE curr = ? AND st = '1'",
+                                     (curr,)).fetchall()
+
+        conn.execute("UPDATE cards SET status = ? WHERE id_c = ?", ("0", roww[1]))
+        conn.commit()
+        lict = []
+        for i in range(len(next_card)):
+            while next_card[i][2] == "1":
+                try:
+                    lict.append(next_card[i + 1])
+                    break
+                except IndexError:
+                    lict.append(next_card[0])
+                    break
+
+        conn.execute("UPDATE cards SET status = ? WHERE id_c = ?", ("1", lict[0][0]))
+        conn.commit()
+    except Exception as e:
+        logging.warning(e)
