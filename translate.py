@@ -110,7 +110,12 @@ translates = {
         "Выберите качество работы курьера:": "Select the quality of the courier's work",
         "Спасибо за отзыв": "Thanks for your feedback",
         "Рейтинг курьера": "Courier rating",
-        "Курьер на стажировке": "Courier on internship"
+        "Курьер на стажировке": "Courier on internship",
+        "Перевод подтвержден": "Transfer confirmed",
+        "Ожидайте подтверждение перевода вам": "Awaiting confirmation of transfer to you",
+        "Что то пошло не так": "Something went wrong",
+        "Напишите своему оператору для уточнения информации": "Write to your operator for more information",
+        "Написать оператору": "Write to the operator"
 
 
     }

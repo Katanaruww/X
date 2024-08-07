@@ -161,7 +161,19 @@ def accept_deals(call_id, lang):
     acc_d.adjust(1, 1)
     return acc_d
 
+def help_oper(link_oper, lang):
+    heo = InlineKeyboardBuilder()
+    heo.button(text=f"{_('Написать оператору', lang)}", url=f"https://t.me/{link_oper}")
+    heo.adjust(1)
+    return heo
 
+def final_button(id_deals, link_us):
+    fib = InlineKeyboardBuilder()
+    fib.button(text="Оплачено😊", callback_data=f"final_{id_deals}")
+    fib.button(text="Написать пользователю", url=f"https://t.me/{link_us}")
+    fib.button(text="Отменить сделку📛", callback_data=f"canfinal_{id_deals}")
+    fib.adjust(1, 1, 1)
+    return fib
 ### ОНЛАЙН СДЕЛКА ###
 """MYZONE"""
 
@@ -345,3 +357,4 @@ def delete_card_button(call_id):
     del_c_b.button(text="Назад🔙", callback_data=f"back_admin")
     del_c_b.adjust(1, 1)
     return del_c_b
+

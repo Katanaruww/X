@@ -7,7 +7,7 @@ from aiogram.types import FSInputFile
 from aiogram import types
 import config
 from inline_but import *
-from routers import (check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
+from routers import (check_us, check_lang, db_rep_lang, db_add_start_deals, db_delete_deal, add_pars_deals_onl, db_view_type_give,
                      print_deals, add_amount_out, add_t_p, add_type_our, get_card_db, change_number_deal)
 from cards import get_card_check_deals
 from translate import _
@@ -19,6 +19,7 @@ from routers import check_lang, st_move_cards
 from inline_but import add_cur_offline, dell_state
 import sqlite3
 from dop_func.func_float import format_number
+from auto import check_transaction
 from aiogram.enums.parse_mode import ParseMode
 # ERTYU
 router = Router()
@@ -44,7 +45,8 @@ def sql_start():
 
     base.execute('CREATE TABLE IF NOT EXISTS courier(id INTEGER PRIMARY KEY AUTOINCREMENT ,username TEXT, tg_id INTEGER, name TEXT, area TEXT, Like INTEGER)')
 
-    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, cash TEXT, innn TEXT, out TEXT, area TEXT, time TEXT)')
+    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, cash TEXT, '
+                 'innn TEXT, out TEXT, area TEXT, time TEXT)')
 
     base.execute('CREATE TABLE IF NOT EXISTS Reviews(username TEXT NOT NULL , stars TEXT NOT NULL)')
 
@@ -448,6 +450,27 @@ async def accept_in_deals(call):
                 f"<i>{_('Получаете', lang[0])}: <b>{format_number(deal_info[6], deal_info[3])} {deal_info[3]}\n\n</b></i>"
                 f"<code>{_('Ожидайте подтверждение перевода!', lang[0])}</code>\n"
                 f"<code>{_('По любым вопросам обращайтесь к своему оператору', lang[0])} @{deal_info[10]}</code>")
+        print(deal_info[7])
+        answer = await check_transaction.auto_check(id_deal, deal_info[7])
+        if answer == True:
+            print("ok")
+            user = await check_us(deal_info[1])
+            await bot.send_message(deal_info[1], f"<b>{_('Перевод подтвержден', lang[0])}🎉</b>\n\n"
+                                            f"<code>{_('Ожидайте подтверждение перевода вам', lang[0])})</code>", parse_mode="HTML")
+            await bot.send_message(-1002224991103, f"<b>Сделка №{deal_info[0]}</b>\n\n"
+                                                   f"<b>Платеж подтвержден.</b>\n\n"
+                                                   f"<b>Валюта:</b> <i>{deal_info[3]}</i>\n"
+                                                   f"<b>Реквизиты:</b> <code>{deal_info[8]}</code>\n\n"
+                                                   f"<b>>Сумма перевода:</b> <code>{deal_info[6]}</code> <i>{deal_info[3]}</i>", parse_mode="HTML", reply_markup=final_button(id_deal, user[2]).as_markup())
+        if answer == False:
+            user = await check_us(deal_info[1])
+            await bot.send_message(deal_info[1], f"<b>{_('Что то пошло не так', lang[0])}(</b>\n\n"
+                                                 f"<code>{_('Напишите своему оператору для уточнения информации', lang[0])}</code>", parse_mode="HTML", reply_markup=help_oper(deal_info[10], lang[0]).as_markup())
+            await bot.send_message(-1002224991103, f"<b>Сделка №{deal_info[0]}</b>\n\n"
+                                                   f"<b>Платеж НЕ подтвержден.</b>\n\n"
+                                                   f"<b>Валюта:</b> <i>{deal_info[3]}</i>\n"
+                                                   f"<b>Реквизиты:</b> <code>{deal_info[8]}</code>\n\n"
+                                                   f"<b>Сумма перевода:</b> <code>{deal_info[6]}</code> <i>{deal_info[3]}</i>", parse_mode="HTML", reply_markup=final_button(id_deal, user[2]).as_markup())
 
 
     except Exception as e:
