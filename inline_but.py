@@ -52,7 +52,11 @@ def inline_geo(lang):
     rul.button(text=f"{_('Нет', lang[0])}🔴", callback_data="nogeo")
     rul.adjust(2)
     return rul
-
+def kura(lang, idddd):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Связь с курьером', lang[0])}👤", url=f"https://t.me/{idddd}")
+    rul.adjust(2)
+    return rul
 def i_cur(lang, ids):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Подтвердить', lang[0])}🟢", callback_data=f"conf_{ids}")
@@ -64,6 +68,7 @@ def beznal(lang):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Наличный засчёт', lang[0])}💵", callback_data=f"nal")
     rul.button(text=f"{_('Безналичный засчёт', lang[0])}💳", callback_data=f"beznal")
+    rul.button(text=f"{_('Отмена', lang[0])}🔴", callback_data="dell_geo")
     rul.adjust(2)
     return rul
 def in_gps(lang):

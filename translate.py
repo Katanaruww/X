@@ -100,7 +100,11 @@ translates = {
         "Наличный засчёт": "Cash payment",
         "Безналичный засчёт": "Cashless payment",
         "Расчёт": "Calculation",
-        "Выберете действие": "Choose an action"
+        "Выберете действие": "Choose an action",
+        "Наличные": "Cash",
+        "Безналички": "Cashless",
+        "Связь с курьером": "Contact the courier"
+
     }
 }
 
