@@ -44,18 +44,39 @@ def sql_start():
 
     base.execute('CREATE TABLE IF NOT EXISTS courier(id INTEGER PRIMARY KEY AUTOINCREMENT ,username TEXT, tg_id INTEGER, name TEXT, area TEXT, Like INTEGER)')
 
-    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, innn TEXT, out TEXT, area TEXT, time TEXT)')
+    base.execute('CREATE TABLE IF NOT EXISTS deals(username TEXT, id INTEGER, onecur TEXT, twocur INTEGER, cash TEXT, innn TEXT, out TEXT, area TEXT, time TEXT)')
 
+    base.execute('CREATE TABLE IF NOT EXISTS Reviews(username TEXT NOT NULL , stars TEXT NOT NULL)')
 
     base.commit()
 
 
 """РАССЫЛКА"""
 
-async def send_deals(o, n, e, r, w, t, j, i):
-    cur.execute("INSERT INTO deals (username, id, onecur, twocur, innn, out, area, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, j, i))
+async def send_deals(o, n, e, r, w, t, j, i, k):
+    cur.execute("INSERT INTO deals (username, id, onecur, twocur, cash, innn, out, area, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, j, i, k,))
     base.commit()
 
+async def get_average_rating(courier_id, lang):
+    try:
+        cur.execute('SELECT SUM(stars), COUNT(stars) FROM Reviews WHERE username = ?', (courier_id,))
+        result = cur.fetchone()
+        if result and result[1] == 0:  # Если записей нет
+            return f"{_("Курьер на стажировке", lang[0])}"
+        if result and result[0] is not None and result[1] is not None and result[1] != 0:
+            total_sum = result[0]
+            count = result[1]
+            return round(total_sum / count, 2)  # Округление до двух знаков после запятой
+        return f"{_("Курьер на стажировке", lang[0])}"
+    except sqlite3.Error as e:
+        logging.error(f"SQLite error: {e}")
+        return f"{_("Курьер на стажировке", lang[0])}"
+
+
+
+async def send_reviews(o, n):
+    cur.execute("INSERT INTO Reviews (username, stars) VALUES (?, ?)", (o, n))
+    base.commit()
 
 async def send_broadcast(message_text, photo_url):
     cur.execute('SELECT id FROM users_id')
@@ -215,11 +236,12 @@ async def get_cur2(val_out, call: types.CallbackQuery, val_in, amount, state: FS
             print(resultone)
             if result is not None:
                 curs = round(float(result))
-
+                print(f"val_in {val_in}")
+                print(f"val_out {val_out}")
                 return (f"<b><i>💰 {_(text='Актуальный курс', lang=lang[0])}: {format_number(float(resultone), val_out)} {val_out}\n💳 "
                         f"{_(text='Вы отдадите', lang=lang[0])}: {format_number(float(amount), val_in)} {val_in}\n💸 "
                         f"{_(text='Обмен по актуальному курсу будет составлять:', lang=lang[0])}"
-                        f"{str(float(format_number(float(resultone), val_out))*float(format_number(float(amount), val_in)))} {val_out}</i></b>")
+                        f"{str(format_number(float(format_number(float(resultone), val_out))*float(format_number(float(amount), val_in)), val_out))} {val_out}</i></b>")
             else:
                 # Если результат None, то сообщение об ошибке
                 return f"{_(text='Не удалось получить курс. Повторите попытку позже.', lang=lang[0])}"

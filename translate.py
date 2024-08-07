@@ -97,13 +97,21 @@ translates = {
         "Курьер завершает заказ?\nПодтвердить выполнение?": "Does the courier complete the order?\nConfirm completion?",
         "Актуальный курс": "Current rate",
         "Отлично!\nПроверьте свои данные для оформления заявки\n": "Great!\nCheck your details to complete your application\n",
-        "Наличный засчёт": "Cash payment",
-        "Безналичный засчёт": "Cashless payment",
+        "Наличный расчёт": "Cash payment",
+        "Безналичный расчёт": "Cashless payment",
         "Расчёт": "Calculation",
         "Выберете действие": "Choose an action",
         "Наличные": "Cash",
         "Безналички": "Cashless",
-        "Связь с курьером": "Contact the courier"
+        "Связь с курьером": "Contact the courier",
+        "Обмен успешно завершен": "Exchange completed successfully",
+        "Хотите ли оставить отзывы?": "Would you like to leave feedback?",
+        "Оставить отзыв": "Leave feedback",
+        "Выберите качество работы курьера:": "Select the quality of the courier's work",
+        "Спасибо за отзыв": "Thanks for your feedback",
+        "Рейтинг курьера": "Courier rating",
+        "Курьер на стажировке": "Courier on internship"
+
 
     }
 }

@@ -57,6 +57,22 @@ def kura(lang, idddd):
     rul.button(text=f"{_('Связь с курьером', lang[0])}👤", url=f"https://t.me/{idddd}")
     rul.adjust(2)
     return rul
+def otviz(lang, idddd):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"{_('Оставить отзыв', lang[0])}📢", callback_data=f"otzivi_{idddd}")
+    rul.button(text=f"{_('Отмена', lang[0])}🔴", callback_data=f"exitnaxui")
+    rul.adjust(2)
+    return rul
+
+def otviz2(idddd):
+    rul = InlineKeyboardBuilder()
+    rul.button(text=f"1⭐️", callback_data=f"ete_1_{idddd}")
+    rul.button(text=f"2⭐️", callback_data=f"ete_2_{idddd}")
+    rul.button(text=f"3⭐️", callback_data=f"ete_3_{idddd}")
+    rul.button(text=f"4⭐️", callback_data=f"ete_4_{idddd}")
+    rul.button(text=f"5⭐️", callback_data=f"ete_5_{idddd}")
+    rul.adjust(5)
+    return rul
 def i_cur(lang, ids):
     rul = InlineKeyboardBuilder()
     rul.button(text=f"{_('Подтвердить', lang[0])}🟢", callback_data=f"conf_{ids}")
@@ -66,8 +82,8 @@ def i_cur(lang, ids):
 
 def beznal(lang):
     rul = InlineKeyboardBuilder()
-    rul.button(text=f"{_('Наличный засчёт', lang[0])}💵", callback_data=f"nal")
-    rul.button(text=f"{_('Безналичный засчёт', lang[0])}💳", callback_data=f"beznal")
+    rul.button(text=f"{_('Наличный расчёт', lang[0])}💵", callback_data=f"nal")
+    rul.button(text=f"{_('Безналичный расчёт', lang[0])}💳", callback_data=f"beznal")
     rul.button(text=f"{_('Отмена', lang[0])}🔴", callback_data="dell_geo")
     rul.adjust(2)
     return rul
