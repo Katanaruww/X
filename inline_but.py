@@ -161,9 +161,13 @@ def accept_deals(call_id, lang):
     acc_d.adjust(1, 1)
     return acc_d
 
-def help_oper(link_oper, lang):
+def help_oper(link_oper, lang, st=0):
     heo = InlineKeyboardBuilder()
-    heo.button(text=f"{_('Написать оператору', lang)}", url=f"https://t.me/{link_oper}")
+    if st == 0:
+        heo.button(text=f"{_('Написать оператору', lang)}", url=f"https://t.me/{link_oper}")
+    elif st == 1:
+        heo.button(text=f"{_('Написать оператору', lang)}", url=f"https://t.me/{link_oper}")
+        #heo.button(text=f"{_('Оставить отзыв', lang)}", callback_data=f"rec-feedback_{}")
     heo.adjust(1)
     return heo
 

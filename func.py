@@ -21,6 +21,7 @@ import sqlite3
 from dop_func.func_float import format_number
 from auto import check_transaction
 from aiogram.enums.parse_mode import ParseMode
+import traceback
 # ERTYU
 router = Router()
 bot = Bot(config.token[0])
@@ -59,10 +60,11 @@ async def send_deals(o, n, e, r, w, t, j, i, k):
     cur.execute("INSERT INTO deals (username, id, onecur, twocur, cash, innn, out, area, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, j, i, k,))
     base.commit()
 
-async def get_average_rating(courier_id, lang):
+async def get_average_rating(courier_id, idsse):
     try:
         cur.execute('SELECT SUM(stars), COUNT(stars) FROM Reviews WHERE username = ?', (courier_id,))
         result = cur.fetchone()
+        lang = await check_lang(idsse)
         if result and result[1] == 0:  # Если записей нет
             return f"{_("Курьер на стажировке", lang[0])}"
         if result and result[0] is not None and result[1] is not None and result[1] != 0:
@@ -458,23 +460,51 @@ async def accept_in_deals(call):
             await bot.send_message(deal_info[1], f"<b>{_('Перевод подтвержден', lang[0])}🎉</b>\n\n"
                                             f"<code>{_('Ожидайте подтверждение перевода вам', lang[0])})</code>", parse_mode="HTML")
             await bot.send_message(-1002224991103, f"<b>Сделка №{deal_info[0]}</b>\n\n"
-                                                   f"<b>Платеж подтвержден.</b>\n\n"
+                                                   f"<b>Платеж подтвержден🟢</b>\n\n"
                                                    f"<b>Валюта:</b> <i>{deal_info[3]}</i>\n"
-                                                   f"<b>Реквизиты:</b> <code>{deal_info[8]}</code>\n\n"
-                                                   f"<b>>Сумма перевода:</b> <code>{deal_info[6]}</code> <i>{deal_info[3]}</i>", parse_mode="HTML", reply_markup=final_button(id_deal, user[2]).as_markup())
+                                                   f"<b>Реквизиты:</b> <code>{deal_info[9]}</code>\n\n"
+                                                   f"<b>>Сумма перевода:</b> <code>{format_number(deal_info[6], deal_info[3])}</code> <i>{deal_info[3]}</i>", parse_mode="HTML", reply_markup=final_button(id_deal, user[2]).as_markup())
         if answer == False:
             user = await check_us(deal_info[1])
             await bot.send_message(deal_info[1], f"<b>{_('Что то пошло не так', lang[0])}(</b>\n\n"
                                                  f"<code>{_('Напишите своему оператору для уточнения информации', lang[0])}</code>", parse_mode="HTML", reply_markup=help_oper(deal_info[10], lang[0]).as_markup())
             await bot.send_message(-1002224991103, f"<b>Сделка №{deal_info[0]}</b>\n\n"
-                                                   f"<b>Платеж НЕ подтвержден.</b>\n\n"
+                                                   f"<b>Платеж НЕ подтвержден🛑</b>\n\n"
                                                    f"<b>Валюта:</b> <i>{deal_info[3]}</i>\n"
-                                                   f"<b>Реквизиты:</b> <code>{deal_info[8]}</code>\n\n"
-                                                   f"<b>Сумма перевода:</b> <code>{deal_info[6]}</code> <i>{deal_info[3]}</i>", parse_mode="HTML", reply_markup=final_button(id_deal, user[2]).as_markup())
+                                                   f"<b>Реквизиты:</b> <code>{deal_info[9]}</code>\n\n"
+                                                   f"<b>Сумма перевода:</b> <code>{format_number(deal_info[6], deal_info[3])}</code> <i>{deal_info[3]}</i>\n\n"
+                                                   f"Свяжитесь с покупателем для уточнения информации", parse_mode="HTML", reply_markup=final_button(id_deal, user[2]).as_markup())
 
 
     except Exception as e:
+        traceback.print_exc()
         logging.exception(e)
 
 
+async def final_deals(call):
+    try:
+        id_deal = call.data.split("_")[1]
+        deal_info = await print_deals(id_deal)
+        user = await check_us(deal_info[1])
+        lang = await check_lang(user[1])
+        stat = await change_number_deal(id_deal, 3)
+        await call.message.edit_text(f"<b>Сделка №{deal_info[0]} завершена</b>🟢\n"
+                                        f"<i>Пользователь: @{user[2]}</i>")
+        await bot.send_message(user[1], f"{_('Оператор подтвердил перевод средств', lang[0])}🟢\n"
+                                            f"{_('Ожидайте поступлление средств', lang[0])}\n\n"
+                                            f"{_('Если в течении 20 минут вам не поступили средства напишите оператору', lang[0])}\n\n"
+                                            f"{_('Хорошего дня', lang[0])}⚡️", reply_markup=help_oper(deal_info[10], lang[0], 1).as_markup())
+    except Exception as e:
+        traceback.print_exc()
+        logging.warning(e)
+
+
+async def cancel_final_deals(call):
+    try:
+        id_deal = call.data.split("_")[1]
+        await call.message.edit_text(f"<b>Введите причину отмены сделки:</b>\n")
+        return id_deal
+    except Exception as e:
+        traceback.print_exc()
+        logging.warning(e)
 ### КОНЕЦ СОЗДАНИЯ СДЕЛКИ ОНЛАЙН ###

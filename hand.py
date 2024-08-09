@@ -19,7 +19,7 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   deals_online_type_add, deals_online_cancel, get_messa, deals_add_curr,
                   deals_add_curr_finish,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method,
-                  send_deals, get_pars2, accept_in_deals, get_average_rating)
+                  send_deals, get_pars2, accept_in_deals, get_average_rating, final_deals, cancel_final_deals)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
 from func import get_cur, get_cur2, get_messs, get_cb, send_reviews
@@ -29,6 +29,7 @@ import check_address
 import datetime
 from dop_func.func_float import format_number
 from aiogram.enums.parse_mode import ParseMode
+import traceback
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
@@ -44,6 +45,8 @@ class fsm(StatesGroup):
     call_id_cards = State()
     rekv = State()
     rekv_us = State()
+    reason = State()
+    id_deal = State()
 
 
 class DealState(StatesGroup):
@@ -382,7 +385,7 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
                 reply_markup=oflline2(lang).as_markup())
             await state.set_state(DealState.choosing_currency2)
     except Exception as err:
-        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
 
         await message.answer(f"{_(text='Произошла ошибка. Пожалуйста, попробуйте снова.', lang=lang[0])}")
         await state.clear()
@@ -623,7 +626,23 @@ async def card(call, state: FSMContext):
         await activate_card(call)
     except Exception as e:
         logging.exception(e)
-
+@router.callback_query(lambda call: call.data and call.data.startswith("final_"))
+async def final(call, state: FSMContext):
+    try:
+        print(call.message)
+        await final_deals(call)
+    except Exception as e:
+        traceback.print_exc()
+        logging.exception(e)
+@router.callback_query(lambda call: call.data and call.data.startswith("canfinal_"))
+async def final(call, state: FSMContext):
+    try:
+        row = await cancel_final_deals(call)
+        await state.update_data(id_deal=row)
+        await state.set_state(fsm.reason)
+    except Exception as e:
+        traceback.print_exc()
+        logging.exception(e)
 
 @router.callback_query(lambda call: True)
 async def cal(call, state: FSMContext):
@@ -916,5 +935,24 @@ async def setrt(message: types.Message, state: FSMContext):
                              f"<i>Добавим еще реквизит?</i>", reply_markup=admin_exc().as_markup())
         await state.clear()
         await state.set_state(fsm.set_amount)
+    except Exception as e:
+        logging.exception(e)
+
+@router.message(fsm.reason)
+async def setrt(message: types.Message, state: FSMContext):
+    try:
+        await state.update_data(reason=message.text)
+        data = await state.get_data()
+        reason_get = data["reason"]
+        id_deal_get = data["id_deal"]
+        print(id_deal_get)
+        deal_info = await print_deals(id_deal_get)
+        user = await check_us(deal_info[1])
+        lang = await check_lang(user[1])
+        await message.answer(f"<b>Сделка №{deal_info[0]} отменена🔴</b>\n\n"
+                             f"<i>Причина: {reason_get}</i>")
+        await bot.send_message(deal_info[1], f"<b>Сделка №{deal_info[0]} отменена🔴</b>\n\n"
+                             f"<i>Причина: {reason_get}</i>", parse_mode="HTML",  reply_markup=help_oper(deal_info[10], lang[0]).as_markup())
+        await state.clear()
     except Exception as e:
         logging.exception(e)

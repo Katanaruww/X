@@ -115,7 +115,11 @@ translates = {
         "Ожидайте подтверждение перевода вам": "Awaiting confirmation of transfer to you",
         "Что то пошло не так": "Something went wrong",
         "Напишите своему оператору для уточнения информации": "Write to your operator for more information",
-        "Написать оператору": "Write to the operator"
+        "Написать оператору": "Write to the operator",
+        "Оператор подтвердил перевод средств": "The operator confirmed the transfer of funds",
+        "Ожидайте поступлление средств": "Stand by to receive funds",
+        "Если в течении 20 минут вам не поступили средства напишите оператору": "If you have not received the funds within 20 minutes, write to the operator",
+        "Хорошего дня": "Have a good day"
 
 
     }
