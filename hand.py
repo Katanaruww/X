@@ -84,7 +84,22 @@ bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
                     format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 
+# Словарь для хранения задач сброса состояния для каждого пользователя
+reset_tasks = {}
 
+async def reset_user_state(user_id: int, state: FSMContext):
+    await asyncio.sleep(300)  # 5 минут
+    current_state = await state.get_state()
+    if current_state is not None:
+        await state.clear()
+    # Удаляем задачу из словаря после выполнения
+    reset_tasks.pop(user_id, None)
+async def create_reset_task(user_id: int, state: FSMContext):
+    # Отменяем предыдущую задачу сброса, если она существует
+    if user_id in reset_tasks:
+        reset_tasks[user_id].cancel()
+    # Создаем новую задачу сброса состояния
+    reset_tasks[user_id] = asyncio.create_task(reset_user_state(user_id, state))
 @router.message(Command("start"))
 async def start_handler(msg: Message):
     try:
@@ -97,6 +112,7 @@ async def start_handler(msg: Message):
                 await msg.answer_photo(
                     caption=f"<b>{_('Добро пожаловать', lang[0])}, <i>{msg.chat.first_name}</i></b>",
                     reply_markup=start_but(lang[0]).as_markup(), photo=photo)
+
             except Exception as err:
                 logging.warning(err)
         else:
@@ -131,24 +147,34 @@ async def swertyhbubh(call, state: FSMContext):
                                    text=f"<b>New application!\n\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag), curs2)} {curs2} 💳\n\n{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠\n\nСalculation - {_(f"{ifbez}", lang[0])}\n\nTime deals - {current_time} 🧭</b>",parse_mode=ParseMode.HTML,
                                    reply_markup=get_curiers(call.from_user.id).as_markup())
             await state.clear()
+            if call.from_user.id in reset_tasks:
+                reset_tasks[call.from_user.id].cancel()
+                reset_tasks.pop(call.from_user.id)
         if ggg in {"nogeo"}:
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
             await state.clear()
+            if call.from_user.id in reset_tasks:
+                reset_tasks[call.from_user.id].cancel()
+                reset_tasks.pop(call.from_user.id)
         if ggg in {"yesgps"}:
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-            await send_deals(call.from_user.username, call.from_user.id, curs, curs2, str(su), str(round(float(laaaag))),
-                             str(f"{cu1} {cu2}"), current_time)
             await call.message.answer(
                 f"<b>{_('Ваша заявка успешно сохранена\nВ скором времени с вами свяжется курьер!', lang[0])}</b>")
             await bot.send_message(chat_id=-1002244398985,
                                    text=f"<b>New application!\n\nID - {call.from_user.id}\nUsername - {call.from_user.username}\n{_("Обмениваете - ", lang[0])} {su} {curs} 💳\n{_("Получаете - ", lang[0])} {format_number(float(laaaag), curs2)} {curs2} 💳\n\n{_("Ваш район - ", lang[0])}<code>{f"{cu1} {cu2}"}</code> 🏠\n\nСalculation - {_(f"{ifbez}", lang[0])}\n\nTime deals - {current_time} 🧭</b>",parse_mode=ParseMode.HTML,
                                    reply_markup=get_curiers(call.from_user.id).as_markup())
             await state.clear()
+            if call.from_user.id in reset_tasks:
+                reset_tasks[call.from_user.id].cancel()
+                reset_tasks.pop(call.from_user.id)
         if ggg in {"nogps"}:
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             await call.message.answer(f"<b>{_("Ваша заявка успешно отменена", lang[0])}</b>")
             await state.clear()
+            if call.from_user.id in reset_tasks:
+                reset_tasks[call.from_user.id].cancel()
+                reset_tasks.pop(call.from_user.id)
         else:
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
 
@@ -165,7 +191,7 @@ locations = {}
 
 @router.message(DealState.gps, F.location)
 async def location_handler(message: types.Message, state: FSMContext):
-    # try:
+    try:
         global cu1
         global cu2
         global rai1
@@ -193,8 +219,9 @@ async def location_handler(message: types.Message, state: FSMContext):
             f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(float(llllll), curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<i><b>{_("Расчёт", lang[0])}: {_(f"{ifbez}", lang[0])}💰</b></i>\n<b><i>{_("Ваш район - ", lang[0])} {f"{cu1} {cu2}"} 🏠</i></b>",
             reply_markup=in_gps(lang).as_markup())
         await state.set_state(DealState.yesorno)
-    # except Exception as e:
-    #     print(f"Произошла ошибка: {e}")
+        await create_reset_task(message.from_user.id, state)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
 
 @router.callback_query(DealState.geo, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
@@ -215,24 +242,26 @@ async def swertyhbubh(call, state: FSMContext):
                 f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll, curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<b><i>{_("Расчёт", lang[0])} - {_(f"{ifbez}", lang[0])}💰</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
                 reply_markup=inline_geo(lang).as_markup())
             await state.set_state(DealState.yesorno)
+            await create_reset_task(call.from_user.id, state)
         if geo in {"Semen"}:
             geo = "Сменьяк"
             await call.message.answer(
                 f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll, curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<b><i>{_("Расчёт", lang[0])} - {_(f"{ifbez}", lang[0])}💰</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
                 reply_markup=inline_geo(lang).as_markup())
             await state.set_state(DealState.yesorno)
-
+            await create_reset_task(call.from_user.id, state)
         if geo in {"Ubud"}:
             geo = "Убуд"
             await call.message.answer(
                 f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки\n', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(llllll, curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<b><i>{_("Расчёт", lang[0])} - {_(f"{ifbez}", lang[0])}💰</i></b>\n<b><i>{_("Ваш район - ", lang[0])} {_(f"{geo}", lang[0])} 🏠</i></b>",
                 reply_markup=inline_geo(lang).as_markup())
             await state.set_state(DealState.yesorno)
-
+            await create_reset_task(call.from_user.id, state)
         if geo in {"Geo"}:
             await call.message.answer(f"<b>{_('Отправьте свою геопозицию', lang[0])}</b>",
                                       reply_markup=dell_gps000(lang).as_markup())
             await state.set_state(DealState.gps)
+            await create_reset_task(call.from_user.id, state)
         if geo in {"dell_gps"}:
             # await call.message.answer(f"<b>{_(text='Сделка отменена', lang=lang[0])}</b>🚫")
             await get_cb(call, state)
@@ -261,13 +290,14 @@ async def nalnal(call, state: FSMContext):
             await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}',
                                       reply_markup=get_geo(lang).as_markup())
             await state.set_state(DealState.geo)
-
+            await create_reset_task(call.from_user.id, state)
         if ifbez in {"beznal"}:
             ifbez = "Безналичный расчёт"
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             await call.message.answer(f'{_(text="В каком районе вы находитесь?", lang=lang[0])}',
                                       reply_markup=get_geo(lang).as_markup())
             await state.set_state(DealState.geo)
+            await create_reset_task(call.from_user.id, state)
         if ifbez in {"dell_geo"}:
             await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             await get_cb(call, state)
@@ -303,7 +333,7 @@ async def rextryftugiu(call, state: FSMContext):
                 await call.message.answer(f'{currency}\n\n{_(text="Выберете действие", lang=lang[0])}:', reply_markup=beznal(lang).as_markup())
 
                 await state.set_state(DealState.nalbeznal)
-
+                await create_reset_task(call.from_user.id, state)
             else:
 
                 await state.clear()
@@ -335,6 +365,7 @@ async def swertyhbubh(call, state: FSMContext):
             if currency == True:
                 await get_messs(curs, call)
                 await state.set_state(DealState.currency1)
+                await create_reset_task(call.from_user.id, state)
             if currency == False:
                 await call.message.edit_text(f"{_(text='Повторите попытку', lang=lang[0])}")
         else:
@@ -384,6 +415,7 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
                 f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
                 reply_markup=oflline2(lang).as_markup())
             await state.set_state(DealState.choosing_currency2)
+            await create_reset_task(message.from_user.id, state)
     except Exception as err:
         await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
 
@@ -453,11 +485,12 @@ async def card(call, state: FSMContext):
         idss = text.replace("conf_", "")
         laaaag = await get_pars2(curs, curs2, int(su))
         lang = await check_lang(int(text_id))
+        lang808 = await check_lang(int(idss))
         await send_deals(call.from_user.username, call.from_user.id, curs, curs2, ifbez, str(su),
                          str(round(float(laaaag))),
                          geo, current_time)
-        await bot.send_message(chat_id=int(idss), text=f"{_("Обмен успешно")}")
-        await bot.send_message(chat_id=int(text_id), text=f"<b>{_("Обмен успешно завершен")}🟢\n\n{_("Хотите ли оставить отзывы?", lang[0])}📣</b>",parse_mode=ParseMode.HTML, reply_markup=otviz(lang, idss).as_markup())
+        await bot.send_message(chat_id=int(idss), text=f"{_("Обмен прошёл успешно!", lang808[0])}🙂")
+        await bot.send_message(chat_id=int(text_id), text=f"<b>{_("Обмен успешно завершен", lang[0])}🟢\n\n{_("Хотите ли оставить отзывы?", lang[0])}📣</b>",parse_mode=ParseMode.HTML, reply_markup=otviz(lang, idss).as_markup())
 
     except Exception as e:
         logging.exception(e)
@@ -484,7 +517,6 @@ async def otziv(call, state: FSMContext):
         lang = await check_lang(call.from_user.id)
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         await send_reviews(str(iddds), str(numer))
-        print(curidd, numer)
         await call.message.answer(f"<b>{_("Спасибо за отзыв", lang[0])}☺️</b>", parse_mode=ParseMode.HTML)
 
     except Exception as e:
@@ -713,6 +745,7 @@ async def cal(call, state: FSMContext):
             await call.message.edit_text(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
                                          reply_markup=oflline(lang).as_markup())
             await state.set_state(DealState.choosing_currency)
+            await create_reset_task(call.from_user.id, state)
         except Exception as err:
             logging.exception(err)
 
@@ -787,7 +820,11 @@ async def cal(call, state: FSMContext):
                 reply_markup=setting_rasilka(lang).as_markup(), photo=photo)
         except Exception as err:
             logging.warning(err)
-
+    elif call.data == "exitnaxui":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
 
 """ЭТО ОФФЛАЙН НАХУЙ"""
 

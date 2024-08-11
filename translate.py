@@ -119,7 +119,8 @@ translates = {
         "Оператор подтвердил перевод средств": "The operator confirmed the transfer of funds",
         "Ожидайте поступлление средств": "Stand by to receive funds",
         "Если в течении 20 минут вам не поступили средства напишите оператору": "If you have not received the funds within 20 minutes, write to the operator",
-        "Хорошего дня": "Have a good day"
+        "Хорошего дня": "Have a good day",
+        "Обмен прошёл успешно!": "The exchange was successful!"
 
 
     }
