@@ -1,20 +1,1153 @@
-2024-08-10 00:29:54,221 - INFO - start_polling: 527 - Start polling
-2024-08-10 00:29:54,883 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-08-10 00:30:00,136 - INFO - feed_update: 172 - Update id=377112787 is handled. Duration 1553 ms by bot id=6243740464
-2024-08-10 00:30:02,849 - INFO - feed_update: 172 - Update id=377112788 is handled. Duration 1197 ms by bot id=6243740464
-2024-08-10 00:30:04,915 - INFO - feed_update: 172 - Update id=377112789 is handled. Duration 774 ms by bot id=6243740464
-2024-08-10 00:30:07,061 - INFO - feed_update: 172 - Update id=377112790 is handled. Duration 310 ms by bot id=6243740464
-2024-08-10 00:30:08,839 - INFO - feed_update: 172 - Update id=377112791 is handled. Duration 248 ms by bot id=6243740464
-2024-08-10 00:30:12,210 - INFO - feed_update: 172 - Update id=377112792 is handled. Duration 378 ms by bot id=6243740464
-2024-08-10 00:30:18,780 - INFO - feed_update: 172 - Update id=377112793 is handled. Duration 4038 ms by bot id=6243740464
-2024-08-10 00:30:24,360 - INFO - feed_update: 172 - Update id=377112794 is handled. Duration 608 ms by bot id=6243740464
-2024-08-10 00:30:30,940 - INFO - feed_update: 172 - Update id=377112795 is handled. Duration 4428 ms by bot id=6243740464
-2024-08-10 00:30:46,010 - INFO - feed_update: 172 - Update id=377112796 is handled. Duration 2287 ms by bot id=6243740464
-2024-08-10 00:30:52,930 - INFO - feed_update: 172 - Update id=377112797 is handled. Duration 1668 ms by bot id=6243740464
-2024-08-10 00:30:55,150 - INFO - feed_update: 172 - Update id=377112798 is handled. Duration 478 ms by bot id=6243740464
-2024-08-10 00:30:59,310 - INFO - feed_update: 172 - Update id=377112799 is handled. Duration 1868 ms by bot id=6243740464
-2024-08-10 00:31:07,431 - INFO - feed_update: 172 - Update id=377112800 is handled. Duration 1078 ms by bot id=6243740464
-2024-08-10 00:31:09,710 - INFO - feed_update: 172 - Update id=377112801 is handled. Duration 597 ms by bot id=6243740464
-2024-08-10 00:33:51,164 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
-2024-08-10 00:33:51,167 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
-2024-08-10 00:33:51,167 - INFO - start_polling: 554 - Polling stopped
+2024-08-11 19:02:31,754 - INFO - start_polling: 527 - Start polling
+2024-08-11 19:02:32,377 - INFO - _polling: 341 - Run polling for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-08-11 19:02:33,907 - INFO - feed_update: 172 - Update id=377112993 is handled. Duration 655 ms by bot id=6243740464
+2024-08-11 19:02:38,517 - INFO - feed_update: 172 - Update id=377112994 is handled. Duration 235 ms by bot id=6243740464
+2024-08-11 19:02:43,856 - INFO - feed_update: 172 - Update id=377112995 is handled. Duration 229 ms by bot id=6243740464
+2024-08-11 19:02:47,567 - INFO - feed_update: 172 - Update id=377112996 is handled. Duration 308 ms by bot id=6243740464
+2024-08-11 19:02:50,152 - INFO - feed_update: 172 - Update id=377112997 is handled. Duration 1689 ms by bot id=6243740464
+2024-08-11 19:02:53,056 - INFO - feed_update: 172 - Update id=377112998 is handled. Duration 367 ms by bot id=6243740464
+2024-08-11 19:02:59,457 - INFO - feed_update: 172 - Update id=377112999 is handled. Duration 520 ms by bot id=6243740464
+2024-08-11 19:03:02,257 - INFO - feed_update: 172 - Update id=377113000 is handled. Duration 248 ms by bot id=6243740464
+2024-08-11 19:03:04,328 - INFO - feed_update: 172 - Update id=377113001 is handled. Duration 271 ms by bot id=6243740464
+2024-08-11 19:03:15,937 - INFO - feed_update: 172 - Update id=377113002 is not handled. Duration 258 ms by bot id=6243740464
+2024-08-11 19:03:15,937 - ERROR - _process_update: 315 - Cause exception while process update id=377113002 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:03:19,236 - INFO - feed_update: 172 - Update id=377113003 is not handled. Duration 228 ms by bot id=6243740464
+2024-08-11 19:03:19,236 - ERROR - _process_update: 315 - Cause exception while process update id=377113003 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:03:22,037 - INFO - feed_update: 172 - Update id=377113004 is handled. Duration 229 ms by bot id=6243740464
+2024-08-11 19:03:24,588 - INFO - feed_update: 172 - Update id=377113005 is handled. Duration 357 ms by bot id=6243740464
+2024-08-11 19:03:28,907 - INFO - feed_update: 172 - Update id=377113006 is handled. Duration 968 ms by bot id=6243740464
+2024-08-11 19:03:33,649 - INFO - feed_update: 172 - Update id=377113007 is handled. Duration 310 ms by bot id=6243740464
+2024-08-11 19:03:42,558 - INFO - feed_update: 172 - Update id=377113008 is handled. Duration 307 ms by bot id=6243740464
+2024-08-11 19:03:44,416 - INFO - feed_update: 172 - Update id=377113009 is not handled. Duration 238 ms by bot id=6243740464
+2024-08-11 19:03:44,417 - ERROR - _process_update: 315 - Cause exception while process update id=377113009 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:03:47,817 - INFO - feed_update: 172 - Update id=377113010 is handled. Duration 228 ms by bot id=6243740464
+2024-08-11 19:03:57,877 - INFO - feed_update: 172 - Update id=377113011 is handled. Duration 268 ms by bot id=6243740464
+2024-08-11 19:04:01,198 - INFO - feed_update: 172 - Update id=377113012 is handled. Duration 309 ms by bot id=6243740464
+2024-08-11 19:04:03,147 - INFO - feed_update: 172 - Update id=377113013 is handled. Duration 268 ms by bot id=6243740464
+2024-08-11 19:04:05,288 - INFO - feed_update: 172 - Update id=377113014 is not handled. Duration 299 ms by bot id=6243740464
+2024-08-11 19:04:05,289 - ERROR - _process_update: 315 - Cause exception while process update id=377113014 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:04:07,876 - INFO - feed_update: 172 - Update id=377113015 is not handled. Duration 287 ms by bot id=6243740464
+2024-08-11 19:04:07,876 - ERROR - _process_update: 315 - Cause exception while process update id=377113015 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:05:26,137 - INFO - feed_update: 172 - Update id=377113016 is handled. Duration 666 ms by bot id=6243740464
+2024-08-11 19:06:46,779 - INFO - feed_update: 172 - Update id=377113017 is handled. Duration 919 ms by bot id=6243740464
+2024-08-11 19:07:02,237 - INFO - feed_update: 172 - Update id=377113018 is handled. Duration 606 ms by bot id=6243740464
+2024-08-11 19:08:27,849 - INFO - feed_update: 172 - Update id=377113019 is handled. Duration 927 ms by bot id=6243740464
+2024-08-11 19:08:44,027 - INFO - feed_update: 172 - Update id=377113020 is handled. Duration 818 ms by bot id=6243740464
+2024-08-11 19:09:15,487 - INFO - feed_update: 172 - Update id=377113021 is handled. Duration 688 ms by bot id=6243740464
+2024-08-11 19:09:17,407 - INFO - feed_update: 172 - Update id=377113022 is handled. Duration 228 ms by bot id=6243740464
+2024-08-11 19:09:26,678 - INFO - feed_update: 172 - Update id=377113023 is handled. Duration 249 ms by bot id=6243740464
+2024-08-11 19:12:09,558 - INFO - feed_update: 172 - Update id=377113024 is handled. Duration 726 ms by bot id=6243740464
+2024-08-11 19:12:11,918 - INFO - feed_update: 172 - Update id=377113025 is handled. Duration 378 ms by bot id=6243740464
+2024-08-11 19:12:20,508 - INFO - feed_update: 172 - Update id=377113026 is handled. Duration 269 ms by bot id=6243740464
+2024-08-11 19:12:29,307 - INFO - feed_update: 172 - Update id=377113027 is handled. Duration 310 ms by bot id=6243740464
+2024-08-11 19:12:32,318 - INFO - feed_update: 172 - Update id=377113028 is handled. Duration 278 ms by bot id=6243740464
+2024-08-11 19:12:34,997 - INFO - feed_update: 172 - Update id=377113029 is handled. Duration 267 ms by bot id=6243740464
+2024-08-11 19:12:37,289 - INFO - feed_update: 172 - Update id=377113030 is handled. Duration 299 ms by bot id=6243740464
+2024-08-11 19:12:39,140 - INFO - feed_update: 172 - Update id=377113031 is handled. Duration 310 ms by bot id=6243740464
+2024-08-11 19:12:40,367 - INFO - feed_update: 172 - Update id=377113032 is not handled. Duration 308 ms by bot id=6243740464
+2024-08-11 19:12:40,368 - ERROR - _process_update: 315 - Cause exception while process update id=377113032 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:12:41,886 - INFO - feed_update: 172 - Update id=377113033 is not handled. Duration 296 ms by bot id=6243740464
+2024-08-11 19:12:41,886 - ERROR - _process_update: 315 - Cause exception while process update id=377113033 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:12:42,517 - INFO - feed_update: 172 - Update id=377113034 is not handled. Duration 637 ms by bot id=6243740464
+2024-08-11 19:12:42,518 - ERROR - _process_update: 315 - Cause exception while process update id=377113034 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:13:07,779 - INFO - feed_update: 172 - Update id=377113035 is handled. Duration 1499 ms by bot id=6243740464
+2024-08-11 19:13:16,817 - INFO - feed_update: 172 - Update id=377113036 is handled. Duration 1226 ms by bot id=6243740464
+2024-08-11 19:13:20,509 - INFO - feed_update: 172 - Update id=377113037 is handled. Duration 309 ms by bot id=6243740464
+2024-08-11 19:13:41,627 - INFO - feed_update: 172 - Update id=377113038 is handled. Duration 727 ms by bot id=6243740464
+2024-08-11 19:13:45,699 - INFO - feed_update: 172 - Update id=377113039 is handled. Duration 310 ms by bot id=6243740464
+2024-08-11 19:13:53,916 - INFO - feed_update: 172 - Update id=377113040 is handled. Duration 237 ms by bot id=6243740464
+2024-08-11 19:14:31,068 - INFO - feed_update: 172 - Update id=377113041 is handled. Duration 1548 ms by bot id=6243740464
+2024-08-11 19:15:35,808 - INFO - feed_update: 172 - Update id=377113042 is handled. Duration 658 ms by bot id=6243740464
+2024-08-11 19:15:52,570 - INFO - feed_update: 172 - Update id=377113043 is handled. Duration 919 ms by bot id=6243740464
+2024-08-11 19:17:51,818 - INFO - feed_update: 172 - Update id=377113044 is handled. Duration 11627 ms by bot id=6243740464
+2024-08-11 19:18:02,110 - INFO - feed_update: 172 - Update id=377113045 is handled. Duration 819 ms by bot id=6243740464
+2024-08-11 19:18:07,008 - INFO - feed_update: 172 - Update id=377113046 is handled. Duration 298 ms by bot id=6243740464
+2024-08-11 19:19:22,118 - INFO - feed_update: 172 - Update id=377113047 is handled. Duration 1466 ms by bot id=6243740464
+2024-08-11 19:19:50,738 - INFO - feed_update: 172 - Update id=377113048 is handled. Duration 1518 ms by bot id=6243740464
+2024-08-11 19:19:51,889 - INFO - feed_update: 172 - Update id=377113049 is handled. Duration 348 ms by bot id=6243740464
+2024-08-11 19:19:54,438 - INFO - feed_update: 172 - Update id=377113050 is handled. Duration 1228 ms by bot id=6243740464
+2024-08-11 19:19:55,649 - INFO - feed_update: 172 - Update id=377113051 is handled. Duration 278 ms by bot id=6243740464
+2024-08-11 19:21:06,788 - INFO - feed_update: 172 - Update id=377113052 is handled. Duration 876 ms by bot id=6243740464
+2024-08-11 19:21:08,618 - INFO - feed_update: 172 - Update id=377113053 is handled. Duration 298 ms by bot id=6243740464
+2024-08-11 19:21:09,421 - INFO - feed_update: 172 - Update id=377113054 is handled. Duration 228 ms by bot id=6243740464
+2024-08-11 19:21:16,919 - INFO - feed_update: 172 - Update id=377113055 is handled. Duration 227 ms by bot id=6243740464
+2024-08-11 19:21:21,921 - INFO - feed_update: 172 - Update id=377113056 is handled. Duration 341 ms by bot id=6243740464
+2024-08-11 19:21:40,098 - INFO - feed_update: 172 - Update id=377113057 is handled. Duration 668 ms by bot id=6243740464
+2024-08-11 19:21:59,799 - INFO - feed_update: 172 - Update id=377113058 is handled. Duration 638 ms by bot id=6243740464
+2024-08-11 19:22:08,790 - INFO - feed_update: 172 - Update id=377113059 is handled. Duration 309 ms by bot id=6243740464
+2024-08-11 19:22:10,988 - INFO - feed_update: 172 - Update id=377113060 is handled. Duration 327 ms by bot id=6243740464
+2024-08-11 19:22:13,091 - INFO - feed_update: 172 - Update id=377113061 is handled. Duration 310 ms by bot id=6243740464
+2024-08-11 19:22:14,548 - INFO - feed_update: 172 - Update id=377113062 is not handled. Duration 378 ms by bot id=6243740464
+2024-08-11 19:22:14,548 - ERROR - _process_update: 315 - Cause exception while process update id=377113062 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 19:58:04,012 - INFO - feed_update: 172 - Update id=377113063 is handled. Duration 703 ms by bot id=6243740464
+2024-08-11 19:58:09,531 - INFO - feed_update: 172 - Update id=377113064 is handled. Duration 1078 ms by bot id=6243740464
+2024-08-11 19:58:14,410 - INFO - feed_update: 172 - Update id=377113065 is handled. Duration 1136 ms by bot id=6243740464
+2024-08-11 19:58:16,752 - INFO - feed_update: 172 - Update id=377113066 is handled. Duration 250 ms by bot id=6243740464
+2024-08-11 19:58:22,815 - INFO - feed_update: 172 - Update id=377113067 is handled. Duration 287 ms by bot id=6243740464
+2024-08-11 19:58:31,972 - INFO - feed_update: 172 - Update id=377113068 is handled. Duration 1168 ms by bot id=6243740464
+2024-08-11 19:58:36,991 - INFO - feed_update: 172 - Update id=377113069 is handled. Duration 568 ms by bot id=6243740464
+2024-08-11 19:58:38,532 - INFO - feed_update: 172 - Update id=377113070 is handled. Duration 264 ms by bot id=6243740464
+2024-08-11 19:58:43,284 - INFO - feed_update: 172 - Update id=377113071 is handled. Duration 271 ms by bot id=6243740464
+2024-08-11 19:58:46,785 - INFO - feed_update: 172 - Update id=377113072 is handled. Duration 239 ms by bot id=6243740464
+2024-08-11 19:59:08,332 - INFO - feed_update: 172 - Update id=377113073 is handled. Duration 698 ms by bot id=6243740464
+2024-08-11 19:59:16,251 - INFO - feed_update: 172 - Update id=377113074 is handled. Duration 1138 ms by bot id=6243740464
+2024-08-11 19:59:28,423 - INFO - feed_update: 172 - Update id=377113075 is handled. Duration 247 ms by bot id=6243740464
+2024-08-11 19:59:50,704 - INFO - feed_update: 172 - Update id=377113076 is handled. Duration 11248 ms by bot id=6243740464
+2024-08-11 20:00:02,443 - INFO - feed_update: 172 - Update id=377113077 is handled. Duration 1437 ms by bot id=6243740464
+2024-08-11 20:00:18,224 - INFO - feed_update: 172 - Update id=377113078 is handled. Duration 3165 ms by bot id=6243740464
+2024-08-11 20:01:42,939 - INFO - feed_update: 172 - Update id=377113079 is handled. Duration 1853 ms by bot id=6243740464
+2024-08-11 20:01:58,676 - INFO - feed_update: 172 - Update id=377113080 is handled. Duration 2168 ms by bot id=6243740464
+2024-08-11 20:02:07,056 - INFO - feed_update: 172 - Update id=377113081 is handled. Duration 1138 ms by bot id=6243740464
+2024-08-11 20:02:09,455 - INFO - feed_update: 172 - Update id=377113082 is handled. Duration 478 ms by bot id=6243740464
+2024-08-11 20:02:11,158 - INFO - feed_update: 172 - Update id=377113083 is handled. Duration 361 ms by bot id=6243740464
+2024-08-11 20:02:16,866 - INFO - feed_update: 172 - Update id=377113084 is handled. Duration 258 ms by bot id=6243740464
+2024-08-11 20:02:21,376 - INFO - feed_update: 172 - Update id=377113085 is handled. Duration 668 ms by bot id=6243740464
+2024-08-11 20:02:25,515 - INFO - feed_update: 172 - Update id=377113086 is handled. Duration 728 ms by bot id=6243740464
+2024-08-11 20:02:27,246 - INFO - feed_update: 172 - Update id=377113087 is handled. Duration 278 ms by bot id=6243740464
+2024-08-11 20:02:30,577 - INFO - feed_update: 172 - Update id=377113088 is handled. Duration 227 ms by bot id=6243740464
+2024-08-11 20:02:33,436 - INFO - feed_update: 172 - Update id=377113089 is handled. Duration 236 ms by bot id=6243740464
+2024-08-11 20:02:40,676 - INFO - feed_update: 172 - Update id=377113090 is handled. Duration 258 ms by bot id=6243740464
+2024-08-11 20:02:56,407 - INFO - feed_update: 172 - Update id=377113091 is handled. Duration 699 ms by bot id=6243740464
+2024-08-11 20:02:59,947 - INFO - feed_update: 172 - Update id=377113092 is handled. Duration 448 ms by bot id=6243740464
+2024-08-11 20:03:02,328 - INFO - feed_update: 172 - Update id=377113093 is handled. Duration 460 ms by bot id=6243740464
+2024-08-11 20:03:05,066 - INFO - feed_update: 172 - Update id=377113094 is handled. Duration 266 ms by bot id=6243740464
+2024-08-11 20:03:12,668 - INFO - feed_update: 172 - Update id=377113095 is handled. Duration 427 ms by bot id=6243740464
+2024-08-11 20:03:15,957 - INFO - feed_update: 172 - Update id=377113096 is handled. Duration 408 ms by bot id=6243740464
+2024-08-11 20:03:19,186 - INFO - feed_update: 172 - Update id=377113097 is handled. Duration 278 ms by bot id=6243740464
+2024-08-11 20:03:21,957 - INFO - feed_update: 172 - Update id=377113098 is handled. Duration 255 ms by bot id=6243740464
+2024-08-11 20:03:25,557 - INFO - feed_update: 172 - Update id=377113099 is handled. Duration 248 ms by bot id=6243740464
+2024-08-11 20:03:27,829 - INFO - feed_update: 172 - Update id=377113100 is handled. Duration 298 ms by bot id=6243740464
+2024-08-11 20:03:32,769 - INFO - feed_update: 172 - Update id=377113101 is handled. Duration 260 ms by bot id=6243740464
+2024-08-11 20:03:42,298 - INFO - feed_update: 172 - Update id=377113102 is handled. Duration 229 ms by bot id=6243740464
+2024-08-11 20:03:47,228 - INFO - feed_update: 172 - Update id=377113103 is handled. Duration 246 ms by bot id=6243740464
+2024-08-11 20:03:50,438 - INFO - feed_update: 172 - Update id=377113104 is handled. Duration 248 ms by bot id=6243740464
+2024-08-11 20:03:54,139 - INFO - feed_update: 172 - Update id=377113105 is handled. Duration 1228 ms by bot id=6243740464
+2024-08-11 20:03:59,269 - INFO - feed_update: 172 - Update id=377113106 is handled. Duration 238 ms by bot id=6243740464
+2024-08-11 20:04:04,768 - INFO - feed_update: 172 - Update id=377113107 is handled. Duration 273 ms by bot id=6243740464
+2024-08-11 20:04:06,429 - INFO - feed_update: 172 - Update id=377113108 is handled. Duration 476 ms by bot id=6243740464
+2024-08-11 20:04:09,149 - INFO - feed_update: 172 - Update id=377113109 is handled. Duration 268 ms by bot id=6243740464
+2024-08-11 20:04:11,299 - INFO - feed_update: 172 - Update id=377113110 is handled. Duration 308 ms by bot id=6243740464
+2024-08-11 20:04:13,569 - INFO - feed_update: 172 - Update id=377113111 is handled. Duration 578 ms by bot id=6243740464
+2024-08-11 20:04:15,529 - INFO - feed_update: 172 - Update id=377113112 is handled. Duration 238 ms by bot id=6243740464
+2024-08-11 20:04:17,312 - INFO - feed_update: 172 - Update id=377113113 is handled. Duration 251 ms by bot id=6243740464
+2024-08-11 20:04:20,098 - INFO - feed_update: 172 - Update id=377113114 is handled. Duration 565 ms by bot id=6243740464
+2024-08-11 20:04:21,818 - INFO - feed_update: 172 - Update id=377113115 is handled. Duration 228 ms by bot id=6243740464
+2024-08-11 20:04:23,530 - INFO - feed_update: 172 - Update id=377113116 is not handled. Duration 239 ms by bot id=6243740464
+2024-08-11 20:04:23,531 - ERROR - _process_update: 315 - Cause exception while process update id=377113116 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 20:04:26,318 - INFO - feed_update: 172 - Update id=377113117 is not handled. Duration 343 ms by bot id=6243740464
+2024-08-11 20:04:26,318 - ERROR - _process_update: 315 - Cause exception while process update id=377113117 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 20:04:26,691 - INFO - feed_update: 172 - Update id=377113118 is not handled. Duration 321 ms by bot id=6243740464
+2024-08-11 20:04:26,691 - ERROR - _process_update: 315 - Cause exception while process update id=377113118 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 20:04:44,229 - INFO - feed_update: 172 - Update id=377113119 is handled. Duration 748 ms by bot id=6243740464
+2024-08-11 20:04:46,649 - INFO - feed_update: 172 - Update id=377113120 is handled. Duration 265 ms by bot id=6243740464
+2024-08-11 20:04:49,219 - INFO - feed_update: 172 - Update id=377113121 is handled. Duration 476 ms by bot id=6243740464
+2024-08-11 20:04:52,060 - INFO - feed_update: 172 - Update id=377113122 is handled. Duration 246 ms by bot id=6243740464
+2024-08-11 20:04:56,769 - INFO - feed_update: 172 - Update id=377113123 is handled. Duration 255 ms by bot id=6243740464
+2024-08-11 20:05:05,629 - INFO - feed_update: 172 - Update id=377113124 is handled. Duration 1238 ms by bot id=6243740464
+2024-08-11 20:05:08,360 - INFO - feed_update: 172 - Update id=377113125 is handled. Duration 296 ms by bot id=6243740464
+2024-08-11 20:05:10,170 - INFO - feed_update: 172 - Update id=377113126 is handled. Duration 278 ms by bot id=6243740464
+2024-08-11 20:05:13,721 - INFO - feed_update: 172 - Update id=377113127 is handled. Duration 1548 ms by bot id=6243740464
+2024-08-11 20:05:26,494 - INFO - feed_update: 172 - Update id=377113128 is handled. Duration 521 ms by bot id=6243740464
+2024-08-11 20:05:29,690 - INFO - feed_update: 172 - Update id=377113129 is handled. Duration 295 ms by bot id=6243740464
+2024-08-11 20:05:36,384 - INFO - feed_update: 172 - Update id=377113130 is handled. Duration 317 ms by bot id=6243740464
+2024-08-11 20:05:38,693 - INFO - feed_update: 172 - Update id=377113131 is handled. Duration 362 ms by bot id=6243740464
+2024-08-11 20:05:54,920 - INFO - feed_update: 172 - Update id=377113132 is handled. Duration 658 ms by bot id=6243740464
+2024-08-11 20:08:41,968 - INFO - feed_update: 172 - Update id=377113133 is handled. Duration 1573 ms by bot id=6243740464
+2024-08-11 20:10:36,769 - INFO - feed_update: 172 - Update id=377113134 is not handled. Duration 710 ms by bot id=6243740464
+2024-08-11 20:10:36,770 - ERROR - _process_update: 315 - Cause exception while process update id=377113134 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 20:10:51,278 - INFO - feed_update: 172 - Update id=377113135 is handled. Duration 335 ms by bot id=6243740464
+2024-08-11 20:11:09,358 - INFO - feed_update: 172 - Update id=377113136 is handled. Duration 11167 ms by bot id=6243740464
+2024-08-11 20:11:18,607 - INFO - feed_update: 172 - Update id=377113137 is handled. Duration 654 ms by bot id=6243740464
+2024-08-11 20:11:44,695 - INFO - feed_update: 172 - Update id=377113139 is handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:11:44,742 - INFO - feed_update: 172 - Update id=377113138 is handled. Duration 1371 ms by bot id=6243740464
+2024-08-11 20:12:00,908 - INFO - feed_update: 172 - Update id=377113140 is handled. Duration 1406 ms by bot id=6243740464
+2024-08-11 20:12:10,144 - INFO - feed_update: 172 - Update id=377113141 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:12:23,667 - INFO - feed_update: 172 - Update id=377113142 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:13:25,765 - INFO - feed_update: 172 - Update id=377113143 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:13:34,026 - INFO - feed_update: 172 - Update id=377113144 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:13:47,254 - INFO - feed_update: 172 - Update id=377113145 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:14:05,283 - INFO - feed_update: 172 - Update id=377113146 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:14:05,564 - INFO - feed_update: 172 - Update id=377113147 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:14:08,867 - INFO - feed_update: 172 - Update id=377113148 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:14:21,323 - INFO - feed_update: 172 - Update id=377113149 is not handled. Duration 2 ms by bot id=6243740464
+2024-08-11 20:15:14,644 - INFO - feed_update: 172 - Update id=377113150 is handled. Duration 1597 ms by bot id=6243740464
+2024-08-11 20:15:24,584 - INFO - feed_update: 172 - Update id=377113151 is handled. Duration 1168 ms by bot id=6243740464
+2024-08-11 20:15:29,083 - INFO - feed_update: 172 - Update id=377113152 is handled. Duration 1438 ms by bot id=6243740464
+2024-08-11 20:15:45,693 - INFO - feed_update: 172 - Update id=377113153 is handled. Duration 1307 ms by bot id=6243740464
+2024-08-11 20:15:48,867 - INFO - feed_update: 172 - Update id=377113154 is handled. Duration 1461 ms by bot id=6243740464
+2024-08-11 20:15:58,564 - INFO - feed_update: 172 - Update id=377113155 is handled. Duration 1457 ms by bot id=6243740464
+2024-08-11 20:16:02,914 - INFO - feed_update: 172 - Update id=377113156 is handled. Duration 273 ms by bot id=6243740464
+2024-08-11 20:16:06,824 - INFO - feed_update: 172 - Update id=377113157 is handled. Duration 288 ms by bot id=6243740464
+2024-08-11 20:16:15,739 - INFO - feed_update: 172 - Update id=377113158 is handled. Duration 1122 ms by bot id=6243740464
+2024-08-11 20:16:27,359 - INFO - feed_update: 172 - Update id=377113159 is handled. Duration 251 ms by bot id=6243740464
+2024-08-11 20:16:39,105 - INFO - feed_update: 172 - Update id=377113160 is handled. Duration 298 ms by bot id=6243740464
+2024-08-11 20:16:41,136 - INFO - feed_update: 172 - Update id=377113161 is not handled. Duration 307 ms by bot id=6243740464
+2024-08-11 20:16:41,136 - ERROR - _process_update: 315 - Cause exception while process update id=377113161 by bot id=6243740464
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/hand.py", line 769, in cal
+    await call.message.edit_text("<b>Админ-панель для обменника</b>", reply_markup=admin_exc().as_markup())
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dmitriifatkullin/PycharmProjects/X/myenv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2024-08-11 20:16:45,666 - INFO - feed_update: 172 - Update id=377113162 is handled. Duration 369 ms by bot id=6243740464
+2024-08-11 20:16:49,515 - INFO - feed_update: 172 - Update id=377113163 is handled. Duration 957 ms by bot id=6243740464
+2024-08-11 20:16:51,835 - INFO - feed_update: 172 - Update id=377113164 is handled. Duration 314 ms by bot id=6243740464
+2024-08-11 20:16:55,987 - INFO - feed_update: 172 - Update id=377113165 is handled. Duration 307 ms by bot id=6243740464
+2024-08-11 20:16:57,955 - INFO - feed_update: 172 - Update id=377113166 is handled. Duration 251 ms by bot id=6243740464
+2024-08-11 20:17:05,844 - INFO - feed_update: 172 - Update id=377113167 is handled. Duration 237 ms by bot id=6243740464
+2024-08-11 20:17:30,107 - INFO - feed_update: 172 - Update id=377113168 is handled. Duration 1479 ms by bot id=6243740464
+2024-08-11 20:17:44,947 - INFO - feed_update: 172 - Update id=377113169 is handled. Duration 268 ms by bot id=6243740464
+2024-08-11 20:18:00,881 - INFO - feed_update: 172 - Update id=377113170 is handled. Duration 11291 ms by bot id=6243740464
+2024-08-11 20:18:10,207 - INFO - feed_update: 172 - Update id=377113171 is handled. Duration 798 ms by bot id=6243740464
+2024-08-11 20:18:12,657 - INFO - feed_update: 172 - Update id=377113172 is handled. Duration 876 ms by bot id=6243740464
+2024-08-11 20:18:23,562 - INFO - feed_update: 172 - Update id=377113173 is handled. Duration 1109 ms by bot id=6243740464
+2024-08-11 20:18:27,130 - INFO - feed_update: 172 - Update id=377113174 is handled. Duration 1040 ms by bot id=6243740464
+2024-08-11 20:18:37,237 - INFO - feed_update: 172 - Update id=377113175 is handled. Duration 279 ms by bot id=6243740464
+2024-08-11 20:18:39,718 - INFO - feed_update: 172 - Update id=377113176 is handled. Duration 258 ms by bot id=6243740464
+2024-08-11 20:18:45,319 - INFO - feed_update: 172 - Update id=377113177 is handled. Duration 231 ms by bot id=6243740464
+2024-08-11 20:19:16,719 - INFO - feed_update: 172 - Update id=377113178 is handled. Duration 647 ms by bot id=6243740464
+2024-08-11 20:19:25,288 - INFO - feed_update: 172 - Update id=377113179 is handled. Duration 307 ms by bot id=6243740464
+2024-08-11 20:19:41,608 - INFO - feed_update: 172 - Update id=377113180 is handled. Duration 657 ms by bot id=6243740464
+2024-08-11 20:19:44,211 - INFO - feed_update: 172 - Update id=377113181 is handled. Duration 238 ms by bot id=6243740464
+2024-08-11 20:20:52,775 - INFO - feed_update: 172 - Update id=377113182 is handled. Duration 2223 ms by bot id=6243740464
+2024-08-11 20:30:01,469 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-08-11 20:30:01,472 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)
+2024-08-11 20:30:13,073 - INFO - _listen_updates: 233 - Connection established (tryings = 1, bot id = 6243740464)
+2024-08-11 21:37:15,381 - ERROR - _listen_updates: 219 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-08-11 21:37:15,384 - WARNING - _listen_updates: 221 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6243740464)
+2024-08-11 21:37:27,042 - INFO - _listen_updates: 233 - Connection established (tryings = 1, bot id = 6243740464)
+2024-08-11 21:53:12,874 - WARNING - _signal_stop_polling: 455 - Received SIGINT signal
+2024-08-11 21:53:12,883 - INFO - _polling: 359 - Polling stopped for bot @tests_for_coders_bot id=6243740464 - 'тесты'
+2024-08-11 21:53:12,884 - INFO - start_polling: 554 - Polling stopped
