@@ -188,7 +188,40 @@ async def swertyhbubh(call, state: FSMContext):
 
 locations = {}
 
-
+#
+# @router.message(DealState.gps, F.location)
+# async def location_handler(message: types.Message, state: FSMContext):
+#     try:
+#         global cu1
+#         global cu2
+#         global rai1
+#         global rai2
+#         global currens2
+#         global currens3
+#         latitude = message.location.latitude
+#         longitude = message.location.longitude
+#         locations['latitude'] = latitude
+#         locations['longitude'] = longitude
+#         act_cur = await get_pars2(curs, curs2, int(1))
+#         cu1 = str(locations['latitude'])
+#         cu2 = str(locations['longitude'])
+#         await state.update_data(name=str(cu1))
+#         await state.update_data(name2=str(cu2))
+#         llllll = await get_pars2(curs, curs2, int(su))
+#         lang = await check_lang(message.chat.id)
+#         currens2 = await state.get_data()
+#         currens3 = await state.get_data()
+#         rai1 = currens2["name"]
+#         rai2 = currens3["name2"]
+#         # await message.answer(str(rai1))
+#         # await message.answer(str(rai2))
+#         await message.answer(
+#             f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(float(llllll), curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<i><b>{_("Расчёт", lang[0])}: {_(f"{ifbez}", lang[0])}💰</b></i>\n<b><i>{_("Ваш район - ", lang[0])} {f"{cu1} {cu2}"} 🏠</i></b>",
+#             reply_markup=in_gps(lang).as_markup())
+#         await state.set_state(DealState.yesorno)
+#         await create_reset_task(message.from_user.id, state)
+#     except Exception as e:
+#         print(f"Произошла ошибка: {e}")
 @router.message(DealState.gps, F.location)
 async def location_handler(message: types.Message, state: FSMContext):
     try:
@@ -213,15 +246,35 @@ async def location_handler(message: types.Message, state: FSMContext):
         currens3 = await state.get_data()
         rai1 = currens2["name"]
         rai2 = currens3["name2"]
-        # await message.answer(str(rai1))
-        # await message.answer(str(rai2))
+
         await message.answer(
             f"<b>{_(f'Отлично!\nПроверьте свои данные для оформления заявки', lang[0])}</b>\n<b><i>{_("Обмениваете - ", lang[0])} {su} {curs} 💳</i></b>\n<b><i>{_("Получаете - ", lang[0])} {format_number(float(llllll), curs2)} {curs2} 💳 </i></b>\n<b><i>{_("Актуальный курс", lang[0])} - {format_number(act_cur, curs2)} 💵</i></b>\n<i><b>{_("Расчёт", lang[0])}: {_(f"{ifbez}", lang[0])}💰</b></i>\n<b><i>{_("Ваш район - ", lang[0])} {f"{cu1} {cu2}"} 🏠</i></b>",
             reply_markup=in_gps(lang).as_markup())
+
         await state.set_state(DealState.yesorno)
         await create_reset_task(message.from_user.id, state)
     except Exception as e:
         print(f"Произошла ошибка: {e}")
+
+
+@router.message(DealState.gps, F.text)
+async def text_handler(message: types.Message):
+    lang = await check_lang(message.chat.id)
+
+    await message.answer(f"{_("Пожалуйста, отправьте своё местоположение, а не текст.", lang[0])}")
+
+
+@router.message(DealState.gps, F.photo)
+async def photo_handler(message: types.Message):
+    lang = await check_lang(message.chat.id)
+
+    await message.answer(f"{_("Пожалуйста, отправьте своё местоположение, а не фотографию.", lang[0])}")
+
+
+# @router.message(DealState.gps)
+# async def default_handler(message: types.Message):
+#     await message.answer("Пожалуйста, отправьте своё местоположение.")
+
 
 @router.callback_query(DealState.geo, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):

@@ -120,7 +120,9 @@ translates = {
         "Ожидайте поступлление средств": "Stand by to receive funds",
         "Если в течении 20 минут вам не поступили средства напишите оператору": "If you have not received the funds within 20 minutes, write to the operator",
         "Хорошего дня": "Have a good day",
-        "Обмен прошёл успешно!": "The exchange was successful!"
+        "Обмен прошёл успешно!": "The exchange was successful!",
+        "Пожалуйста, отправьте своё местоположение, а не текст.": "Please send your location, not text.",
+        "Пожалуйста, отправьте своё местоположение, а не фотографию.": "Please send your location, not a photo."
 
 
     }
