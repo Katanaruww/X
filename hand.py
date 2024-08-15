@@ -261,14 +261,14 @@ async def location_handler(message: types.Message, state: FSMContext):
 async def text_handler(message: types.Message):
     lang = await check_lang(message.chat.id)
 
-    await message.answer(f"{_("Пожалуйста, отправьте своё местоположение, а не текст.", lang[0])}")
+    await message.answer(f"<b>{_("Пожалуйста, отправьте своё местоположение, а не текст.", lang[0])}</b>", parse_mode=ParseMode.HTML)
 
 
 @router.message(DealState.gps, F.photo)
 async def photo_handler(message: types.Message):
     lang = await check_lang(message.chat.id)
 
-    await message.answer(f"{_("Пожалуйста, отправьте своё местоположение, а не фотографию.", lang[0])}")
+    await message.answer(f"<b>{_("Пожалуйста, отправьте своё местоположение, а не фотографию.", lang[0])}<b>", parse_mode=ParseMode.HTML)
 
 
 # @router.message(DealState.gps)
