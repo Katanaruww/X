@@ -19,7 +19,7 @@ from func import (get_user_value, replace_language, start_c, deals_online_start,
                   deals_online_type_add, deals_online_cancel, get_messa, deals_add_curr,
                   deals_add_curr_finish,
                   ban_users_us, check_bans, get_black_list, transaction_con, continue_in_deals, choose_pay_method,
-                  send_deals, get_pars2, accept_in_deals, get_average_rating, final_deals, cancel_final_deals)
+                  send_deals, get_pars2, accept_in_deals, get_average_rating, final_deals, cancel_final_deals, add_values, add_values2, add_values3, add_values4, add_values5, add_values6, add_values7, add_values8, add_values10, add_values9)
 from cards import (add_currency_card, add_start_card, cancel_add_card, add_type_pay_exc_admin, get_start_card,
                    get_list_card, print_list_card, see_card, activate_card)
 from func import get_cur, get_cur2, get_messs, get_cb, send_reviews
@@ -30,12 +30,60 @@ import datetime
 from dop_func.func_float import format_number
 from aiogram.enums.parse_mode import ParseMode
 import traceback
+from currre import get_pars5
 router = Router()
 
 bot = Bot(token="6990593953:AAFNKnRYT7Rqke31xTTucDBtnz0N94GHSH8")
 # Диспетчер
 dp = Dispatcher()
 
+class Direction1(StatesGroup):
+    price1 = State()
+    price2 = State()
+    price3 = State()
+    price4 = State()
+    price5 = State()
+class Direction2(StatesGroup):
+    price1 = State()
+    price2 = State()
+    price3 = State()
+    price4 = State()
+    price5 = State()
+class USDT(StatesGroup):
+    price1 = State()
+class Direction3(StatesGroup):
+    price1 = State()
+    price2 = State()
+    price3 = State()
+    price4 = State()
+    price5 = State()
+
+class BTCLTC(StatesGroup):
+    price1 = State()
+class BTCRUB(StatesGroup):
+    price1 = State()
+class BTCIDR(StatesGroup):
+    price1 = State()
+class LTCRUB(StatesGroup):
+    price1 = State()
+class LTCIDR(StatesGroup):
+    price1 = State()
+class BTCUSD(StatesGroup):
+    price1 = State()
+class LTCUSD(StatesGroup):
+    price1 = State()
+class ActCurs(StatesGroup):
+    choosing_currency = State()
+    currency1 = State()
+    choosing_currency2 = State()
+    rate = State()
+    gps = State()
+    geo = State()
+    time = State()
+    yesorno = State()
+    yesornogps = State()
+    nalbeznal = State()
+    nalbeznal2 = State()
 
 class fsm(StatesGroup):
     adm_id = State()
@@ -126,6 +174,7 @@ async def start_handler(msg: Message):
 @router.message(Command("rate"))
 async def rate(msg: Message):
     await get_pars(msg)
+
 
 
 @router.callback_query(DealState.yesorno, lambda call: call.data)
@@ -401,7 +450,36 @@ async def rextryftugiu(call, state: FSMContext):
         logging.exception(err)
         await state.clear()
 
+@router.callback_query(ActCurs.choosing_currency2, lambda call: call.data)
+async def rextryftugiu(call, state: FSMContext):
+    try:
+        global curs2
+        global currency
+        lang = await check_lang(call.message.chat.id)
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
 
+        ifcur = str(ban_user["nameban"])
+        curs2 = str(ban_user["nameban"]).replace("1", "")
+        print(ifcur, curs2)
+
+        if ifcur in {"RUB1", "IDR1", "USD1", "USDT1", "BTC1", "LTC1"}:
+            if curs2 == curs:
+                await call.message.edit_text(
+                    f'<b><i>{_(text="Невозможно обменять одинаковою валюту!", lang=lang[0])}</i></b>')
+                await state.clear()
+                return  # Завершаем функцию, если валюты одинаковые
+
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await get_pars5(curs, curs2, 1, call)
+            await state.clear()
+
+        else:
+            await start_c(call)
+            await state.clear()
+    except Exception as err:
+        logging.exception(err)
+        await state.clear()
 # ЭТО КОРОЧЕ ОТСЛЕЖАНИЕ КОЛЛБЕКА НАХУЙ
 @router.callback_query(DealState.choosing_currency, lambda call: call.data)
 async def swertyhbubh(call, state: FSMContext):
@@ -431,11 +509,34 @@ async def swertyhbubh(call, state: FSMContext):
     except Exception as e:
         print(f"Произошла ошибка: {e}")
 
+@router.callback_query(ActCurs.choosing_currency, lambda call: call.data)
+async def swertyhbubh(call, state: FSMContext):
+    try:
+        global curs
+        lang = await check_lang(call.message.chat.id)
+        await state.update_data(nameban=call.data)
+        ban_user = await state.get_data()
+        curs = str(ban_user["nameban"]).replace("1", "")
+        off = str(ban_user["nameban"])
+        if off in {"RUB1", "IDR1", "USD1", "USDT1", "BTC1", "LTC1"}:
+            currency = await get_cur(curs, call)
+            # await call.message.edit_text(currency)
+            if currency == True:
+                await call.message.edit_text(
+                    f"<b>{_('Выберите интересующие направление для обмена на - ', lang[0])} {curs}</b>",
+                    reply_markup=oflline2(lang).as_markup())
+                await state.set_state(ActCurs.choosing_currency2)
+                await create_reset_task(call.from_user.id, state)
+            if currency == False:
+                await call.message.edit_text(f"{_(text='Повторите попытку', lang=lang[0])}")
+        else:
+            await start_c(call)
+            await state.clear()
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
 
 
 
-    except Exception as err:
-        logging.exception(err)
 
 
 
@@ -475,9 +576,225 @@ async def zrextcyvgubhi(message: types.Message, state: FSMContext):
         await message.answer(f"{_(text='Произошла ошибка. Пожалуйста, попробуйте снова.', lang=lang[0])}")
         await state.clear()
         logging.exception(err)
+@router.message(Direction2.price5)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_5
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_5 = str(ban_user["nameban"])
+        await add_values3(price_number_1, price_number_2, price_number_3, price_number_4, price_number_5)
+        await message.answer("Курс успешно изменен!")
+        await state.clear()
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction2.price4)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_4
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_4 = str(ban_user["nameban"])
+        await message.answer("Введите для значения 100,000,000 IDR - 300,000,000 IDR", reply_markup=dell_state_admin().as_markup())
+        await state.set_state(Direction2.price5)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction2.price3)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_3
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_3 = str(ban_user["nameban"])
+        await message.answer("Введите для значения 50,000,000 IDR - 100,000,000 IDR ", reply_markup=dell_state_admin().as_markup())
+        await state.set_state(Direction2.price4)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction2.price2)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await message.answer("Введите для значения 30,000,000 IDR - 50,000,000 IDR ", reply_markup=dell_state_admin().as_markup())
+        await state.set_state(Direction2.price3)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction2.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_1
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_1 = str(ban_user["nameban"])
+        await state.set_state(Direction2.price2)
 
 
-# ЭТО КОРОЧЕ ПРОВЕРКА НАХУЙ
+        await message.answer("Введите для значения 10,000,000 IDR - 30,000,000 IDR", reply_markup=dell_state_admin().as_markup())
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction1.price5)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_5
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_5 = str(ban_user["nameban"])
+        await add_values(price_number_1, price_number_2, price_number_3, price_number_4, price_number_5)
+        await message.answer("Курс успешно изменен!")
+        await state.clear()
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction1.price4)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_4
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_4 = str(ban_user["nameban"])
+        await message.answer("Введите для второго значения 500.000 ₽ - 1.000.000 ₽", reply_markup=dell_state_admin().as_markup())
+        await state.set_state(Direction1.price5)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction1.price3)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_3
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_3 = str(ban_user["nameban"])
+        await message.answer("Введите для второго значения 300.000 ₽ - 500.000 ₽", reply_markup=dell_state_admin().as_markup())
+        await state.set_state(Direction1.price4)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction1.price2)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await message.answer("Введите для второго значения 100.000 ₽ - 300.000 ₽", reply_markup=dell_state_admin().as_markup())
+        await state.set_state(Direction1.price3)
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(Direction1.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    # try:
+        global price_number_1
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_1 = str(ban_user["nameban"])
+        await state.set_state(Direction1.price2)
+
+
+        await message.answer("Введите для второго значения 50.000 ₽ - 100.000 ₽", reply_markup=dell_state_admin().as_markup())
+    # except Exception as e:
+    #     print(f"Произошла ошибка: {e}")
+@router.message(USDT.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values2(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+@router.message(BTCRUB.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values4(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+@router.message(BTCIDR.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values5(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+@router.message(LTCRUB.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values7(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+@router.message(LTCIDR.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values6(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+@router.message(BTCLTC.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values8(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+@router.message(BTCUSD.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values9(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+@router.message(LTCUSD.price1)
+async def swertyhbubh(message: types.Message, state: FSMContext):
+    try:
+        global price_number_2
+        await state.update_data(nameban=message.text)
+        ban_user = await state.get_data()
+        price_number_2 = str(ban_user["nameban"])
+        await add_values10(str(price_number_2))
+        await state.clear()
+        await message.answer(f'Курс изменен!')
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
 @router.message(DealState.currency1, ~F.text)
 async def get_trext(message: types.Message, state: FSMContext):
     await message.answer(f'Отправь текст!')
@@ -831,12 +1148,105 @@ async def cal(call, state: FSMContext):
         except Exception as err:
             logging.exception(err)
 
+    elif call.data == "edit_curs":
+        try:
+            await call.message.edit_text("Выберите направление", reply_markup=admin_curs().as_markup())
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "RUBIDR123":
+        try:
+            await call.message.edit_text("Введите первое значение для 10.000 ₽ - 50.000 ₽", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(Direction1.price1)
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "RUBUSD123":
+        try:
+            await call.message.edit_text("Введите значение для (RUB 🔄 USD(USDT)) or (USD(USDT) 🔄 RUB)", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(USDT.price1)
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "IDRUSD123":
+        try:
+            await call.message.edit_text("Введите значение для 2,000,000 IDR - 10,000,000 IDR", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(Direction2.price1)
+
+        except Exception as err:
+            logging.exception(err)
 
 
 
 
+    elif call.data == "BTCRUB123":
+        try:
+            await call.message.edit_text("Введите значение для курса BTC на RUB", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(BTCRUB.price1)
 
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "BTCIDR123":
+        try:
+            await call.message.edit_text("Введите значение для курса BTC на IDR", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(BTCIDR.price1)
 
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "LTCIDR123":
+        try:
+            await call.message.edit_text("Введите значение для курса LTC на IDR", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(LTCIDR.price1)
+
+        except Exception as err:
+            logging.exception(err)
+    elif call.data == "LTCRUB123":
+        try:
+            await call.message.edit_text("Введите значение для курса LTC на RUB", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(LTCRUB.price1)
+
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "LTCBTC123":
+        try:
+            await call.message.edit_text("Введите значение для курса BTC на LTC", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(BTCLTC.price1)
+
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "BTCUSD123":
+        try:
+            await call.message.edit_text("Введите значение для курса BTC на USD(USDT)", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(BTCUSD.price1)
+
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "LTCUSD123":
+        try:
+            await call.message.edit_text("Введите значение для курса LTC на USD(USDT)", reply_markup=dell_state_admin().as_markup())
+            await state.set_state(LTCUSD.price1)
+
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "act_cursik":
+        try:
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            lang = await check_lang(call.message.chat.id)
+            await call.message.answer(f"<b>{_('Выберите интересующие направление для вас:', lang[0])}</b>",
+                                         reply_markup=oflline(lang).as_markup())
+            await state.set_state(ActCurs.choosing_currency)
+        except Exception as err:
+            logging.exception(err)
+
+    elif call.data == "otmenabbb":
+        try:
+            await start_c(call)
+        except Exception as err:
+            logging.exception(err)
     ## ПРОЦЕСС СОЗДАНИЯ СДЕЛКИ ####
     elif call.data == "exch":
         try:
@@ -878,6 +1288,14 @@ async def cal(call, state: FSMContext):
             await start_c(call)
         except Exception as err:
             logging.exception(err)
+    elif call.data == "back_naxuisuka":
+        try:
+            await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+            await state.clear()
+            await call.message.answer("Отменено!")
+        except Exception as err:
+            logging.exception(err)
+
 
 """ЭТО ОФФЛАЙН НАХУЙ"""
 

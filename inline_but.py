@@ -15,6 +15,7 @@ def start_but(lang):
     st.button(text=f"{_('Наш канал', lang)}", url="google.com")
     st.button(text=f"{_('Связь с админом', lang)}", url="google.com")
     st.button(text=f"{_('Личный кабинет', lang)}", callback_data="lk")
+    st.button(text=f"{_("Актуальный курс", lang)}", callback_data="act_cursik")
     st.button(text=f"{_('Настройки', lang)}⚙", callback_data="setting")
     st.adjust(1, 1, 2, 1)
     return st
@@ -145,6 +146,11 @@ def exc_btn_cancel(call_id, lang):
     exc.adjust(2, 1)
     return exc
 
+def olesia222(lang):
+    exc = InlineKeyboardBuilder()
+    exc.button(text=f"{_('Назад', lang[0])}⭕", callback_data=f"otmenabbb")
+    exc.adjust(1)
+    return exc
 
 def continue_add_deal(call_id, lang):
     con_ad_d = InlineKeyboardBuilder()
@@ -214,6 +220,11 @@ def dell_state(lang):
     adm_exc_add = InlineKeyboardBuilder()
     adm_exc_add.button(text=f"{_(text='Отмена', lang=lang[0])}⭕️", callback_data=f"back_state")
     return adm_exc_add
+
+def dell_state_admin():
+    adm_exc_add = InlineKeyboardBuilder()
+    adm_exc_add.button(text="Выйти⭕️", callback_data=f"back_naxuisuka")
+    return adm_exc_add
 def add_cur_offline(lang):
     adm_exc_add = InlineKeyboardBuilder()
     adm_exc_add.button(text=f"{_(text='Начать обмен', lang=lang[0])}", callback_data=f"start_offline")
@@ -280,9 +291,35 @@ def admin_but():
     adm.button(text="Админка обменника", callback_data="adm_exc")
     adm.button(text="Рассылка", callback_data="send")
     adm.button(text="Чёрный список", callback_data="black_list")
+    adm.button(text="Изменить курс", callback_data="edit_curs")
     adm.adjust(1)
     return adm
 
+def admin_curs():
+    adm = InlineKeyboardBuilder()
+    adm.button(text="(RUB 🔄 IDR) or (IDR 🔄 RUB)", callback_data="RUBIDR123")
+
+    adm.button(text="(RUB 🔄 USD(USDT)) or (USD(USDT) 🔄 RUB)", callback_data="RUBUSD123")
+
+    adm.button(text="(IDR 🔄 USD(USDT)) or (USD(USDT) 🔄 IDR)", callback_data="IDRUSD123")
+
+    adm.button(text="(BTC 🔄 RUB) or (RUB 🔄 BTC)", callback_data="BTCRUB123")
+
+    adm.button(text="(BTC 🔄 IDR) or (IDR 🔄 BTC)", callback_data="BTCIDR123")
+
+    adm.button(text="(LTC 🔄 IDR) or (IDR 🔄 LTC)", callback_data="LTCIDR123")
+
+    adm.button(text="(LTC 🔄 RUB) or (RUB 🔄 LTC)", callback_data="LTCRUB123")
+
+    adm.button(text="(BTC 🔄 LTC) or (LTC 🔄 BTC)", callback_data="LTCBTC123")
+
+    adm.button(text="(BTC 🔄 USDT(USD)) or (USDT(USD)) 🔄 BTC)", callback_data="BTCUSD123")
+
+    adm.button(text="(LTC 🔄 USDT(USD)) or (USD(USDT)) 🔄 LTC)", callback_data="LTCUSD123")
+
+
+    adm.adjust(1)
+    return adm
 
 def admin_but_blaack_list():
     adm = InlineKeyboardBuilder()

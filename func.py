@@ -14,10 +14,10 @@ from translate import _
 from inline_but import setting_rasilka, crypto_valets, admin_but_blaack_list, add_cur_offline
 from limits import limits_currency_pairs
 from translate import _
-from currency import get_pars, get_pars2
 from routers import check_lang, st_move_cards
 from inline_but import add_cur_offline, dell_state
 import sqlite3
+from currency import get_pars, get_pars2
 from dop_func.func_float import format_number
 from auto import check_transaction
 from aiogram.enums.parse_mode import ParseMode
@@ -50,12 +50,213 @@ def sql_start():
                  'innn TEXT, out TEXT, area TEXT, time TEXT)')
 
     base.execute('CREATE TABLE IF NOT EXISTS Reviews(username TEXT NOT NULL , stars TEXT NOT NULL)')
+    base.execute('''
+            CREATE TABLE IF NOT EXISTS Curs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                c1 TEXT,
+                c2 TEXT,
+                c3 TEXT,
+                c4 TEXT,
+                c5 TEXT
+            )
+        ''')
+    base.execute('''
+                CREATE TABLE IF NOT EXISTS Curs2 (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    c1 TEXT
+                )
+            ''')
+    base.execute('''
+                CREATE TABLE IF NOT EXISTS Curs3 (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    c1 TEXT,
+                    c2 TEXT,
+                    c3 TEXT,
+                    c4 TEXT,
+                    c5 TEXT
+                )
+            ''')
 
+    base.execute('''
+                    CREATE TABLE IF NOT EXISTS Curs4 (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        c1 TEXT
+                    )
+                ''')
+    base.execute('''
+                    CREATE TABLE IF NOT EXISTS Curs5 (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        c1 TEXT
+                    )
+                ''')
+    base.execute('''
+                    CREATE TABLE IF NOT EXISTS Curs6 (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        c1 TEXT
+                    )
+                ''')
+    base.execute('''
+                    CREATE TABLE IF NOT EXISTS Curs7 (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        c1 TEXT
+                    )
+                ''')
+
+    base.execute('''
+                        CREATE TABLE IF NOT EXISTS Curs8 (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            c1 TEXT
+                        )
+                    ''')
+
+    base.execute('''
+                            CREATE TABLE IF NOT EXISTS Curs9 (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                c1 TEXT
+                            )
+                        ''')
+
+    base.execute('''
+                            CREATE TABLE IF NOT EXISTS Curs10 (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                c1 TEXT
+                            )
+                        ''')
     base.commit()
 
 
 """РАССЫЛКА"""
+async def add_values(c1, c2, c3, c4, c5):
+        cur.execute('''
+            INSERT INTO Curs (c1, c2, c3, c4, c5)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (c1, c2, c3, c4, c5))
+        base.commit()
 
+
+async def add_values2(c1):
+    cur.execute('''
+            INSERT INTO Curs2 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+
+async def add_values3(c1, c2, c3, c4, c5):
+    cur.execute('''
+            INSERT INTO Curs3 (c1, c2, c3, c4, c5)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (c1, c2, c3, c4, c5))
+    base.commit()
+
+async def add_values4(c1):
+    cur.execute('''
+            INSERT INTO Curs4 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+async def add_values5(c1):
+    cur.execute('''
+            INSERT INTO Curs5 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+async def add_values6(c1):
+    cur.execute('''
+            INSERT INTO Curs6 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+async def add_values7(c1):
+    cur.execute('''
+            INSERT INTO Curs7 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+async def add_values8(c1):
+    cur.execute('''
+            INSERT INTO Curs8 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+
+async def add_values9(c1):
+    cur.execute('''
+            INSERT INTO Curs9 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+
+async def add_values10(c1):
+    cur.execute('''
+            INSERT INTO Curs10 (c1)
+            VALUES (?)
+        ''', (c1,))
+    base.commit()
+async def get_values_from_column(column_name):
+    query = f"SELECT {column_name} FROM Curs"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+
+async def get_values_from_column2(column_name):
+    query = f"SELECT {column_name} FROM Curs2"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+
+async def get_values_from_column3(column_name):
+    query = f"SELECT {column_name} FROM Curs3"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+
+async def get_values_from_column4(column_name):
+    query = f"SELECT {column_name} FROM Curs4"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+async def get_values_from_column5(column_name):
+    query = f"SELECT {column_name} FROM Curs5"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+async def get_values_from_column6(column_name):
+    query = f"SELECT {column_name} FROM Curs6"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+async def get_values_from_column7(column_name):
+    query = f"SELECT {column_name} FROM Curs7"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+async def get_values_from_column8(column_name):
+    query = f"SELECT {column_name} FROM Curs8"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+
+async def get_values_from_column9(column_name):
+    query = f"SELECT {column_name} FROM Curs9"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+
+async def get_values_from_column10(column_name):
+    query = f"SELECT {column_name} FROM Curs10"
+    with sqlite3.connect('users_bd.db') as db:
+        cursor = db.execute(query)
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
 async def send_deals(o, n, e, r, w, t, j, i, k):
     cur.execute("INSERT INTO deals (username, id, onecur, twocur, cash, innn, out, area, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (o, n, e, r, w, t, j, i, k,))
     base.commit()

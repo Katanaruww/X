@@ -3,6 +3,7 @@ import asyncio
 import logging
 import json
 import requests
+from aiogram import types
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
                     format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", encoding="UTF-8")
 api = "bd729e895e84210bcfd8e985b7feb8226eefba79a5fb72d35ed0625adc074252"
@@ -45,3 +46,10 @@ async def get_pars2(val_in, val_out, amount):
 
     except Exception as e:
         logging.warning(e)
+
+
+
+
+
+
+
