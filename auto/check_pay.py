@@ -588,6 +588,8 @@ async def check_you(test):
     return sum
 
 
+
+
 async def check_sum(name_bank):
     print(name_bank)
     if name_bank == "Сбербанк":

@@ -23,6 +23,7 @@ from auto import check_transaction
 from aiogram.enums.parse_mode import ParseMode
 import traceback
 # ERTYU
+# пенис
 router = Router()
 bot = Bot(config.token[0])
 logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
